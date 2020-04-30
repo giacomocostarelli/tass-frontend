@@ -21,9 +21,9 @@ import {SampleModule} from 'app/main/sample/sample.module';
 import {MaterialModule} from './angular-material/material.module';
 import {RegisterModule} from './main/register/register.module';
 import {LoginModule} from './main/login/login.module';
-import { HomepageComponent } from './main/homepage/homepage.component';
 import {HomepageModule} from './main/homepage/homepage.module';
-import {SecretPlacesModule} from "./main/secret-places/secret-places.module";
+import {SecretPlacesModule} from './main/secret-places/secret-places.module';
+import {RicercaStandardModule} from './main/ricerca-standard/ricerca-standard.module';
 
 const appRoutes: Routes = [
     {
@@ -46,6 +46,10 @@ const appRoutes: Routes = [
         path        : 'secret_places',
         loadChildren: './main/secret-places/secret-places.module#SecretPlacesModule'
     },
+    {
+        path        : 'ricerca_standard',
+        loadChildren: './main/ricerca-standard/ricerca-standard.module#RicercaStandardModule'
+    }
 ];
 
 @NgModule({
@@ -81,7 +85,8 @@ const appRoutes: Routes = [
         RegisterModule,
         LoginModule,
         HomepageModule,
-        SecretPlacesModule
+        SecretPlacesModule,
+        RicercaStandardModule
     ],
     bootstrap: [
         AppComponent
