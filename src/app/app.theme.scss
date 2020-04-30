@@ -78,6 +78,7 @@ $typography: mat-typography-config(
 // -----------------------------------------------------------------------------------------------------
 
 // Import app and page component themes here to enable theming for them
+@import "src/app/main/login/login.theme";
 @import "src/app/main/register/register.theme";
 @import "src/app/layout/components/chat-panel/chat-panel.theme";
 @import "src/app/layout/components/toolbar/toolbar.theme";
@@ -85,6 +86,7 @@ $typography: mat-typography-config(
 // Define a mixin for easier access
 @mixin components-theme($theme) {
 
+    @include login-theme($theme);
     @include register-theme($theme);
 
     // Layout components

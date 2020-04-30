@@ -1,34 +1,39 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule } from '@ngx-translate/core';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule, Routes} from '@angular/router';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {TranslateModule} from '@ngx-translate/core';
 import 'hammerjs';
 
-import { FuseModule } from '@fuse/fuse.module';
-import { FuseSharedModule } from '@fuse/shared.module';
-import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
+import {FuseModule} from '@fuse/fuse.module';
+import {FuseSharedModule} from '@fuse/shared.module';
+import {FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule} from '@fuse/components';
 
-import { fuseConfig } from 'app/fuse-config';
+import {fuseConfig} from 'app/fuse-config';
 
-import { AppComponent } from 'app/app.component';
-import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
+import {AppComponent} from 'app/app.component';
+import {LayoutModule} from 'app/layout/layout.module';
+import {SampleModule} from 'app/main/sample/sample.module';
 import {MaterialModule} from './angular-material/material.module';
-import {RegisterModule} from "./main/register/register.module";
+import {RegisterModule} from './main/register/register.module';
+import {LoginModule} from './main/login/login.module';
 
 const appRoutes: Routes = [
     {
-        path      : '**',
+        path: '**',
         redirectTo: 'sample'
     },
     {
-        path        : 'register',
+        path: 'register',
         loadChildren: './main/register/register.module#RegisterModule'
+    },
+    {
+        path: 'login',
+        loadChildren: './main/login/login.module#LoginModule'
     }
 ];
 
@@ -36,7 +41,7 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -62,12 +67,12 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         SampleModule,
-        RegisterModule
+        RegisterModule,
+        LoginModule
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }
