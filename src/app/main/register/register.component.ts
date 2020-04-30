@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private bookingService: SpringService
+        private springService: SpringService
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     onRegistersubmit(name: string, username: string, mail: string, password: string): void {
-        this.bookingService.register(name, username, mail, password).subscribe(g => console.log(g));
+        this.springService.register(name, username, mail, password).subscribe(g => console.log(g));
     }
 }
 

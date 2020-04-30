@@ -1,8 +1,11 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
+import {SpringService} from '../spring.service';
+// import {Md5} from 'ts-md5';
+
 
 @Component({
     selector: 'login',
@@ -12,7 +15,6 @@ import {fuseAnimations} from '@fuse/animations';
     animations: fuseAnimations
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
 
     /**
      * Constructor
@@ -22,7 +24,8 @@ export class LoginComponent implements OnInit {
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private springService: SpringService
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -42,6 +45,10 @@ export class LoginComponent implements OnInit {
             }
         };
     }
+    loginForm: FormGroup;
+
+    @ViewChild('email', {static: true}) email: ElementRef;
+    @ViewChild('pwd', {static: true}) password: ElementRef;
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
@@ -56,4 +63,9 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
     }
+    onLoginSubmit(): void {
+        this.springService.login(this.email.nativeElement.value, this.password.nativeElement.value)
+            .subscribe(g => console.log(g));
+    }
+
 }

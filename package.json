@@ -57,6 +57,7 @@
         "perfect-scrollbar": "1.4.0",
         "prismjs": "1.16.0",
         "rxjs": "6.5.2",
+        "ts-md5": "1.2.7",
         "web-animations-js": "github:angular/web-animations-js#release_pr208",
         "zone.js": "0.9.1"
     },

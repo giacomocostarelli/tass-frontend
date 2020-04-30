@@ -69,6 +69,15 @@ export class SpringService {
             );
     }
 
+    login(email: string, pwd: string): Observable<Guest> {
+        const url =  `http://87.8.225.138:8080/guests/login`;
+        const param = {email: email, pwd: pwd};
+        return this.http.post<Guest>(url, param)
+            .pipe(
+                catchError(this.handleError<Guest>('guestLogin', null))
+        );
+    }
+
 
     /**
      * Handle Http operation that failed.
