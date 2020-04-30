@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {HomepageComponent} from './homepage.component';
 import {RouterModule} from '@angular/router';
-import {FuseSharedModule} from '../../../@fuse/shared.module';
 
 
 const routes = [
@@ -18,9 +16,6 @@ const routes = [
   ],
   imports: [
       RouterModule.forChild(routes),
-      CommonModule,
-
-      FuseSharedModule
   ],
   exports: [
       HomepageComponent
