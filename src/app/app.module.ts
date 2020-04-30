@@ -21,9 +21,8 @@ import {SampleModule} from 'app/main/sample/sample.module';
 import {MaterialModule} from './angular-material/material.module';
 import {RegisterModule} from './main/register/register.module';
 import {LoginModule} from './main/login/login.module';
-import { HomepageComponent } from './main/homepage/homepage.component';
 import {HomepageModule} from './main/homepage/homepage.module';
-import {SecretPlacesModule} from "./main/secret-places/secret-places.module";
+import {SecretPlacesModule} from './main/secret-places/secret-places.module';
 
 const appRoutes: Routes = [
     {
@@ -39,11 +38,11 @@ const appRoutes: Routes = [
         loadChildren: './main/login/login.module#LoginModule'
     },
     {
-        path        : 'homepage',
+        path: 'homepage',
         loadChildren: './main/homepage/homepage.module#HomepageModule'
     },
     {
-        path        : 'secret_places',
+        path: 'secret_places',
         loadChildren: './main/secret-places/secret-places.module#SecretPlacesModule'
     },
 ];
