@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
 
-import { FuseSharedModule } from '@fuse/shared.module';
+import {FuseSharedModule} from '@fuse/shared.module';
 
-import { SampleComponent } from './sample.component';
+import {SampleComponent} from './sample.component';
+import {MaterialModule} from '../../angular-material/material.module'; /* CAPIRE SE SI PUò TOGLIERE DA QUA E MAGARI INSERIRLO SOLO APP.MODULE **/
+
 
 const routes = [
     {
-        path     : 'sample',
+        path: 'sample',
         component: SampleComponent
     }
 ];
@@ -17,18 +19,17 @@ const routes = [
     declarations: [
         SampleComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
 
         TranslateModule,
-
-        FuseSharedModule
+        FuseSharedModule,
+        MaterialModule
     ],
-    exports     : [
+    exports: [
         SampleComponent
     ]
 })
 
-export class SampleModule
-{
+export class SampleModule {
 }
