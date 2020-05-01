@@ -5,6 +5,7 @@ import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
 import {Md5} from 'ts-md5/dist/md5';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private springService: SpringService
+        private springService: SpringService,
+        private router: Router
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -67,7 +69,8 @@ export class LoginComponent implements OnInit {
         const md5 = new Md5();
         const pwd = md5.appendStr(this.password.nativeElement.value).end();
         this.springService.login(this.email.nativeElement.value, pwd)
-            .subscribe(g => console.log(g));
+            .subscribe(g => localStorage.setItem('user', JSON.stringify(g)));
+        this.router.navigate(['/homepage']);
     }
 
 }

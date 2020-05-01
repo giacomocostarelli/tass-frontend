@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {City} from "../../interfaceDB/city";
 
 @Component({
     selector: 'form-secret-places',
@@ -10,25 +11,10 @@ export class FormComponent implements OnInit {
     favoriteSeason: string;
     starOne: string[] = ['*', '**', '***', '****', '*****'];
     starTwo: string[] = ['*', '**', '***', '****', '*****'];
-    balneare = false;
-    montano = false;
-    lacustre = false;
-    naturalistico = false;
-    culturale = false;
-    termale = false;
-    religioso = false;
-    sportivo = false;
-    enogastronomico = false;
+    tourismTypes: string[] = ['balneare', 'montano', 'lacustre', 'naturalistico', 'culturale', 'termale', 'religioso', 'sportivo', 'enogastronomico']
+    cities: City[] = [{name: 'United States of America'},{name: 'China'}]; // ...
 
     form: FormGroup;
-
-    // Vertical Stepper
-    verticalStepperStep1: FormGroup;
-    verticalStepperStep2: FormGroup;
-    verticalStepperStep3: FormGroup;
-    verticalStepperStep4: FormGroup;
-    verticalStepperStep5: FormGroup;
-
 
     /**
      * Constructor
@@ -41,26 +27,28 @@ export class FormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.form = new FormGroup({
+            City: new FormControl('', Validators.required),
+            // City: new FormArray([], Validators.required),
+            //
 
-        // Vertical Stepper form stepper
-        this.verticalStepperStep1 = this._formBuilder.group({
-            cityNumber: ['', Validators.required],
+            Days: new FormControl('', Validators.required), // prendono anche lettere
+            MaxBudget: new FormControl('', Validators.required),
+            People: new FormControl('', Validators.required),
+
+            OnlyRegion: new FormControl('', Validators.required),
+            OnlyNotRegion:  new FormControl('', Validators.required),
+
+            MaxStars: new FormControl('', Validators.required),
+            MinStars: new FormControl('', Validators.required),
+            // le stelle invece di restituire un numero da 1 a 5 danno ****
+
+            TourismType: new FormArray([], Validators.required),
+
+            Arrival: new FormControl('', Validators.required),
+            Departure: new FormControl('', Validators.required)
         });
 
-        this.verticalStepperStep2 = this._formBuilder.group({
-            durata: ['', Validators.required],
-            budget: ['', Validators.required],
-            persone: ['', Validators.required],
-        });
-
-        this.verticalStepperStep3 = this._formBuilder.group({
-        });
-
-        this.verticalStepperStep4 = this._formBuilder.group({
-        });
-
-        this.verticalStepperStep5 = this._formBuilder.group({
-        });
     }
 
     public generateRowIndexes(count: number): Array<number> {
@@ -84,6 +72,31 @@ export class FormComponent implements OnInit {
      * Finish the vertical stepper
      */
     finishVerticalStepper(): void {
-        alert('You have finished the vertical stepper!');
+        alert(this.form.get('TourismType').value);
+    }
+
+    onCheckChange(event): void {
+        const formArray: FormArray = this.form.get('TourismType') as FormArray;
+
+        /* Selected */
+        if (event.target.checked){
+            // Add a new control in the arrayForm
+            formArray.push(new FormControl(event.target.value));
+        }
+        /* unselected */
+        else {
+            // find the unselected element
+            let i: number = 0;
+
+            formArray.controls.forEach((ctrl: FormControl) => {
+                if (ctrl.value === event.target.value) {
+                    // Remove the unselected element from the arrayForm
+                    formArray.removeAt(i);
+                    return;
+                }
+
+                i++;
+            });
+        }
     }
 }

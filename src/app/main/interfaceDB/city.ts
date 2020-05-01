@@ -1,6 +1,7 @@
 export interface City {
     id?: number;
-    arrival?: string;
-    departure?: string;
-
+    cap?: number;
+    tourismTypes?: string[]; // da vedere se serve l'id in caso bisogna creare l'interfaccia tourismtypes
+    region?: string;
+    name?: string;
 }
