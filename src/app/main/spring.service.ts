@@ -60,7 +60,7 @@ export class SpringService {
             );
     }
 
-    register(name: string, user: string, email: string, pwd: string): Observable<Guest> {
+    register(name: string, user: string, email: string, pwd: string | Int32Array): Observable<Guest> {
         const url = `http://87.8.225.138:8080/guests/register`;
         const guest = {email: email, name: name, pwd: pwd, username: user};
         return this.http.post<Guest>(url, guest)
@@ -69,7 +69,7 @@ export class SpringService {
             );
     }
 
-    login(email: string, pwd: string): Observable<Guest> {
+    login(email: string, pwd: string | Int32Array): Observable<Guest> {
         const url =  `http://87.8.225.138:8080/guests/login`;
         const param = {email: email, pwd: pwd};
         return this.http.post<Guest>(url, param)
