@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
-// import {Md5} from 'ts-md5';
+import {Md5} from 'ts-md5/dist/md5';
 
 
 @Component({
@@ -64,7 +64,9 @@ export class LoginComponent implements OnInit {
         });
     }
     onLoginSubmit(): void {
-        this.springService.login(this.email.nativeElement.value, this.password.nativeElement.value)
+        const md5 = new Md5();
+        const pwd = md5.appendStr(this.password.nativeElement.value).end();
+        this.springService.login(this.email.nativeElement.value, pwd)
             .subscribe(g => console.log(g));
     }
 

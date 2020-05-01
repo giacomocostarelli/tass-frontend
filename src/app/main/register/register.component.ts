@@ -6,6 +6,7 @@ import {takeUntil} from 'rxjs/internal/operators';
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
+import {Md5} from "ts-md5";
 
 @Component({
     selector: 'register',
@@ -83,7 +84,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     onRegistersubmit(name: string, username: string, mail: string, password: string): void {
-        this.springService.register(name, username, mail, password).subscribe(g => console.log(g));
+        const md5 = new Md5();
+        const pwd = md5.appendStr(password).end();
+        this.springService.register(name, username, mail, pwd).subscribe(g => console.log(g));
     }
 }
 
