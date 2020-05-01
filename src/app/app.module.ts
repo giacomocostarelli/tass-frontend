@@ -48,7 +48,7 @@ const appRoutes: Routes = [
         loadChildren: './main/secret-places/secret-places.module#SecretPlacesModule'
     },
     {
-        path        : 'ricerca_standard',
+        path: 'ricerca_standard',
         loadChildren: './main/ricerca-standard/ricerca-standard.module#RicercaStandardModule'
     }
 ];
