@@ -6,7 +6,7 @@ import {takeUntil} from 'rxjs/internal/operators';
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
-import {Md5} from "ts-md5";
+import {Md5} from 'ts-md5';
 
 @Component({
     selector: 'register',
