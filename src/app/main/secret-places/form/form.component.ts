@@ -1,6 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {City} from "../../interfaceDB/city";
+import {City} from '../../interfaceDB/city';
+import {Observable, of} from 'rxjs';
+import {SpringService} from "../../spring.service";
+
+
+export interface StateGroup {
+    letter: string;
+    names: string[];
+}
+
+export const _filter = (opt: string[], value: string): string[] => {
+    const filterValue = value.toLowerCase();
+
+    return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
+};
 
 @Component({
     selector: 'form-secret-places',
@@ -11,10 +25,12 @@ export class FormComponent implements OnInit {
     favoriteSeason: string;
     starOne: string[] = ['*', '**', '***', '****', '*****'];
     starTwo: string[] = ['*', '**', '***', '****', '*****'];
-    tourismTypes: string[] = ['balneare', 'montano', 'lacustre', 'naturalistico', 'culturale', 'termale', 'religioso', 'sportivo', 'enogastronomico']
-    cities: City[] = [{name: 'United States of America'},{name: 'China'}]; // ...
-
+    tourismTypes: string[] = ['balneare', 'montano', 'lacustre', 'naturalistico', 'culturale', 'termale', 'religioso', 'sportivo', 'enogastronomico'];
+    cities: City[] = [{name: 'United States of America'}, {name: 'China'}]; // ...
+    cityInputs = [1];
     form: FormGroup;
+    stateGroupOptions: Observable<StateGroup[]>;
+    returnList: StateGroup[] = [];
 
     /**
      * Constructor
@@ -22,15 +38,19 @@ export class FormComponent implements OnInit {
      * @param {FuseTranslationLoaderService} _fuseTranslationLoaderService
      */
     constructor(
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private springService: SpringService
     ) {
     }
 
+
+
     ngOnInit(): void {
+
         this.form = new FormGroup({
-            City: new FormControl('', Validators.required),
-            // City: new FormArray([], Validators.required),
-            //
+            // City: new FormControl('', Validators.required),
+            City: new FormArray([], Validators.required),
+
 
             Days: new FormControl('', Validators.required), // prendono anche lettere
             MaxBudget: new FormControl('', Validators.required),
@@ -48,9 +68,10 @@ export class FormComponent implements OnInit {
             Arrival: new FormControl('', Validators.required),
             Departure: new FormControl('', Validators.required)
         });
+        this.stateGroupOptions = this.sortCity();
+        console.log(this.returnList);
 
     }
-
     public generateRowIndexes(count: number): Array<number> {
         const indexes = [];
         for (let i = 0; i < count; i++) {
@@ -72,7 +93,8 @@ export class FormComponent implements OnInit {
      * Finish the vertical stepper
      */
     finishVerticalStepper(): void {
-        alert(this.form.get('TourismType').value);
+        this.springService.searchClips(this.form.value)
+            .subscribe(alternative => console.log(JSON.stringify(alternative)));
     }
 
     onCheckChange(event): void {
@@ -86,7 +108,7 @@ export class FormComponent implements OnInit {
         /* unselected */
         else {
             // find the unselected element
-            let i: number = 0;
+            let i = 0;
 
             formArray.controls.forEach((ctrl: FormControl) => {
                 if (ctrl.value === event.target.value) {
@@ -98,5 +120,31 @@ export class FormComponent implements OnInit {
                 i++;
             });
         }
+    }
+
+    addInput(value: string): void{
+        this.cityInputs.push(1);
+        const formArray: FormArray = this.form.get('City') as FormArray;
+        formArray.push(new FormControl(value));
+    }
+
+
+    sortCity(): Observable<StateGroup[]>  {
+        this.cities.sort((one, two) => (one.name > two.name ? 1 : -1));
+        let thisLetter = 'A';
+        let citySameLetter: string[] = [];
+        for (const c of this.cities) {
+            const city = c.name;
+            if (city[0].toUpperCase() !== thisLetter) {
+                if ( citySameLetter.length > 0){
+                    this.returnList.push({letter: thisLetter, names: citySameLetter});
+                    citySameLetter = [];
+                }
+                thisLetter = city[0].toUpperCase();
+            }
+            citySameLetter.push(city);
+        }
+        this.returnList.push({letter: thisLetter, names: citySameLetter});
+        return of(this.returnList);
     }
 }

@@ -37,16 +37,17 @@ export class SpringService {
             );
     }
 
-    searchClips(Cities: { city: string, region: string }[], Days: number, MaxBudget: string, People: number,
+    /*Cities: { city: string, region: string }[], Days: number, MaxBudget: string, People: number,
                 OnlyRegion: string, OnlyNotRegion: string, MaxStars: number, MinStars: number,
-                TourismType: string[], Arrival: string, Departure: string): Observable<Alternative[]> {
-        const secretSearch = {
+                TourismType: string[], Arrival: string, Departure: string*/
+    searchClips(formdata: any): Observable<Alternative[]> {
+       /* const secretSearch = {
             cities: Cities, days: Days, maxBudget: MaxBudget, people: People,
             onlyRegion: OnlyRegion, onlyNotRegion: OnlyNotRegion, maxStars: MaxStars, minStars: MinStars,
             tourismTypes: TourismType, arrival: Arrival, departure: Departure
-        };
+        };*/
         const url = `${this.serverUrl}/prova`;
-        return this.http.post<Alternative[]>(url, secretSearch)
+        return this.http.post<Alternative[]>(url, formdata)
             .pipe(
                 catchError(this.handleError<Alternative[]>('postRegisterItem', []))
             );
