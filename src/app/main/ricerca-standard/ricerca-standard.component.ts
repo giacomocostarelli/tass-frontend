@@ -21,14 +21,8 @@ export class RicercaStandardComponent implements OnInit {
                     disabled: true
                 }, Validators.required
             ],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            address: ['', Validators.required],
-            address2: ['', Validators.required],
-            city: ['', Validators.required],
-            state: ['', Validators.required],
-            postalCode: ['', [Validators.required, Validators.maxLength(5)]],
-            country: ['', Validators.required]
+            personNumber: ['', Validators.required, Validators.maxLength(2)],
+            destination: ['', Validators.required]
         });
     }
 

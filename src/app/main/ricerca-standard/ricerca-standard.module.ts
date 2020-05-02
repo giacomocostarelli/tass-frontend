@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 
 import { FuseSharedModule } from '@fuse/shared.module';
+import {MaterialModule} from '../../angular-material/material.module';
 
 const routes = [
     {
@@ -21,18 +22,19 @@ const routes = [
   declarations: [
       RicercaStandardComponent
   ],
-  imports: [
-      RouterModule.forChild(routes),
+    imports: [
+        RouterModule.forChild(routes),
 
-      MatButtonModule,
-      MatFormFieldModule,
-      MatIconModule,
-      MatInputModule,
-      MatSelectModule,
-      MatStepperModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatStepperModule,
 
-      FuseSharedModule,
-  ],
+        FuseSharedModule,
+        MaterialModule,
+    ],
   exports: [
       RicercaStandardComponent
   ]

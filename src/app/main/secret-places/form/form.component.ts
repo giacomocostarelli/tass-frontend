@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {City} from "../../interfaceDB/city";
+import {City} from '../../interfaceDB/city';
 
 @Component({
     selector: 'form-secret-places',
