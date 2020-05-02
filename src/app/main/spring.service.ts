@@ -53,9 +53,9 @@ export class SpringService {
             );
     }
 
-    normalSearch(city: string, arrival: string, departure: string): Observable<Room[]> {
+    normalSearch(formData): Observable<Room[]> {
         const url = `${this.serverUrl}/search`;
-        return this.http.post<Room[]>(url, {city, arrival, departure})
+        return this.http.post<Room[]>(url, formData)
             .pipe(
                 catchError(this.handleError<Room[]>('postRegisterItem', []))
             );

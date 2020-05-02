@@ -10,11 +10,6 @@ export interface StateGroup {
     names: string[];
 }
 
-export const _filter = (opt: string[], value: string): string[] => {
-    const filterValue = value.toLowerCase();
-
-    return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
-};
 
 @Component({
     selector: 'form-secret-places',
@@ -69,7 +64,7 @@ export class FormComponent implements OnInit {
             Departure: new FormControl('', Validators.required)
         });
         this.stateGroupOptions = this.sortCity();
-        console.log(this.returnList);
+
 
     }
     public generateRowIndexes(count: number): Array<number> {
@@ -93,8 +88,9 @@ export class FormComponent implements OnInit {
      * Finish the vertical stepper
      */
     finishVerticalStepper(): void {
-        this.springService.searchClips(this.form.value)
-            .subscribe(alternative => console.log(JSON.stringify(alternative)));
+        console.log(JSON.stringify(this.form.value));
+        /*this.springService.searchClips(this.form.value)
+            .subscribe(alternative => console.log(JSON.stringify(alternative)));*/
     }
 
     onCheckChange(event): void {
