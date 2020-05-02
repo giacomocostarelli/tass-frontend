@@ -1,3 +1,22 @@
 mat-form-field {
     margin-right: 25px;
 }
+
+:host {
+
+    .content {
+
+        form {
+            width: 100%;
+            max-width: 800px !important;
+        }
+
+        .form-errors-model {
+            flex: 1;
+
+            code {
+                background: none !important;
+            }
+        }
+    }
+}

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {City} from '../interfaceDB/city';
 import {Observable, of} from 'rxjs';
-import {SpringService} from "../spring.service";
+import {SpringService} from '../spring.service';
 
 
 export interface StateGroup {
@@ -31,27 +31,21 @@ export class RicercaStandardComponent implements OnInit {
     ngOnInit(): void {
 
         this.form = this._formBuilder.group({
-            company: [
-                {
-                    value: 'Google',
-                    disabled: true
-                }, Validators.required
-            ],
             city: ['', Validators.required],
-            personNumber: ['', Validators.required, Validators.maxLength(2)],
+            personNumber: ['', Validators.required],
             arrival: ['', Validators.required],
             departure: ['', Validators.required]
         });
     }
 
-    sortCity(): Observable<StateGroup[]>  {
+    sortCity(): Observable<StateGroup[]> {
         this.cities.sort((one, two) => (one.name > two.name ? 1 : -1));
         let thisLetter = 'A';
         let citySameLetter: string[] = [];
         for (const c of this.cities) {
             const city = c.name;
             if (city[0].toUpperCase() !== thisLetter) {
-                if ( citySameLetter.length > 0){
+                if (citySameLetter.length > 0) {
                     this.returnList.push({letter: thisLetter, names: citySameLetter});
                     citySameLetter = [];
                 }
@@ -66,7 +60,7 @@ export class RicercaStandardComponent implements OnInit {
 
     // PROBLEMI: prende le città anche se non fan parte della lista
     // il numero di persone viene preso solo dopo aver compilato correttamente un altro campo ???
-    onFormSubmit(): void{
+    onFormSubmit(): void {
         alert(JSON.stringify(this.form.value));
         /*this.springService.normalSearch(this.form.value)
             .subscribe(boh => console.log(JSON.stringify(boh)) );*/
