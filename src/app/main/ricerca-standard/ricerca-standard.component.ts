@@ -3,33 +3,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {City} from '../interfaceDB/city';
 import {Observable, of} from 'rxjs';
 import {SpringService} from '../spring.service';
-import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 
 export interface StateGroup {
     letter: string;
     names: string[];
 }
-export const MY_FORMATS = {
-    parse: {
-        dateInput: 'LL'
-    },
-    display: {
-        dateInput: 'DD-MM-YYYY',
-        monthYearLabel: 'YYYY',
-        dateA11yLabel: 'LL',
-        monthYearA11yLabel: 'YYYY'
-    }
-};
-
 
 @Component({
     selector: 'ricerca_standard',
     templateUrl: './ricerca-standard.component.html',
     styleUrls: ['./ricerca-standard.component.scss'],
-    providers: [
-        {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-    ]
 })
 export class RicercaStandardComponent implements OnInit {
     form: FormGroup;
@@ -77,8 +61,33 @@ export class RicercaStandardComponent implements OnInit {
     // PROBLEMI: prende le città anche se non fan parte della lista
     // il numero di persone viene preso solo dopo aver compilato correttamente un altro campo ???
     onFormSubmit(): void {
-         alert(JSON.stringify(this.form.value));
-         //this.springService.normalSearch(this.form.value)
-         //  .subscribe(boh => alert(JSON.stringify(boh)) );
+        // alert(JSON.stringify(this.form.value));
+        console.log(this.form.get('arrival').value);
+
+        const date = this.parse(this.form.get('arrival').value);
+        const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
+        this.form.get('arrival').setValue(finalDate);
+        console.log(this.form.get('arrival').value);
+
+
+        const date2 = this.parse(this.form.get('departure').value);
+        const finalDate2 = date2.getDate() + '/' + (1 + date2.getMonth())  + '/' + date2.getFullYear();
+        this.form.get('departure').setValue(finalDate2);
+        console.log(this.form.get('departure').value);
+
+
+        this.springService.normalSearch(this.form.value).subscribe(boh => alert(JSON.stringify(boh)) );
+    }
+
+    parse(value: any): Date | null {
+        if ((typeof value === 'string') && (value.indexOf('/') > -1)) {
+            const str = value.split('/');
+            const year = Number(str[2]);
+            const month = Number(str[1]) - 1;
+            const date = Number(str[0]);
+            return new Date(year, month, date);
+        }
+        const timestamp = typeof value === 'number' ? value : Date.parse(value);
+        return isNaN(timestamp) ? null : new Date(timestamp);
     }
 }
