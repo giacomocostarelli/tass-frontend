@@ -52,12 +52,12 @@
                     <input matInput #personNumber formControlName="personNumber" maxlength="1" required>
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
                     <mat-hint align="end">{{personNumber.value.length}} / 1</mat-hint>
-                    <mat-error>Il numero di persone è richiesto!</mat-error>
+                    <mat-error >Il numero di persone è richiesto!</mat-error>
                 </mat-form-field>
 
             </div>
             <div fxLayout="row" fxLayoutAlign="center center">
-                <button mat-raised-button type="submit" color="accent">
+                <button mat-raised-button type="submit" disabled [disabled]="form.invalid" color="accent">
                     Finito
                 </button>
             </div>

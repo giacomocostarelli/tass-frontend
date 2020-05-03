@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {City} from '../../interfaceDB/city';
 import {Observable, of} from 'rxjs';
-import {SpringService} from "../../spring.service";
+import {SpringService} from '../../spring.service';
 
 
 export interface StateGroup {
@@ -88,7 +88,7 @@ export class FormComponent implements OnInit {
      * Finish the vertical stepper
      */
     finishVerticalStepper(): void {
-        console.log(JSON.stringify(this.form.value));
+        alert(JSON.stringify(this.form.value));
         /*this.springService.searchClips(this.form.value)
             .subscribe(alternative => console.log(JSON.stringify(alternative)));*/
     }
@@ -96,23 +96,17 @@ export class FormComponent implements OnInit {
     onCheckChange(event): void {
         const formArray: FormArray = this.form.get('TourismType') as FormArray;
 
-        /* Selected */
         if (event.target.checked){
-            // Add a new control in the arrayForm
             formArray.push(new FormControl(event.target.value));
         }
-        /* unselected */
         else {
-            // find the unselected element
             let i = 0;
-
             formArray.controls.forEach((ctrl: FormControl) => {
                 if (ctrl.value === event.target.value) {
                     // Remove the unselected element from the arrayForm
                     formArray.removeAt(i);
                     return;
                 }
-
                 i++;
             });
         }

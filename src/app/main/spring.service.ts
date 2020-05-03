@@ -11,7 +11,9 @@ import {Guest} from './interfaceDB/guest';
 @Injectable({providedIn: 'root'})
 export class SpringService {
 
-    private serverUrl = 'http://localhost:8080';
+    // private serverUrl = 'http://localhost:8080';
+    private serverUrl = 'http://87.8.225.138:8080';
+
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
@@ -54,10 +56,10 @@ export class SpringService {
     }
 
     normalSearch(formData): Observable<Room[]> {
-        const url = `${this.serverUrl}/search`;
+        const url = `${this.serverUrl}/freeRooms`;
         return this.http.post<Room[]>(url, formData)
             .pipe(
-                catchError(this.handleError<Room[]>('postRegisterItem', []))
+                catchError(this.handleError<Room[]>('standardSearch', []))
             );
     }
 

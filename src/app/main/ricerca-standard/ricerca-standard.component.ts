@@ -3,17 +3,33 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {City} from '../interfaceDB/city';
 import {Observable, of} from 'rxjs';
 import {SpringService} from '../spring.service';
+import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 
 export interface StateGroup {
     letter: string;
     names: string[];
 }
+export const MY_FORMATS = {
+    parse: {
+        dateInput: 'LL'
+    },
+    display: {
+        dateInput: 'DD-MM-YYYY',
+        monthYearLabel: 'YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'YYYY'
+    }
+};
+
 
 @Component({
     selector: 'ricerca_standard',
     templateUrl: './ricerca-standard.component.html',
-    styleUrls: ['./ricerca-standard.component.scss']
+    styleUrls: ['./ricerca-standard.component.scss'],
+    providers: [
+        {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    ]
 })
 export class RicercaStandardComponent implements OnInit {
     form: FormGroup;
@@ -32,7 +48,7 @@ export class RicercaStandardComponent implements OnInit {
 
         this.form = this._formBuilder.group({
             city: ['', Validators.required],
-            personNumber: ['', Validators.required],
+            personNumber: ['', [Validators.required, Validators.pattern('^[0-9]')]],
             arrival: ['', Validators.required],
             departure: ['', Validators.required]
         });
@@ -61,8 +77,8 @@ export class RicercaStandardComponent implements OnInit {
     // PROBLEMI: prende le città anche se non fan parte della lista
     // il numero di persone viene preso solo dopo aver compilato correttamente un altro campo ???
     onFormSubmit(): void {
-        alert(JSON.stringify(this.form.value));
-        /*this.springService.normalSearch(this.form.value)
-            .subscribe(boh => console.log(JSON.stringify(boh)) );*/
+         alert(JSON.stringify(this.form.value));
+         //this.springService.normalSearch(this.form.value)
+         //  .subscribe(boh => alert(JSON.stringify(boh)) );
     }
 }
