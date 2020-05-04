@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {City} from '../interfaceDB/city';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {SpringService} from '../spring.service';
+import {Room} from "../interfaceDB/room";
+import {fuseAnimations} from "../../../@fuse/animations";
 
 
 export interface StateGroup {
@@ -10,20 +12,26 @@ export interface StateGroup {
     names: string[];
 }
 
+
 @Component({
     selector: 'ricerca_standard',
     templateUrl: './ricerca-standard.component.html',
     styleUrls: ['./ricerca-standard.component.scss'],
+    animations   : fuseAnimations,
+    encapsulation: ViewEncapsulation.None
 })
 export class RicercaStandardComponent implements OnInit {
     form: FormGroup;
     cities: City[] = [{name: 'United States of America'}, {name: 'China'}]; // ...
     stateGroupOptions: Observable<StateGroup[]>;
     returnList: StateGroup[] = [];
+    roomList: Room[] = [];
+    dataSource =   [{id: 2,	name_hotel: 'hotel2',price:43, num_posti:3,star: 4}];
+    displayedColumns = ['id', 'image', 'name_hotel', 'price', 'num_posti', 'star'];
 
     constructor(
         private _formBuilder: FormBuilder,
-        private springService: SpringService
+        private springService: SpringService,
     ) {
         this.stateGroupOptions = this.sortCity();
     }
@@ -76,7 +84,8 @@ export class RicercaStandardComponent implements OnInit {
         console.log(this.form.get('departure').value);
 
 
-        this.springService.normalSearch(this.form.value).subscribe(boh => alert(JSON.stringify(boh)) );
+        this.springService.normalSearch(this.form.value)
+            .subscribe(map => this.roomList = map.get('returnedValue'));
     }
 
     parse(value: any): Date | null {

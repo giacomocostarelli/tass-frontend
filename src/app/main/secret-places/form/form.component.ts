@@ -18,10 +18,10 @@ export interface StateGroup {
 })
 export class FormComponent implements OnInit {
     favoriteSeason: string;
-    starOne: string[] = ['*', '**', '***', '****', '*****'];
-    starTwo: string[] = ['*', '**', '***', '****', '*****'];
+    starOne: string[] = ['1', '2', '3', '4', '5'];
+    starTwo: string[] = ['1', '2', '3', '4', '5'];
     tourismTypes: string[] = ['balneare', 'montano', 'lacustre', 'naturalistico', 'culturale', 'termale', 'religioso', 'sportivo', 'enogastronomico'];
-    cities: City[] = [{name: 'United States of America'}, {name: 'China'}]; // ...
+    cities: City[] = [{name: 'Cagliari'}, {name: 'China'}]; // ...
     cityInputs = [1];
     form: FormGroup;
     stateGroupOptions: Observable<StateGroup[]>;
@@ -43,25 +43,23 @@ export class FormComponent implements OnInit {
     ngOnInit(): void {
 
         this.form = new FormGroup({
-            // City: new FormControl('', Validators.required),
-            City: new FormArray([], Validators.required),
+            cities: new FormArray([], Validators.required),
 
 
-            Days: new FormControl('', Validators.required), // prendono anche lettere
-            MaxBudget: new FormControl('', Validators.required),
-            People: new FormControl('', Validators.required),
+            maxBudget: new FormControl('', Validators.required),
+            people: new FormControl('', Validators.required),
 
-            OnlyRegion: new FormControl('', Validators.required),
-            OnlyNotRegion:  new FormControl('', Validators.required),
+            onlyRegion: new FormControl('', Validators.required),
+            onlyNotRegion:  new FormControl('', Validators.required),
 
-            MaxStars: new FormControl('', Validators.required),
-            MinStars: new FormControl('', Validators.required),
+            maxStars: new FormControl(5, Validators.required),
+            minStars: new FormControl(1, Validators.required),
             // le stelle invece di restituire un numero da 1 a 5 danno ****
 
-            TourismType: new FormArray([], Validators.required),
+            tourismTypes: new FormArray([], Validators.required),
 
-            Arrival: new FormControl('', Validators.required),
-            Departure: new FormControl('', Validators.required)
+            arrival: new FormControl('', Validators.required),
+            departure: new FormControl('', Validators.required)
         });
         this.stateGroupOptions = this.sortCity();
 
@@ -88,13 +86,25 @@ export class FormComponent implements OnInit {
      * Finish the vertical stepper
      */
     finishVerticalStepper(): void {
-        alert(JSON.stringify(this.form.value));
-        /*this.springService.searchClips(this.form.value)
-            .subscribe(alternative => console.log(JSON.stringify(alternative)));*/
+
+        const date = this.parse(this.form.get('arrival').value);
+        const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
+        this.form.get('arrival').setValue(finalDate);
+        console.log(this.form.get('arrival').value);
+
+
+        const date2 = this.parse(this.form.get('departure').value);
+        const finalDate2 = date2.getDate() + '/' + (1 + date2.getMonth())  + '/' + date2.getFullYear();
+        this.form.get('departure').setValue(finalDate2);
+        console.log(this.form.get('departure').value);
+
+        //  alert(JSON.stringify(this.form.value));
+        this.springService.searchClips(this.form.value)
+            .subscribe(alternative => console.log(JSON.stringify(alternative)));
     }
 
     onCheckChange(event): void {
-        const formArray: FormArray = this.form.get('TourismType') as FormArray;
+        const formArray: FormArray = this.form.get('tourismTypes') as FormArray;
 
         if (event.target.checked){
             formArray.push(new FormControl(event.target.value));
@@ -114,8 +124,8 @@ export class FormComponent implements OnInit {
 
     addInput(value: string): void{
         this.cityInputs.push(1);
-        const formArray: FormArray = this.form.get('City') as FormArray;
-        formArray.push(new FormControl(value));
+        const formArray: FormArray = this.form.get('cities') as FormArray;
+        formArray.push( new FormControl({name: value}));
     }
 
 
@@ -136,5 +146,17 @@ export class FormComponent implements OnInit {
         }
         this.returnList.push({letter: thisLetter, names: citySameLetter});
         return of(this.returnList);
+    }
+
+    parse(value: any): Date | null {
+        if ((typeof value === 'string') && (value.indexOf('/') > -1)) {
+            const str = value.split('/');
+            const year = Number(str[2]);
+            const month = Number(str[1]) - 1;
+            const date = Number(str[0]);
+            return new Date(year, month, date);
+        }
+        const timestamp = typeof value === 'number' ? value : Date.parse(value);
+        return isNaN(timestamp) ? null : new Date(timestamp);
     }
 }

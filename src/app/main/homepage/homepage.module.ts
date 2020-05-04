@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {HomepageComponent} from './homepage.component';
 import {RouterModule} from '@angular/router';
+import {PricingModule} from './pricing/pricing.module';
 
 
 const routes = [
@@ -14,9 +15,10 @@ const routes = [
   declarations: [
       HomepageComponent
   ],
-  imports: [
-      RouterModule.forChild(routes),
-  ],
+    imports: [
+        RouterModule.forChild(routes),
+        PricingModule,
+    ],
   exports: [
       HomepageComponent
   ]

@@ -1,0 +1,107 @@
+@import "../../../../@fuse/scss/fuse";
+
+pricing {
+
+    #price-tables {
+
+        .header {
+            padding: 24px;
+            height: 900px;
+            min-height: 900px;
+            background-image: url('ba.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            @include media-breakpoint('xs') {
+                height: 150px;
+                min-height: 400px;
+            }
+
+            .hero-text {
+                margin: 60px 24px;
+
+                @include media-breakpoint('xs') {
+                    margin: 64px 24px;
+                }
+
+                .h1 {
+                    //E74C3C
+                    color: #FFFFFF;
+                    font-size: 120px;
+                    font-weight: 600;
+                    letter-spacing: 0.01em;
+                    text-align: center;
+                    text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff;
+
+                    @include media-breakpoint('xs') {
+                        font-size: 32px;
+                    }
+                }
+
+                .h3 {
+                    color: white;
+                    max-width: 820px;
+                    text-align: center;
+                    margin-top: 16px;
+                    margin-bottom: 50px;
+                    font-weight: 600;
+                    font-size: 32px;
+                    letter-spacing: 0.05em;
+
+
+                    @include media-breakpoint('xs') {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        .price-tables {
+            flex: 1 0 auto;
+            margin-top: -300px;
+
+
+            @include media-breakpoint('xs') {
+                margin-top: -128px;
+            }
+
+            .price-table {
+                margin: 12px;
+            }
+
+        }
+
+        .price-table-title {
+
+        }
+
+        .faq {
+            flex: 1 0 auto;
+            margin: 96px auto;
+            max-width: 1200px;
+
+            .title {
+                font-size: 50px;
+                font-weight: 700;
+                text-align: center;
+                margin-bottom: 64px;
+                padding: 0 5px;
+            }
+
+            .item {
+                padding: 24px;
+
+                .question {
+                    font-size: 25px;
+                    margin-bottom: 8px;
+                }
+
+                .answer {
+                    text-align: justify;
+                    font-size: 22px;
+                    line-height: 1.5;
+                }
+            }
+        }
+    }
+}

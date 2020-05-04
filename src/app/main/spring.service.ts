@@ -48,23 +48,23 @@ export class SpringService {
             onlyRegion: OnlyRegion, onlyNotRegion: OnlyNotRegion, maxStars: MaxStars, minStars: MinStars,
             tourismTypes: TourismType, arrival: Arrival, departure: Departure
         };*/
-        const url = `${this.serverUrl}/prova`;
+        const url = `${this.serverUrl}/secretSearch`;
         return this.http.post<Alternative[]>(url, formdata)
             .pipe(
-                catchError(this.handleError<Alternative[]>('postRegisterItem', []))
+                catchError(this.handleError<Alternative[]>('getSecretSearch', []))
             );
     }
 
-    normalSearch(formData): Observable<Room[]> {
+    normalSearch(formData): Observable<Map<string, any>> {
         const url = `${this.serverUrl}/freeRooms`;
-        return this.http.post<Room[]>(url, formData)
+        return this.http.post<Map<string, any>>(url, formData)
             .pipe(
-                catchError(this.handleError<Room[]>('standardSearch', []))
+                catchError(this.handleError<Map<string, any>>('standardSearch', null))
             );
     }
 
     register(name: string, user: string, email: string, pwd: string | Int32Array): Observable<Guest> {
-        const url = `http://87.8.225.138:8080/guests/register`;
+        const url = `${this.serverUrl}/guests/register`;
         const guest = {email: email, name: name, pwd: pwd, username: user};
         return this.http.post<Guest>(url, guest)
             .pipe(
@@ -73,7 +73,7 @@ export class SpringService {
     }
 
     login(email: string, pwd: string | Int32Array): Observable<Guest> {
-        const url =  `http://87.8.225.138:8080/guests/login`;
+        const url =  `${this.serverUrl}/guests/login`;
         const param = {email: email, pwd: pwd};
         return this.http.post<Guest>(url, param)
             .pipe(
