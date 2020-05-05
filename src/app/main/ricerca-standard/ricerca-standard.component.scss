@@ -20,9 +20,6 @@ mat-form-field {
         }
     }
 }
-
-e-commerce-products {
-
     #products {
 
         .top-bg {
@@ -35,36 +32,20 @@ e-commerce-products {
         > .center {
 
             > .header {
-
-                .search-wrapper {
+                height: 700px !important;
+                max-height: 700px;
+                .form-css {
                     width: 100%;
-                    max-width: 480px;
+
+                    max-height: 480px;
                     border-radius: 28px;
-                    overflow: hidden;
                     @include mat-elevation(1);
 
                     @include media-breakpoint('xs') {
                         width: 100%;
                     }
 
-                    .search {
-                        width: 100%;
-                        height: 48px;
-                        line-height: 48px;
-                        padding: 0 18px;
-
-                        input {
-                            width: 100%;
-                            height: 48px;
-                            min-height: 48px;
-                            max-height: 48px;
-                            padding: 0 16px;
-                            border: none;
-                            outline: none;
-                        }
-                    }
                 }
-
                 @include media-breakpoint('lt-md') {
                     padding: 8px 0;
                     height: 192px !important;
@@ -145,4 +126,4 @@ e-commerce-products {
             border-radius: 50%;
         }
     }
-}
+

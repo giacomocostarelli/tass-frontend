@@ -5,4 +5,5 @@ export interface Hotel {
     city?: string;
     cellNumber?: string;
     stars?: number;
+    name?: string;
 }
