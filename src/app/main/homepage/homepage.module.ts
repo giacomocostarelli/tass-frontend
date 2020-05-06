@@ -6,7 +6,7 @@ import {PricingModule} from './pricing/pricing.module';
 
 const routes = [
     {
-        path     : 'homepage',
+        path     : '',
         component: HomepageComponent
     }
 ];
