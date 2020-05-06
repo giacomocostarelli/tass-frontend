@@ -9,7 +9,6 @@ import {DataSource} from '@angular/cdk/collections';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
-import {FuseUtils} from "../../../@fuse/utils";
 
 
 export interface StateGroup {
@@ -41,8 +40,8 @@ export class RicercaStandardComponent implements OnInit {
     @ViewChild(MatSort, {static: true})
     sort: MatSort;
 
-    @ViewChild('filter', {static: true})
-    filter: ElementRef;
+    /*@ViewChild('filter', {static: true})
+    filter: ElementRef;*/
 
     constructor(
         private _formBuilder: FormBuilder,

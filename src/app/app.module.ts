@@ -24,6 +24,7 @@ import {HomepageModule} from './main/homepage/homepage.module';
 import {SecretPlacesModule} from './main/secret-places/secret-places.module';
 import {RicercaStandardModule} from './main/ricerca-standard/ricerca-standard.module';
 import {Error404Module} from './main/errors/404/error-404.module';
+import {Error500Module} from './main/errors/500/error-500.module';
 
 
 
@@ -52,6 +53,10 @@ const appRoutes: Routes = [
     {
         path: 'ricerca_standard',
         loadChildren: './main/ricerca-standard/ricerca-standard.module#RicercaStandardModule'
+    },
+    {
+        path: 'errors/error-500',
+        loadChildren: './main/errors/500/error-500.module#Error500Module'
     },
     {
         path: '**',
@@ -94,7 +99,10 @@ const appRoutes: Routes = [
         HomepageModule,
         SecretPlacesModule,
         RicercaStandardModule,
-        Error404Module
+
+        // Errors
+        Error404Module,
+        Error500Module
     ],
     bootstrap: [
         AppComponent

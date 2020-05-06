@@ -7,6 +7,7 @@ import {Item} from './interfaceDB/item';
 import {Alternative} from './interfaceDB/alternative';
 import {Room} from './interfaceDB/room';
 import {Guest} from './interfaceDB/guest';
+import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 export class SpringService {
@@ -18,26 +19,19 @@ export class SpringService {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private router: Router
+    ) {
     }
 
-    getAllHotels(): Observable<Hotel[]> {
+    /*getAllHotels(): Observable<Hotel[]> {
         const url = `${this.serverUrl}/hotels`;
         return this.http.get<Hotel[]>(url)
             .pipe(
                 catchError(this.handleError<Hotel[]>('getAllHotels', []))
             );
-    }
-
-    createNewItem(i: Item): Observable<Item> {
-        const url = `${this.serverUrl}/items/register`;
-        // const i2: Map<string, string>[];
-        // const lol = {name: "blablabla"};
-        return this.http.post<Item>(url, i)
-            .pipe(
-                catchError(this.handleError<Item>('postRegisterItem', null))
-            );
-    }
+    }*/
 
     /*Cities: { city: string, region: string }[], Days: number, MaxBudget: string, People: number,
                 OnlyRegion: string, OnlyNotRegion: string, MaxStars: number, MinStars: number,
@@ -63,10 +57,9 @@ export class SpringService {
             );
     }
 
-    register(name: string, user: string, email: string, pwd: string | Int32Array): Observable<Guest> {
+    register(form: Guest): Observable<Guest> {
         const url = `${this.serverUrl}/guests/register`;
-        const guest = {email: email, name: name, pwd: pwd, username: user};
-        return this.http.post<Guest>(url, guest)
+        return this.http.post<Guest>(url, form)
             .pipe(
                 catchError(this.handleError<Guest>('postRegisterItem', null))
             );
@@ -89,11 +82,11 @@ export class SpringService {
      * @param result - optional value to return as the observable result
      */
     private handleError<T>(operation = 'operation', result?: T) {
+        this.router.navigate(['errors/error-500']);
         return (error: any): Observable<T> => {
 
             // TODO: send the error to remote logging infrastructure
             console.error(error); // log to console instead
-
             // Let the app keep running by returning an empty result.
             return of(result as T);
         };

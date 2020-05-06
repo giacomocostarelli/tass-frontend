@@ -7,6 +7,8 @@ import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
 import {Md5} from 'ts-md5';
+import {Router} from "@angular/router";
+import {Guest} from "../interfaceDB/guest";
 
 @Component({
     selector: 'register',
@@ -25,7 +27,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private springService: SpringService
+        private springService: SpringService,
+        private router: Router
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -58,16 +61,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
      */
     ngOnInit(): void {
         this.registerForm = this._formBuilder.group({
-            name: ['', Validators.required],
-            username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required],
+            name: ['', Validators.required],
+            pwd: ['', Validators.required],
+            username: ['', Validators.required],
             passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
         });
 
         // Update the validity of the 'passwordConfirm' field
         // when the 'password' field changes
-        this.registerForm.get('password').valueChanges
+        this.registerForm.get('pwd').valueChanges
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
                 this.registerForm.get('passwordConfirm').updateValueAndValidity();
@@ -83,10 +86,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this._unsubscribeAll.complete();
     }
 
-    onRegistersubmit(name: string, username: string, mail: string, password: string): void {
+    onRegistersubmit(): void {
         const md5 = new Md5();
-        const pwd = md5.appendStr(password).end();
-        this.springService.register(name, username, mail, pwd).subscribe(g => console.log(g));
+        const pwdController = this.registerForm.controls['pwd'];
+        const pwd = md5.appendStr(pwdController.value).end();
+        this.registerForm.removeControl('passwordConfirm');
+        pwdController.setValue(pwd, { emitEvent: false });
+        this.springService.register(this.registerForm.value).subscribe(
+            g => this.router.navigate(['/login']));
+            // da controllare se ritorna errori
     }
 }
 
@@ -102,7 +110,7 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
         return null;
     }
 
-    const password = control.parent.get('password');
+    const password = control.parent.get('pwd');
     const passwordConfirm = control.parent.get('passwordConfirm');
 
     if (!password || !passwordConfirm) {
