@@ -30,7 +30,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-                   <div fxLayout="row" fxLayoutAlign="center center">
+                    <div fxLayout="row" fxLayoutAlign="center center">
                         <button mat-raised-button matStepperNext type="button" color="accent">
                             Successivo
                         </button>
@@ -62,7 +62,7 @@
                         <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
                             Precedente
                         </button>
-                        <button mat-raised-button matStepperNext type="button"  color="accent">
+                        <button mat-raised-button matStepperNext type="button" color="accent">
                             Successivo
                         </button>
                     </div>
@@ -107,29 +107,31 @@
 
                     <div fxFlex="1 0 auto" fxLayout="column">
 
-                        <label id="radio-group-1">Numero di stelle minimo per l'hotel:</label>
-                        <mat-radio-group formControlName="minStars" required>
-                            <mat-radio-button *ngFor="let star1 of starOne" [value]="star1">
+                        <label id="radio-group-1">Numero minimo di stelle per l'hotel:</label>
+                        <mat-radio-group formControlName="minStars" fxLayout="row" required>
+                            <div *ngFor="let star1 of starOne">
                                 {{star1}}
-                            </mat-radio-button>
+                                <mat-radio-button [value]="star1"></mat-radio-button>
+                            </div>
                         </mat-radio-group>
 
                         <hr>
 
-                        <label id="radio-group-2">Numero di stelle massimo per l'hotel:</label>
-                        <mat-radio-group formControlName="maxStars" required>
-                            <mat-radio-button *ngFor="let star2 of starTwo" [value]="star2">
+                        <label id="radio-group-2">Numero massimo di stelle per l'hotel:</label>
+                        <mat-radio-group formControlName="maxStars" fxLayout="row" required>
+                            <div *ngFor="let star2 of starTwo">
                                 {{star2}}
-                            </mat-radio-button>
+                                <mat-radio-button [value]="star2"></mat-radio-button>
+                            </div>
                         </mat-radio-group>
 
                         <hr>
-                        <label id="check-box">Preferenze viaggio:</label>
-                        <div *ngFor="let tip of tourismTypes; let i=index" class="col-md-2">
-                            <label>
-                                <input type="checkbox" [value]="tip" (change)="onCheckChange($event)">
+
+                        <label id="check-box">Preferenze di viaggio:</label>
+                        <div *ngFor="let tip of tourismTypes">
+                            <mat-checkbox [value]="tip" (change)="onCheckChange($event)">
                                 {{tip}}
-                            </label>
+                            </mat-checkbox>
                         </div>
 
 
@@ -149,24 +151,25 @@
                 <mat-step>
 
 
-                    <ng-template matStepLabel>Andata e ritorno</ng-template>
-
+                    <ng-template matStepLabel>Data di partenza e ritorno</ng-template>
 
                     <div fxFlex="1 0 auto" fxLayout="column">
-                        <label id="andata">Andata:</label>
-                        <mat-form-field>
-                            <mat-label>Scegli una data</mat-label>
-                            <input matInput [matDatepicker]="picker1" formControlName="arrival" required>
+                        <label id="andata">Data di partenza:</label>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Data di partenza</mat-label>
+                            <input matInput formControlName="arrival" [matDatepicker]="picker1" required>
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
+                            <mat-error>La data di partenza è richiesta!</mat-error>
                         </mat-form-field>
 
-                        <label id="ritorno">Ritorno:</label>
-                        <mat-form-field>
-                            <mat-label>Scegli una data</mat-label>
-                            <input matInput [matDatepicker]="picker2" formControlName="departure" required>
+                        <label id="ritorno">Data di ritorno:</label>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Data di ritorno</mat-label>
+                            <input matInput formControlName="departure" [matDatepicker]="picker2" required>
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error>La data di ritorno è richiesta!</mat-error>
                         </mat-form-field>
                     </div>
 

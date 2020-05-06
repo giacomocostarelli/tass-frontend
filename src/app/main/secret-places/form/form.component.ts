@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {City} from '../../interfaceDB/city';
 import {Observable, of} from 'rxjs';
 import {SpringService} from '../../spring.service';
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 
 export interface StateGroup {
@@ -17,7 +18,6 @@ export interface StateGroup {
     styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-    favoriteSeason: string;
     starOne: string[] = ['1', '2', '3', '4', '5'];
     starTwo: string[] = ['1', '2', '3', '4', '5'];
     tourismTypes: string[] = ['balneare', 'montano', 'lacustre', 'naturalistico', 'culturale', 'termale', 'religioso', 'sportivo', 'enogastronomico'];
@@ -39,7 +39,6 @@ export class FormComponent implements OnInit {
     }
 
 
-
     ngOnInit(): void {
 
         this.form = new FormGroup({
@@ -50,11 +49,10 @@ export class FormComponent implements OnInit {
             people: new FormControl('', Validators.required),
 
             onlyRegion: new FormControl('', Validators.required),
-            onlyNotRegion:  new FormControl('', Validators.required),
+            onlyNotRegion: new FormControl('', Validators.required),
 
-            maxStars: new FormControl(5, Validators.required),
             minStars: new FormControl(1, Validators.required),
-            // le stelle invece di restituire un numero da 1 a 5 danno ****
+            maxStars: new FormControl(5, Validators.required),
 
             tourismTypes: new FormArray([], Validators.required),
 
@@ -65,6 +63,7 @@ export class FormComponent implements OnInit {
 
 
     }
+
     public generateRowIndexes(count: number): Array<number> {
         const indexes = [];
         for (let i = 0; i < count; i++) {
@@ -73,9 +72,6 @@ export class FormComponent implements OnInit {
         return indexes;
     }
 
-
-    ngOnDestroy(): void {
-    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
@@ -88,31 +84,31 @@ export class FormComponent implements OnInit {
     finishVerticalStepper(): void {
 
         const date = this.parse(this.form.get('arrival').value);
-        const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
+        const finalDate = date.getDate() + '/' + (1 + date.getMonth()) + '/' + date.getFullYear();
         this.form.get('arrival').setValue(finalDate);
-        console.log(this.form.get('arrival').value);
+        // console.log(this.form.get('arrival').value);
 
 
         const date2 = this.parse(this.form.get('departure').value);
-        const finalDate2 = date2.getDate() + '/' + (1 + date2.getMonth())  + '/' + date2.getFullYear();
+        const finalDate2 = date2.getDate() + '/' + (1 + date2.getMonth()) + '/' + date2.getFullYear();
         this.form.get('departure').setValue(finalDate2);
-        console.log(this.form.get('departure').value);
+        // console.log(this.form.get('departure').value);
 
-        //  alert(JSON.stringify(this.form.value));
+        alert(JSON.stringify(this.form.value));
         this.springService.searchClips(this.form.value)
             .subscribe(alternative => console.log(JSON.stringify(alternative)));
     }
 
-    onCheckChange(event): void {
+    onCheckChange(event: MatCheckboxChange): void {
+
         const formArray: FormArray = this.form.get('tourismTypes') as FormArray;
 
-        if (event.target.checked){
-            formArray.push(new FormControl(event.target.value));
-        }
-        else {
+        if (event.checked) {
+            formArray.push(new FormControl(event.checked));
+        } else {
             let i = 0;
             formArray.controls.forEach((ctrl: FormControl) => {
-                if (ctrl.value === event.target.value) {
+                if (ctrl.value === event.checked) {
                     // Remove the unselected element from the arrayForm
                     formArray.removeAt(i);
                     return;
@@ -122,21 +118,21 @@ export class FormComponent implements OnInit {
         }
     }
 
-    addInput(value: string): void{
+    addInput(value: string): void {
         this.cityInputs.push(1);
         const formArray: FormArray = this.form.get('cities') as FormArray;
-        formArray.push( new FormControl({name: value}));
+        formArray.push(new FormControl({name: value}));
     }
 
 
-    sortCity(): Observable<StateGroup[]>  {
+    sortCity(): Observable<StateGroup[]> {
         this.cities.sort((one, two) => (one.name > two.name ? 1 : -1));
         let thisLetter = 'A';
         let citySameLetter: string[] = [];
         for (const c of this.cities) {
             const city = c.name;
             if (city[0].toUpperCase() !== thisLetter) {
-                if ( citySameLetter.length > 0){
+                if (citySameLetter.length > 0) {
                     this.returnList.push({letter: thisLetter, names: citySameLetter});
                     citySameLetter = [];
                 }
