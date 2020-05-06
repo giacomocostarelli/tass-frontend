@@ -30,7 +30,8 @@ import {Error404Module} from './main/errors/404/error-404.module';
 const appRoutes: Routes = [
     {
         path: '',
-        loadChildren: './main/homepage/homepage.module#HomepageModule'
+        pathMatch: 'prefix',
+        redirectTo: 'homepage'
     },
     {
         path: 'homepage',
