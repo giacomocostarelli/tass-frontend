@@ -23,9 +23,19 @@ import {LoginModule} from './main/login/login.module';
 import {HomepageModule} from './main/homepage/homepage.module';
 import {SecretPlacesModule} from './main/secret-places/secret-places.module';
 import {RicercaStandardModule} from './main/ricerca-standard/ricerca-standard.module';
+import {Error404Module} from './main/errors/404/error-404.module';
+
 
 
 const appRoutes: Routes = [
+    {
+        path: '',
+        loadChildren: './main/homepage/homepage.module#HomepageModule'
+    },
+    {
+        path: 'homepage',
+        loadChildren: './main/homepage/homepage.module#HomepageModule'
+    },
     {
         path: 'register',
         loadChildren: './main/register/register.module#RegisterModule'
@@ -35,16 +45,17 @@ const appRoutes: Routes = [
         loadChildren: './main/login/login.module#LoginModule'
     },
     {
-        path: 'homepage',
-        loadChildren: './main/homepage/homepage.module#HomepageModule'
-    },
-    {
         path: 'secret_places',
         loadChildren: './main/secret-places/secret-places.module#SecretPlacesModule'
     },
     {
         path: 'ricerca_standard',
         loadChildren: './main/ricerca-standard/ricerca-standard.module#RicercaStandardModule'
+    },
+    {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: 'errors/error-404'
     }
 ];
 
@@ -81,7 +92,8 @@ const appRoutes: Routes = [
         LoginModule,
         HomepageModule,
         SecretPlacesModule,
-        RicercaStandardModule
+        RicercaStandardModule,
+        Error404Module
     ],
     bootstrap: [
         AppComponent
