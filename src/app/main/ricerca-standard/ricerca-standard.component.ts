@@ -9,6 +9,7 @@ import {DataSource} from '@angular/cdk/collections';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
+import {FuseUtils} from "../../../@fuse/utils";
 
 
 export interface StateGroup {
@@ -121,7 +122,7 @@ export class RicercaStandardComponent implements OnInit {
 
 export class FilesDataSource extends DataSource<any>
 {
-    // private _filterChange = new BehaviorSubject('');  // tutto ciò relativo a filter può servire, non cancellare
+    private _filterChange = new BehaviorSubject('');  // tutto ciò relativo a filter può servire, non cancellare
     private _filteredDataChange = new BehaviorSubject('');
 
     /**
@@ -157,7 +158,7 @@ export class FilesDataSource extends DataSource<any>
         return merge(...displayDataChanges)
             .pipe(
                 map(() => {
-                        let data = this._observableList.roomList;
+                        let data = this._observableList.roomList.slice();
 
                         // data = this.filterData(data);
 
@@ -202,8 +203,8 @@ export class FilesDataSource extends DataSource<any>
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
-    /*
-     * Filter data
+
+    /* Filter data
      *
      * @param data
      * @returns {any}
