@@ -17,7 +17,6 @@ import {fuseConfig} from 'app/fuse-config';
 
 import {AppComponent} from 'app/app.component';
 import {LayoutModule} from 'app/layout/layout.module';
-import {SampleModule} from 'app/main/sample/sample.module';
 import {MaterialModule} from './angular-material/material.module';
 import {RegisterModule} from './main/register/register.module';
 import {LoginModule} from './main/login/login.module';
@@ -27,10 +26,6 @@ import {RicercaStandardModule} from './main/ricerca-standard/ricerca-standard.mo
 
 
 const appRoutes: Routes = [
-    {
-        path: '**',
-        redirectTo: 'sample'
-    },
     {
         path: 'register',
         loadChildren: './main/register/register.module#RegisterModule'
@@ -82,7 +77,6 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule,
         RegisterModule,
         LoginModule,
         HomepageModule,
