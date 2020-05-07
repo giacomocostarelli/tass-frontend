@@ -121,7 +121,7 @@ export class RicercaStandardComponent implements OnInit {
 
 export class FilesDataSource extends DataSource<any>
 {
-    private _filterChange = new BehaviorSubject('');  // tutto ciò relativo a filter può servire, non cancellare
+    // private _filterChange = new BehaviorSubject('');  // tutto ciò relativo a filter può servire, non cancellare
     private _filteredDataChange = new BehaviorSubject('');
 
     /**

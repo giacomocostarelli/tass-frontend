@@ -7,8 +7,7 @@ import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
 import {Md5} from 'ts-md5';
-import {Router} from "@angular/router";
-import {Guest} from "../interfaceDB/guest";
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'register',
@@ -63,14 +62,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.registerForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
             name: ['', Validators.required],
-            pwd: ['', Validators.required],
+            pwd: ['',], // per hash
+            password: ['', Validators.required],
             username: ['', Validators.required],
             passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
         });
 
         // Update the validity of the 'passwordConfirm' field
         // when the 'password' field changes
-        this.registerForm.get('pwd').valueChanges
+        this.registerForm.get('password').valueChanges
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
                 this.registerForm.get('passwordConfirm').updateValueAndValidity();
@@ -88,10 +88,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     onRegistersubmit(): void {
         const md5 = new Md5();
-        const pwdController = this.registerForm.controls['pwd'];
-        const pwd = md5.appendStr(pwdController.value).end();
+        const pwd = md5.appendStr(this.registerForm.get('password').value).end();
         this.registerForm.removeControl('passwordConfirm');
-        pwdController.setValue(pwd, { emitEvent: false });
+        this.registerForm.removeControl('password');
+        this.registerForm.get('pwd').setValue(pwd, { emitEvent: false });
         this.springService.register(this.registerForm.value).subscribe(
             g => this.router.navigate(['/login']));
             // da controllare se ritorna errori
@@ -110,7 +110,7 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
         return null;
     }
 
-    const password = control.parent.get('pwd');
+    const password = control.parent.get('password');
     const passwordConfirm = control.parent.get('passwordConfirm');
 
     if (!password || !passwordConfirm) {
