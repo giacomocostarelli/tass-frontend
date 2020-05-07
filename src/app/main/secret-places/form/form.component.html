@@ -19,6 +19,10 @@
                                        #i
                                        [matAutocomplete]="autoGroup"
                                        (keyup.enter)="addInput(i.value)">
+                                <!-- da usare per rimuovere città già selezionata
+                                <button mat-button *ngIf="i.value" matSuffix mat-icon-button aria-label="Clear" (click)="">
+                                    <mat-icon>close</mat-icon>
+                                </button>-->
                                 <mat-autocomplete #autoGroup="matAutocomplete">
                                     <mat-optgroup *ngFor="let group of stateGroupOptions | async"
                                                   [label]="group.letter">

@@ -25,8 +25,21 @@ import {SecretPlacesModule} from './main/secret-places/secret-places.module';
 import {RicercaStandardModule} from './main/ricerca-standard/ricerca-standard.module';
 import {Error404Module} from './main/errors/404/error-404.module';
 import {Error500Module} from './main/errors/500/error-500.module';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 
+
+export const MY_FORMATS = {
+    parse: {
+        dateInput: 'DD/MM/YYYY',
+    },
+    display: {
+        dateInput: 'DD/MM/YYYY',
+        monthYearLabel: 'MM YYYY',
+        dateA11yLabel: 'DD/MM/YYYY',
+        monthYearA11yLabel: 'MM YYYY',
+    },
+};
 
 const appRoutes: Routes = [
     {
@@ -103,6 +116,15 @@ const appRoutes: Routes = [
         // Errors
         Error404Module,
         Error500Module
+    ],
+    providers: [{
+        provide: MAT_DATE_LOCALE,
+        useValue: 'it'
+    },
+        {
+            provide: MAT_DATE_FORMATS,
+            useValue: MY_FORMATS
+        }
     ],
     bootstrap: [
         AppComponent
