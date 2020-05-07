@@ -56,9 +56,20 @@ export class RicercaStandardComponent implements OnInit {
         this.form = this._formBuilder.group({
             city: ['', Validators.required],
             personNumber: ['', [Validators.required, Validators.pattern('^[0-9]')]],
-            arrival: ['', Validators.required],
-            departure: ['', Validators.required]
+            arr: ['', Validators.required],
+            arrival: ['', ],
+            dep: ['', Validators.required],
+            departure: ['', ]
         });
+        // aggiungere validators su città, non deve prendere città diverse dalle nostre
+        this.form.controls['arr'].valueChanges.subscribe( arr => { this.setFinalDate('arrival', arr); });
+        this.form.controls['dep'].valueChanges.subscribe( dep => { this.setFinalDate('departure', dep); });
+    }
+
+    setFinalDate(param: string, value: any): void{
+        const date = this.parse(value);
+        const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
+        this.form.controls[param].setValue(finalDate);
     }
 
     sortCity(): Observable<StateGroup[]> {
@@ -80,23 +91,8 @@ export class RicercaStandardComponent implements OnInit {
         return of(this.returnList);
     }
 
-    // PROBLEMI: prende le città anche se non fan parte della lista
+
     onFormSubmit(): void {
-        // alert(JSON.stringify(this.form.value));
-        console.log(this.form.get('arrival').value);
-
-        const date = this.parse(this.form.get('arrival').value);
-        const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
-        this.form.get('arrival').setValue(finalDate);
-        console.log(this.form.get('arrival').value);
-
-
-        const date2 = this.parse(this.form.get('departure').value);
-        const finalDate2 = date2.getDate() + '/' + (1 + date2.getMonth())  + '/' + date2.getFullYear();
-        this.form.get('departure').setValue(finalDate2);
-        console.log(this.form.get('departure').value);
-
-
         this.springService.normalSearch(this.form.value)
             .subscribe(
                 mappa => { // sarebbe da controlalre se mappa.get('resultcode') va bene

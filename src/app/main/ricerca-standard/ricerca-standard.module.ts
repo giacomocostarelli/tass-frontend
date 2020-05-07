@@ -7,9 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
-
 import { FuseSharedModule } from '@fuse/shared.module';
 import {MaterialModule} from '../../angular-material/material.module';
+
 
 const routes = [
     {
@@ -35,7 +35,7 @@ const routes = [
         FuseSharedModule,
         MaterialModule,
     ],
-  exports: [
+    exports: [
       RicercaStandardComponent
   ]
 })
