@@ -66,7 +66,7 @@ export class RicercaStandardComponent implements OnInit {
         this.form.controls['dep'].valueChanges.subscribe( dep => { this.setFinalDate('departure', dep); });
     }
 
-    setFinalDate(param: string, value: any): void{
+    private setFinalDate(param: string, value: any): void{
         const date = this.parse(value);
         const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
         this.form.controls[param].setValue(finalDate);

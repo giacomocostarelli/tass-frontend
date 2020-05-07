@@ -40,29 +40,33 @@ export class FormComponent implements OnInit {
 
 
     ngOnInit(): void {
-
+        // VALIDATOR MANCANTI: DATA ARRIVO < DATA RITORNO, CITTA IN LISTA CITTA, MINSTAR < MAXSTAR
         this.form = new FormGroup({
-            cities: new FormArray([], Validators.required),
-
-
-            maxBudget: new FormControl('', Validators.required),
-            people: new FormControl('', Validators.required),
-
-            onlyRegion: new FormControl('', Validators.required),
-            onlyNotRegion: new FormControl('', Validators.required),
-
-            minStars: new FormControl(1, Validators.required),
-            maxStars: new FormControl(5, Validators.required),
-
-            tourismTypes: new FormArray([], Validators.required),
-
-            arrival: new FormControl('', Validators.required),
-            departure: new FormControl('', Validators.required)
+            cities: new FormArray([], ),
+            maxBudget: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*')]),
+            people: new FormControl('', [Validators.required, Validators.pattern('^[0-9]')]),
+            onlyRegion: new FormControl('', ),
+            onlyNotRegion: new FormControl('', ),
+            minStars: new FormControl(1, ),
+            maxStars: new FormControl(5, ),
+            tourismTypes: new FormArray([], ),
+            arr: new FormControl('', Validators.required),
+            arrival: new FormControl('', ),
+            dep: new FormControl('', Validators.required),
+            departure: new FormControl('', )
         });
         this.stateGroupOptions = this.sortCity();
+        this.form.controls['arr'].valueChanges.subscribe( arr => { this.setFinalDate('arrival', arr); });
+        this.form.controls['dep'].valueChanges.subscribe( dep => { this.setFinalDate('departure', dep); });
 
 
     }
+    private setFinalDate(param: string, value: any): void{
+        const date = this.parse(value);
+        const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
+        this.form.controls[param].setValue(finalDate);
+    }
+
 
     public generateRowIndexes(count: number): Array<number> {
         const indexes = [];
@@ -83,20 +87,9 @@ export class FormComponent implements OnInit {
      */
     finishVerticalStepper(): void {
 
-        const date = this.parse(this.form.get('arrival').value);
-        const finalDate = date.getDate() + '/' + (1 + date.getMonth()) + '/' + date.getFullYear();
-        this.form.get('arrival').setValue(finalDate);
-        // console.log(this.form.get('arrival').value);
-
-
-        const date2 = this.parse(this.form.get('departure').value);
-        const finalDate2 = date2.getDate() + '/' + (1 + date2.getMonth()) + '/' + date2.getFullYear();
-        this.form.get('departure').setValue(finalDate2);
-        // console.log(this.form.get('departure').value);
-
         alert(JSON.stringify(this.form.value));
-        this.springService.searchClips(this.form.value)
-            .subscribe(alternative => console.log(JSON.stringify(alternative)));
+        //this.springService.searchClips(this.form.value)
+            //.subscribe(alternative => console.log(JSON.stringify(alternative)));
     }
 
     onCheckChange(event: MatCheckboxChange): void {
@@ -104,11 +97,11 @@ export class FormComponent implements OnInit {
         const formArray: FormArray = this.form.get('tourismTypes') as FormArray;
 
         if (event.checked) {
-            formArray.push(new FormControl(event.checked));
+            formArray.push(new FormControl(event.source.value));
         } else {
             let i = 0;
             formArray.controls.forEach((ctrl: FormControl) => {
-                if (ctrl.value === event.checked) {
+                if (ctrl.value === event.source.value) {
                     // Remove the unselected element from the arrayForm
                     formArray.removeAt(i);
                     return;
