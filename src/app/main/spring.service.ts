@@ -82,7 +82,7 @@ export class SpringService {
      * @param result - optional value to return as the observable result
      */
     private handleError<T>(operation = 'operation', result?: T) {
-        this.router.navigate(['errors/error-500']);
+        // this.router.navigate(['errors/error-500']);
         return (error: any): Observable<T> => {
 
             // TODO: send the error to remote logging infrastructure
