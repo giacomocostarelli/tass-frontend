@@ -59,7 +59,7 @@ pricing {
         .price-tables {
             flex: 1 0 auto;
             margin-top: -300px;
-
+            visibility: hidden;
 
             @include media-breakpoint('xs') {
                 margin-top: -128px;
@@ -104,4 +104,7 @@ pricing {
             }
         }
     }
+}
+.visible {
+    visibility: visible;
 }

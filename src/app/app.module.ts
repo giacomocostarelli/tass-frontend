@@ -26,8 +26,6 @@ import {RicercaStandardModule} from './main/ricerca-standard/ricerca-standard.mo
 import {Error404Module} from './main/errors/404/error-404.module';
 import {Error500Module} from './main/errors/500/error-500.module';
 
-
-
 const appRoutes: Routes = [
     {
         path: '',
@@ -102,7 +100,8 @@ const appRoutes: Routes = [
 
         // Errors
         Error404Module,
-        Error500Module
+        Error500Module,
+
     ],
     bootstrap: [
         AppComponent
