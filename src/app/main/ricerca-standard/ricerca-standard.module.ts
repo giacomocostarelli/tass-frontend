@@ -24,6 +24,8 @@ const routes = [
         RicercaStandardComponent,
         RicercaDialogComponent
     ],
+    entryComponents: [RicercaDialogComponent
+    ],
     imports: [
         RouterModule.forChild(routes),
 
