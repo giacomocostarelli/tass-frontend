@@ -26,6 +26,8 @@ import {RicercaStandardModule} from './main/ricerca-standard/ricerca-standard.mo
 import {Error404Module} from './main/errors/404/error-404.module';
 import {Error500Module} from './main/errors/500/error-500.module';
 import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {SpringService} from './main/spring.service';
+import {HotelService} from "./main/hotel.service";
 
 
 export const MY_FORMATS = {
@@ -116,14 +118,17 @@ const appRoutes: Routes = [
         Error404Module,
         Error500Module
     ],
-    providers: [{
+    providers: [
+        {
         provide: MAT_DATE_LOCALE,
         useValue: 'it'
-    },
+        },
         {
             provide: MAT_DATE_FORMATS,
             useValue: MY_FORMATS
-        }
+        },
+        SpringService,
+        HotelService
     ],
     bootstrap: [
         AppComponent

@@ -1,32 +1,35 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {City} from '../../interfaceDB/city';
 import {Observable, of} from 'rxjs';
 import {SpringService} from '../../spring.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
+import {HotelService, REGIONS, StateGroup} from '../../hotel.service';
+import {map} from "rxjs/operators";
 
-
-export interface StateGroup {
-    letter: string;
-    names: string[];
-}
+/*export function cityValidator(control: AbstractControl): { [key: string]: boolean } | null{
+    for (const city of control.value){
+        this.stateGroupOptions.forEach((value: StateGroup) => )
+    }
+    return {'validCity': true};
+    return null;
+}*/
 
 
 @Component({
     selector: 'form-secret-places',
     templateUrl: './form.component.html',
-    styleUrls: ['./form.component.scss'],
-    providers: [SpringService]
+    styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
     starOne: string[] = ['1', '2', '3', '4', '5'];
     starTwo: string[] = ['1', '2', '3', '4', '5'];
     tourismTypes: string[] = ['balneare', 'montano', 'lacustre', 'naturalistico', 'culturale', 'termale', 'religioso', 'sportivo', 'enogastronomico'];
-    cities: City[] = [{name: 'Cagliari'}, {name: 'China'}]; // ...
     cityInputs = [1];
+    regions = REGIONS;
     form: FormGroup;
     stateGroupOptions: Observable<StateGroup[]>;
-    returnList: StateGroup[] = [];
+
 
     /**
      * Constructor
@@ -35,7 +38,8 @@ export class FormComponent implements OnInit {
      */
     constructor(
         private _formBuilder: FormBuilder,
-        private springService: SpringService
+        private springService: SpringService,
+        private _hotelService: HotelService
     ) {
     }
 
@@ -43,20 +47,20 @@ export class FormComponent implements OnInit {
     ngOnInit(): void {
         // VALIDATOR MANCANTI: DATA ARRIVO < DATA RITORNO, CITTA IN LISTA CITTA, MINSTAR < MAXSTAR
         this.form = new FormGroup({
-            cities: new FormArray([],),
-            maxBudget: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*')]),
+            cities: new FormArray([]),
+            maxBudget: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})')]),
             people: new FormControl('', [Validators.required, Validators.pattern('^[0-9]')]),
-            onlyRegion: new FormControl('',),
-            onlyNotRegion: new FormControl('',),
-            minStars: new FormControl(1,),
-            maxStars: new FormControl(5,),
-            tourismTypes: new FormArray([],),
+            onlyRegion: new FormControl(''),
+            onlyNotRegion: new FormControl(''),
+            minStars: new FormControl(1),
+            maxStars: new FormControl(5),
+            tourismTypes: new FormArray([]),
             arr: new FormControl('', Validators.required),
-            arrival: new FormControl('',),
+            arrival: new FormControl(''),
             dep: new FormControl('', Validators.required),
-            departure: new FormControl('',)
+            departure: new FormControl('')
         });
-        this.stateGroupOptions = this.sortCity();
+        this.stateGroupOptions = this._hotelService.getSortedCity();
         this.form.controls['arr'].valueChanges.subscribe(arr => {
             this.setFinalDate('arrival', arr);
         });
@@ -72,6 +76,8 @@ export class FormComponent implements OnInit {
         const finalDate = date.getDate() + '/' + (1 + date.getMonth()) + '/' + date.getFullYear();
         this.form.controls[param].setValue(finalDate);
     }
+
+
 
 
     public generateRowIndexes(count: number): Array<number> {
@@ -123,25 +129,6 @@ export class FormComponent implements OnInit {
         formArray.push(new FormControl({name: value}));
     }
 
-
-    sortCity(): Observable<StateGroup[]> {
-        this.cities.sort((one, two) => (one.name > two.name ? 1 : -1));
-        let thisLetter = 'A';
-        let citySameLetter: string[] = [];
-        for (const c of this.cities) {
-            const city = c.name;
-            if (city[0].toUpperCase() !== thisLetter) {
-                if (citySameLetter.length > 0) {
-                    this.returnList.push({letter: thisLetter, names: citySameLetter});
-                    citySameLetter = [];
-                }
-                thisLetter = city[0].toUpperCase();
-            }
-            citySameLetter.push(city);
-        }
-        this.returnList.push({letter: thisLetter, names: citySameLetter});
-        return of(this.returnList);
-    }
 
     parse(value: any): Date | null {
         if ((typeof value === 'string') && (value.indexOf('/') > -1)) {

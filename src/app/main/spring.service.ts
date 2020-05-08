@@ -25,14 +25,6 @@ export class SpringService {
     ) {
     }
 
-    /*getAllHotels(): Observable<Hotel[]> {
-        const url = `${this.serverUrl}/hotels`;
-        return this.http.get<Hotel[]>(url)
-            .pipe(
-                catchError(this.handleError<Hotel[]>('getAllHotels', []))
-            );
-    }*/
-
     /*Cities: { city: string, region: string }[], Days: number, MaxBudget: string, People: number,
                 OnlyRegion: string, OnlyNotRegion: string, MaxStars: number, MinStars: number,
                 TourismType: string[], Arrival: string, Departure: string*/

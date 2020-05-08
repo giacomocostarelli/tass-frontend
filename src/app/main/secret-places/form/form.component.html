@@ -94,7 +94,7 @@
                                 Specificare il budget a disposizione
                             </mat-error>
                             <mat-error *ngIf="form.get('maxBudget').hasError('pattern')">
-                                Per favore inserire un valore numerico
+                                Per favore inserire una cifra nel formato 0.00
                             </mat-error>
                         </mat-form-field>
 
@@ -184,12 +184,24 @@
 
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Regione preferita</mat-label>
-                            <input matInput formControlName="onlyRegion">
+                            <mat-select formControlName="onlyRegion" >
+                                <div *ngFor="let region of regions">
+                                    <mat-option [value]="region">
+                                        {{region}}
+                                    </mat-option>
+                                </div>
+                            </mat-select>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Regione da escludere</mat-label>
-                            <input matInput formControlName="onlyNotRegion">
+                            <mat-select formControlName="onlyNotRegion">
+                                <div *ngFor="let region of regions">
+                                    <mat-option [value]="region">
+                                        {{region}}
+                                    </mat-option>
+                                </div>
+                            </mat-select>
                         </mat-form-field>
 
 
