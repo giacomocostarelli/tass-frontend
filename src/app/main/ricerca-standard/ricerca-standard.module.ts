@@ -9,6 +9,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {FuseSharedModule} from '@fuse/shared.module';
 import {MaterialModule} from '../../angular-material/material.module';
+import {RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
 
 
 const routes = [
@@ -20,7 +21,8 @@ const routes = [
 
 @NgModule({
     declarations: [
-        RicercaStandardComponent
+        RicercaStandardComponent,
+        RicercaDialogComponent
     ],
     imports: [
         RouterModule.forChild(routes),

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {City} from '../interfaceDB/city';
 import {BehaviorSubject, merge, Observable, of} from 'rxjs';
@@ -9,6 +9,8 @@ import {DataSource} from '@angular/cdk/collections';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
+import {RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
 
 
 export interface StateGroup {
@@ -47,6 +49,7 @@ export class RicercaStandardComponent implements OnInit {
     constructor(
         private _formBuilder: FormBuilder,
         private springService: SpringService,
+        public dialog: MatDialog
     ) {
         this.stateGroupOptions = this.sortCity();
         this.onProductChanged = new BehaviorSubject({});
@@ -117,6 +120,14 @@ export class RicercaStandardComponent implements OnInit {
         }
         const timestamp = typeof value === 'number' ? value : Date.parse(value);
         return isNaN(timestamp) ? null : new Date(timestamp);
+    }
+
+    openDialog(): void {
+        const dialogRef = this.dialog.open(RicercaDialogComponent);
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
     }
 }
 
