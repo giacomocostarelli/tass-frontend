@@ -3,7 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {City} from '../../interfaceDB/city';
 import {Observable, of} from 'rxjs';
 import {SpringService} from '../../spring.service';
-import {MatCheckboxChange} from "@angular/material/checkbox";
+import {MatCheckboxChange} from '@angular/material/checkbox';
 
 
 export interface StateGroup {
@@ -15,7 +15,8 @@ export interface StateGroup {
 @Component({
     selector: 'form-secret-places',
     templateUrl: './form.component.html',
-    styleUrls: ['./form.component.scss']
+    styleUrls: ['./form.component.scss'],
+    providers: [SpringService]
 })
 export class FormComponent implements OnInit {
     starOne: string[] = ['1', '2', '3', '4', '5'];
@@ -42,28 +43,33 @@ export class FormComponent implements OnInit {
     ngOnInit(): void {
         // VALIDATOR MANCANTI: DATA ARRIVO < DATA RITORNO, CITTA IN LISTA CITTA, MINSTAR < MAXSTAR
         this.form = new FormGroup({
-            cities: new FormArray([], ),
+            cities: new FormArray([],),
             maxBudget: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*')]),
             people: new FormControl('', [Validators.required, Validators.pattern('^[0-9]')]),
-            onlyRegion: new FormControl('', ),
-            onlyNotRegion: new FormControl('', ),
-            minStars: new FormControl(1, ),
-            maxStars: new FormControl(5, ),
-            tourismTypes: new FormArray([], ),
+            onlyRegion: new FormControl('',),
+            onlyNotRegion: new FormControl('',),
+            minStars: new FormControl(1,),
+            maxStars: new FormControl(5,),
+            tourismTypes: new FormArray([],),
             arr: new FormControl('', Validators.required),
-            arrival: new FormControl('', ),
+            arrival: new FormControl('',),
             dep: new FormControl('', Validators.required),
-            departure: new FormControl('', )
+            departure: new FormControl('',)
         });
         this.stateGroupOptions = this.sortCity();
-        this.form.controls['arr'].valueChanges.subscribe( arr => { this.setFinalDate('arrival', arr); });
-        this.form.controls['dep'].valueChanges.subscribe( dep => { this.setFinalDate('departure', dep); });
+        this.form.controls['arr'].valueChanges.subscribe(arr => {
+            this.setFinalDate('arrival', arr);
+        });
+        this.form.controls['dep'].valueChanges.subscribe(dep => {
+            this.setFinalDate('departure', dep);
+        });
 
 
     }
-    private setFinalDate(param: string, value: any): void{
+
+    private setFinalDate(param: string, value: any): void {
         const date = this.parse(value);
-        const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
+        const finalDate = date.getDate() + '/' + (1 + date.getMonth()) + '/' + date.getFullYear();
         this.form.controls[param].setValue(finalDate);
     }
 
@@ -88,8 +94,8 @@ export class FormComponent implements OnInit {
     finishVerticalStepper(): void {
 
         alert(JSON.stringify(this.form.value));
-        //this.springService.searchClips(this.form.value)
-            //.subscribe(alternative => console.log(JSON.stringify(alternative)));
+        // this.springService.searchClips(this.form.value)
+        // .subscribe(alternative => console.log(JSON.stringify(alternative)));
     }
 
     onCheckChange(event: MatCheckboxChange): void {

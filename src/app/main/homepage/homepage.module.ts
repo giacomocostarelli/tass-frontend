@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {HomepageComponent} from './homepage.component';
 import {RouterModule} from '@angular/router';
 import {PricingModule} from './pricing/pricing.module';
@@ -6,21 +6,22 @@ import {PricingModule} from './pricing/pricing.module';
 
 const routes = [
     {
-        path     : 'homepage',
+        path: 'homepage',
         component: HomepageComponent
     }
 ];
 
 @NgModule({
-  declarations: [
-      HomepageComponent
-  ],
+    declarations: [
+        HomepageComponent
+    ],
     imports: [
         RouterModule.forChild(routes),
         PricingModule,
     ],
-  exports: [
-      HomepageComponent
-  ]
+    exports: [
+        HomepageComponent
+    ]
 })
-export class HomepageModule { }
+export class HomepageModule {
+}

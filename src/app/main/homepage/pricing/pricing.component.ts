@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {trigger, transition, useAnimation} from '@angular/animations';
-import { zoomIn} from 'ng-animate';
+import {zoomIn} from 'ng-animate';
 
 @Component({
     selector: 'pricing',

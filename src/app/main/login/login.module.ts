@@ -1,18 +1,16 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-
-import { FuseSharedModule } from '@fuse/shared.module';
-
-import { LoginComponent } from 'app/main/login/login.component';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {FuseSharedModule} from '@fuse/shared.module';
+import {LoginComponent} from 'app/main/login/login.component';
 
 const routes = [
     {
-        path     : 'login',
+        path: 'login',
         component: LoginComponent
     }
 ];
@@ -21,7 +19,7 @@ const routes = [
     declarations: [
         LoginComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
 
         MatButtonModule,
@@ -35,6 +33,5 @@ const routes = [
 
     ]
 })
-export class LoginModule
-{
+export class LoginModule {
 }

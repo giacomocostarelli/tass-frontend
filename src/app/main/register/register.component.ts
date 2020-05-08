@@ -14,7 +14,8 @@ import {Router} from '@angular/router';
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations
+    animations: fuseAnimations,
+    providers: [SpringService]
 })
 export class RegisterComponent implements OnInit, OnDestroy {
     registerForm: FormGroup;
@@ -91,10 +92,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
         const pwd = md5.appendStr(this.registerForm.get('password').value).end();
         this.registerForm.removeControl('passwordConfirm');
         this.registerForm.removeControl('password');
-        this.registerForm.get('pwd').setValue(pwd, { emitEvent: false });
+        this.registerForm.get('pwd').setValue(pwd, {emitEvent: false});
         this.springService.register(this.registerForm.value).subscribe(
             g => this.router.navigate(['/login']));
-            // da controllare se ritorna errori
+        // da controllare se ritorna errori
     }
 }
 

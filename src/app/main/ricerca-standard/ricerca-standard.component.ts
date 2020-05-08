@@ -21,8 +21,9 @@ export interface StateGroup {
     selector: 'ricerca_standard',
     templateUrl: './ricerca-standard.component.html',
     styleUrls: ['./ricerca-standard.component.scss'],
-    animations   : fuseAnimations,
-    encapsulation: ViewEncapsulation.None
+    animations: fuseAnimations,
+    encapsulation: ViewEncapsulation.None,
+    providers: [SpringService]
 })
 export class RicercaStandardComponent implements OnInit {
     form: FormGroup;
@@ -57,18 +58,22 @@ export class RicercaStandardComponent implements OnInit {
             city: ['', Validators.required],
             personNumber: ['', [Validators.required, Validators.pattern('^[0-9]')]],
             arr: ['', Validators.required],
-            arrival: ['', ],
+            arrival: ['',],
             dep: ['', Validators.required],
-            departure: ['', ]
+            departure: ['',]
         });
         // aggiungere validators su città, non deve prendere città diverse dalle nostre
-        this.form.controls['arr'].valueChanges.subscribe( arr => { this.setFinalDate('arrival', arr); });
-        this.form.controls['dep'].valueChanges.subscribe( dep => { this.setFinalDate('departure', dep); });
+        this.form.controls['arr'].valueChanges.subscribe(arr => {
+            this.setFinalDate('arrival', arr);
+        });
+        this.form.controls['dep'].valueChanges.subscribe(dep => {
+            this.setFinalDate('departure', dep);
+        });
     }
 
-    private setFinalDate(param: string, value: any): void{
+    private setFinalDate(param: string, value: any): void {
         const date = this.parse(value);
-        const finalDate = date.getDate() + '/' + (1 + date.getMonth())  + '/' + date.getFullYear();
+        const finalDate = date.getDate() + '/' + (1 + date.getMonth()) + '/' + date.getFullYear();
         this.form.controls[param].setValue(finalDate);
     }
 
@@ -99,7 +104,7 @@ export class RicercaStandardComponent implements OnInit {
                     this.roomList = mappa['returnedValue'];
                     this.onProductChanged.next(this.roomList);
                 }
-                );
+            );
     }
 
     parse(value: any): Date | null {
@@ -115,8 +120,7 @@ export class RicercaStandardComponent implements OnInit {
     }
 }
 
-export class FilesDataSource extends DataSource<any>
-{
+export class FilesDataSource extends DataSource<any> {
     // private _filterChange = new BehaviorSubject('');  // tutto ciò relativo a filter può servire, non cancellare
     private _filteredDataChange = new BehaviorSubject('');
 
@@ -130,8 +134,7 @@ export class FilesDataSource extends DataSource<any>
         private _observableList: RicercaStandardComponent,
         private _matPaginator: MatPaginator,
         private _matSort: MatSort
-    )
-    {
+    ) {
         super();
 
         this.filteredData = this._observableList.roomList;
@@ -142,8 +145,7 @@ export class FilesDataSource extends DataSource<any>
      *
      * @returns {Observable<any[]>}
      */
-    connect(): Observable<any[]>
-    {
+    connect(): Observable<any[]> {
         const displayDataChanges = [
             this._observableList.onProductChanged,
             this._matPaginator.page,
@@ -173,13 +175,11 @@ export class FilesDataSource extends DataSource<any>
     // -----------------------------------------------------------------------------------------------------
 
     // Filtered data
-    get filteredData(): any
-    {
+    get filteredData(): any {
         return this._filteredDataChange.value;
     }
 
-    set filteredData(value: any)
-    {
+    set filteredData(value: any) {
         this._filteredDataChange.next(value);
     }
 
@@ -219,10 +219,8 @@ export class FilesDataSource extends DataSource<any>
      * @param data
      * @returns {any[]}
      */
-    sortData(data): any[]
-    {
-        if ( !this._matSort.active || this._matSort.direction === '' )
-        {
+    sortData(data): any[] {
+        if (!this._matSort.active || this._matSort.direction === '') {
             return data;
         }
 
@@ -230,8 +228,7 @@ export class FilesDataSource extends DataSource<any>
             let propertyA: number | string = '';
             let propertyB: number | string = '';
 
-            switch ( this._matSort.active )
-            {
+            switch (this._matSort.active) {
                 case 'id':
                     [propertyA, propertyB] = [a.id, b.id];
                     break;
@@ -258,7 +255,6 @@ export class FilesDataSource extends DataSource<any>
     /**
      * Disconnect
      */
-    disconnect(): void
-    {
+    disconnect(): void {
     }
 }

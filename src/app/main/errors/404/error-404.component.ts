@@ -1,18 +1,16 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-    selector     : 'error-404',
-    templateUrl  : './error-404.component.html',
-    styleUrls    : ['./error-404.component.scss'],
+    selector: 'error-404',
+    templateUrl: './error-404.component.html',
+    styleUrls: ['./error-404.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class Error404Component
-{
+export class Error404Component {
     /**
      * Constructor
      */
-    constructor()
-    {
+    constructor() {
 
     }
 }

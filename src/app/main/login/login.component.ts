@@ -5,7 +5,7 @@ import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
 import {Md5} from 'ts-md5/dist/md5';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,7 +13,8 @@ import {Router} from "@angular/router";
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations
+    animations: fuseAnimations,
+    providers: [SpringService]
 })
 export class LoginComponent implements OnInit {
 

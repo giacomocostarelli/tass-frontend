@@ -7,7 +7,7 @@ import {Item} from './interfaceDB/item';
 import {Alternative} from './interfaceDB/alternative';
 import {Room} from './interfaceDB/room';
 import {Guest} from './interfaceDB/guest';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class SpringService {
@@ -37,11 +37,11 @@ export class SpringService {
                 OnlyRegion: string, OnlyNotRegion: string, MaxStars: number, MinStars: number,
                 TourismType: string[], Arrival: string, Departure: string*/
     searchClips(formdata: any): Observable<Alternative[]> {
-       /* const secretSearch = {
-            cities: Cities, days: Days, maxBudget: MaxBudget, people: People,
-            onlyRegion: OnlyRegion, onlyNotRegion: OnlyNotRegion, maxStars: MaxStars, minStars: MinStars,
-            tourismTypes: TourismType, arrival: Arrival, departure: Departure
-        };*/
+        /* const secretSearch = {
+             cities: Cities, days: Days, maxBudget: MaxBudget, people: People,
+             onlyRegion: OnlyRegion, onlyNotRegion: OnlyNotRegion, maxStars: MaxStars, minStars: MinStars,
+             tourismTypes: TourismType, arrival: Arrival, departure: Departure
+         };*/
         const url = `${this.serverUrl}/secretSearch`;
         return this.http.post<Alternative[]>(url, formdata)
             .pipe(
@@ -66,12 +66,12 @@ export class SpringService {
     }
 
     login(email: string, pwd: string | Int32Array): Observable<Guest> {
-        const url =  `${this.serverUrl}/guests/login`;
+        const url = `${this.serverUrl}/guests/login`;
         const param = {email: email, pwd: pwd};
         return this.http.post<Guest>(url, param)
             .pipe(
                 catchError(this.handleError<Guest>('guestLogin', null))
-        );
+            );
     }
 
 
