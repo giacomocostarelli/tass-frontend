@@ -101,7 +101,7 @@ export class RicercaStandardComponent implements OnInit {
 
 
     onFormSubmit(): void {
-        this.roomList = [{id: 2, hotel: {name: 'lol', stars:3}	, pricePerNight: 43, numPlaces: 3}];
+        this.roomList = [{id: 2, hotel: {name: 'lol', stars: 3}, pricePerNight: 43, numPlaces: 3}, {id: 5, hotel: {name: 'yytty', stars: 1}, pricePerNight: 43, numPlaces: 3}];
         this.onProductChanged.next(this.roomList);
         /*this.springService.normalSearch(this.form.value)
             .subscribe(
@@ -124,8 +124,12 @@ export class RicercaStandardComponent implements OnInit {
         return isNaN(timestamp) ? null : new Date(timestamp);
     }
 
-    openDialog(): void {
-        const dialogRef = this.dialog.open(RicercaDialogComponent);
+    openDialog(roomRow: Room): void {
+        const dialogRef = this.dialog.open(RicercaDialogComponent, {
+            data: {
+                room: roomRow
+            }
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);

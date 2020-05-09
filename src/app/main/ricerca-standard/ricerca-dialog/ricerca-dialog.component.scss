@@ -1,31 +1,31 @@
 @import "src/@fuse/scss/fuse";
 
-.contact-form-dialog {
+cards {
 
-    @include media-breakpoint('xs') {
-        width: 100%;
-    }
+    .content {
 
-    @include media-breakpoint('gt-xs') {
-        width: 400px;
-    }
+        .cards {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
 
-    .mat-dialog-container {
-        padding: 0;
+            .card {
+                display: flex;
+                align-items: flex-start;
+                padding: 24px 24px 48px 24px;
+                margin-bottom: 96px;
 
-        .mat-toolbar {
-            flex: 1 0 auto;
-            min-height: initial;
+                .card-preview {
+                    display: flex;
+                    min-width: 320px;
+                }
+
+                .card-source {
+                    display: none;
+                }
+            }
         }
-
-        .toolbar-bottom {
-            height: auto;
-        }
-    }
-
-    .dialog-content-wrapper {
-        max-height: 85vh;
-        display: flex;
-        flex-direction: column;
     }
 }

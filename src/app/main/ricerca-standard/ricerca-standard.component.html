@@ -166,7 +166,7 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
 
                 <mat-row *matRowDef="let product; columns: displayedColumns;"
-                         (click)="openDialog()">
+                         (click)="openDialog(product)">
                 </mat-row>
 
             </mat-table>

@@ -1,4 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 
 @Component({
     selector: 'ricerca-dialog',
@@ -8,9 +10,12 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class RicercaDialogComponent implements OnInit {
 
-    constructor() {
+    constructor(
+        public matDialogRef: MatDialogRef<RicercaDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) private _data: any) {
     }
 
     ngOnInit() {
+        // console.log(this._data.room.hotel.name);
     }
 }
