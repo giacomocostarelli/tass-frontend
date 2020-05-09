@@ -21,7 +21,7 @@ export interface StateGroup {
 
 
 @Injectable({providedIn: 'root'})
-export class HotelService{
+export class CityService{
 
     // private serverUrl = 'http://localhost:8080';
     private serverUrl = 'http://87.8.225.138:8080';
@@ -39,7 +39,8 @@ export class HotelService{
 
     getCity(): Observable<Map<string, any>> {
        /* const cities: City[] = [{name: 'Cagliari'}, {name: 'China'}];
-        return of(cities);*/
+        const lol: Map<string, any> = new Map([['returnedValue', cities]]);
+        return of(lol);*/
         const url = `${this.serverUrl}/cities`;
         return this.http.get<Map<string, any>>(url)
             .pipe(

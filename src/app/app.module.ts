@@ -27,7 +27,7 @@ import {Error404Module} from './main/errors/404/error-404.module';
 import {Error500Module} from './main/errors/500/error-500.module';
 import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {SpringService} from './main/spring.service';
-import {HotelService} from "./main/hotel.service";
+import {CityService} from "./main/city.service";
 
 
 export const MY_FORMATS = {
@@ -128,7 +128,7 @@ const appRoutes: Routes = [
             useValue: MY_FORMATS
         },
         SpringService,
-        HotelService
+        CityService
     ],
     bootstrap: [
         AppComponent

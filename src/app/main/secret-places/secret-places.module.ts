@@ -17,7 +17,7 @@ const routes = [
   ],
     imports: [
         RouterModule.forChild(routes),
-        FormModule,
+        FormModule
     ],
   exports: [
   ]

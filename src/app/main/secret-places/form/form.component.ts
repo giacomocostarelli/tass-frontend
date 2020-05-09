@@ -1,19 +1,40 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {
+    FormArray,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators
+} from '@angular/forms';
 import {City} from '../../interfaceDB/city';
 import {Observable, of} from 'rxjs';
 import {SpringService} from '../../spring.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
-import {HotelService, REGIONS, StateGroup} from '../../hotel.service';
-import {map} from "rxjs/operators";
+import {CityService, REGIONS, StateGroup} from '../../city.service';
 
-/*export function cityValidator(control: AbstractControl): { [key: string]: boolean } | null{
-    for (const city of control.value){
-        this.stateGroupOptions.forEach((value: StateGroup) => )
+
+class cityValidatorClass{
+    private listCityGroup: StateGroup[];
+
+    constructor(private stateGroupOptions: Observable<StateGroup[]>){
+        stateGroupOptions.subscribe(value => this.listCityGroup = value);
     }
-    return {'validCity': true};
-    return null;
-}*/
+
+    cityValidator(control: FormArray): { [key: string]: boolean } | null{
+        for (const city of control.value){
+            let exist = true;
+            this.listCityGroup.forEach( value => {
+                if (value.letter === city.value[0].toUpperCase() && value.names.indexOf(city) < 0) {
+                    exist = false;
+                }
+            });
+            if (!exist){
+                return null;
+            }
+        }
+        return { ValidCity: true };
+    }
+}
 
 
 @Component({
@@ -25,7 +46,6 @@ export class FormComponent implements OnInit {
     starOne: string[] = ['1', '2', '3', '4', '5'];
     starTwo: string[] = ['1', '2', '3', '4', '5'];
     tourismTypes: string[] = ['balneare', 'montano', 'lacustre', 'naturalistico', 'culturale', 'termale', 'religioso', 'sportivo', 'enogastronomico'];
-    cityInputs = [1];
     regions = REGIONS;
     form: FormGroup;
     stateGroupOptions: Observable<StateGroup[]>;
@@ -34,58 +54,55 @@ export class FormComponent implements OnInit {
     /**
      * Constructor
      *
-     * @param {FuseTranslationLoaderService} _fuseTranslationLoaderService
+     * @param {CityService} _cityService
+     * @param {FormBuilder} _formBuilder
+     * @param {SpringService} _springService
      */
     constructor(
         private _formBuilder: FormBuilder,
-        private springService: SpringService,
-        private _hotelService: HotelService
+        private _springService: SpringService,
+        private _cityService: CityService
     ) {
     }
 
 
     ngOnInit(): void {
         // VALIDATOR MANCANTI: DATA ARRIVO < DATA RITORNO, CITTA IN LISTA CITTA, MINSTAR < MAXSTAR
-        this.form = new FormGroup({
-            cities: new FormArray([]),
-            maxBudget: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})')]),
-            people: new FormControl('', [Validators.required, Validators.pattern('^[0-9]')]),
-            onlyRegion: new FormControl(''),
-            onlyNotRegion: new FormControl(''),
-            minStars: new FormControl(1),
-            maxStars: new FormControl(5),
-            tourismTypes: new FormArray([]),
-            arr: new FormControl('', Validators.required),
-            arrival: new FormControl(''),
-            dep: new FormControl('', Validators.required),
-            departure: new FormControl('')
+        this.form = this._formBuilder.group({
+            cities: this._formBuilder.array([]),
+            maxBudget: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})*'), Validators.min(0.01)]],
+            people: ['', [Validators.required, Validators.pattern('^[0-9]'), Validators.min(1)]],
+            onlyRegion: [''],
+            onlyNotRegion: [''],
+            minStars: [1],
+            maxStars: [5],
+            tourismTypes: this._formBuilder.array([]),
+            arr: ['', Validators.required],
+            arrival: [''],
+            dep: ['', Validators.required],
+            departure: ['']
         });
-        this.stateGroupOptions = this._hotelService.getSortedCity();
+        this.stateGroupOptions = this._cityService.getSortedCity();
         this.form.controls['arr'].valueChanges.subscribe(arr => {
             this.setFinalDate('arrival', arr);
         });
         this.form.controls['dep'].valueChanges.subscribe(dep => {
             this.setFinalDate('departure', dep);
         });
+    }
 
+    get cities(): FormArray {
+        return this.form.get('cities') as FormArray;
+    }
 
+    removeCity(i): void {
+        this.cities.removeAt(i);
     }
 
     private setFinalDate(param: string, value: any): void {
         const date = this.parse(value);
         const finalDate = date.getDate() + '/' + (1 + date.getMonth()) + '/' + date.getFullYear();
         this.form.controls[param].setValue(finalDate);
-    }
-
-
-
-
-    public generateRowIndexes(count: number): Array<number> {
-        const indexes = [];
-        for (let i = 0; i < count; i++) {
-            indexes.push(i);
-        }
-        return indexes;
     }
 
 
@@ -100,7 +117,7 @@ export class FormComponent implements OnInit {
     finishVerticalStepper(): void {
 
         alert(JSON.stringify(this.form.value));
-        // this.springService.searchClips(this.form.value)
+        // this._springService.searchClips(this.form.value)
         // .subscribe(alternative => console.log(JSON.stringify(alternative)));
     }
 
@@ -123,10 +140,12 @@ export class FormComponent implements OnInit {
         }
     }
 
-    addInput(value: string): void {
-        this.cityInputs.push(1);
-        const formArray: FormArray = this.form.get('cities') as FormArray;
-        formArray.push(new FormControl({name: value}));
+    addInput(input: HTMLInputElement): void {
+        const value: string = input.value;
+        if ( value === ''){ return; }
+        const newCity =  new FormGroup({name: new FormControl(value)});
+        this.cities.push(newCity);
+        input.value = '';
     }
 
 

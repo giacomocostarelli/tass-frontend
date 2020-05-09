@@ -7,22 +7,40 @@
                 <mat-step>
                     <ng-template matStepLabel>Città da visitare</ng-template>
 
-                    <div fxFlex="1 0 auto" fxLayout="column">
+                    <div fxFlex="1 0 auto" fxLayout="column" formArrayName="cities">
 
-                        <div *ngFor="let more of cityInputs;  let i=index">
-                            <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>Destinazione</mat-label>
+                        <!-- CITTA' INSERITE-->
+                        <mat-form-field appearance="outline" fxFlex="100" *ngFor="let city of cities.controls; let bla=index" [formGroupName]="bla">
+                            <mat-label>Città selezionata N°{{bla+1}}</mat-label>
+                            <input type="text"
+                                   matInput
+                                   formControlName="name"
+                                   [matAutocomplete]="autoGroup">
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="removeCity(bla)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                            <mat-autocomplete #autoGroup="matAutocomplete">
+                                <mat-optgroup *ngFor="let group of stateGroupOptions | async"
+                                              [label]="group.letter">
+                                    <mat-option *ngFor="let name of group.names" [value]="name">
+                                        {{name}}
+                                    </mat-option>
+                                </mat-optgroup>
+                            </mat-autocomplete>
+                            <mat-error *ngIf="form.get('cities').hasError('ValidCity')">
+                                Al momento non abbiamo hotel disponibili per questa città
+                            </mat-error>
+                        </mat-form-field>
+
+
+                        <!-- INPUT CITTA'-->
+                        <div fxLayour="row" fxFlex="100">
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Inserire una destinazione...</mat-label>
                                 <input type="text"
                                        matInput
-                                       placeholder="States Group"
-                                       required
-                                       #i
-                                       [matAutocomplete]="autoGroup"
-                                       (keyup.enter)="addInput(i.value)">
-                                <!-- da usare per rimuovere città già selezionata
-                                <button mat-button *ngIf="i.value" matSuffix mat-icon-button aria-label="Clear" (click)="">
-                                    <mat-icon>close</mat-icon>
-                                </button>-->
+                                       #inputCity
+                                       [matAutocomplete]="autoGroup">
                                 <mat-autocomplete #autoGroup="matAutocomplete">
                                     <mat-optgroup *ngFor="let group of stateGroupOptions | async"
                                                   [label]="group.letter">
@@ -31,9 +49,16 @@
                                         </mat-option>
                                     </mat-optgroup>
                                 </mat-autocomplete>
+                                <mat-error *ngIf="form.get('cities').hasError('ValidCity')">
+                                    Al momento non abbiamo hotel disponibili per questa città
+                                </mat-error>
                                 <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                             </mat-form-field>
+                            <button class="m-4" mat-fab color="accent" (click)="addInput(inputCity)">
+                                <mat-icon>add_box</mat-icon>
+                            </button>
                         </div>
+
                     </div>
                     <div fxLayout="row" fxLayoutAlign="center center">
                         <button mat-raised-button matStepperNext type="button" color="accent">
@@ -93,6 +118,9 @@
                             <mat-error *ngIf="form.get('maxBudget').hasError('required')">
                                 Specificare il budget a disposizione
                             </mat-error>
+                            <mat-error *ngIf="form.get('maxBudget').hasError('min')">
+                                Dove vuoi andare senza soldi?
+                            </mat-error>
                             <mat-error *ngIf="form.get('maxBudget').hasError('pattern')">
                                 Per favore inserire una cifra nel formato 0.00
                             </mat-error>
@@ -103,6 +131,9 @@
                             <input matInput formControlName="people" required maxlength="1" >
                             <mat-error *ngIf="form.get('people').hasError('required')">
                                 Specificare il numero di viaggiatori
+                            </mat-error>
+                            <mat-error *ngIf="form.get('people').hasError('min')">
+                                Dev'esserci almeno una persona per poter viaggiare ;)
                             </mat-error>
                             <mat-error *ngIf="form.get('people').hasError('pattern')">
                                 Per favore inserire un valore numerico
