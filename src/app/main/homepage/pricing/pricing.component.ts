@@ -9,13 +9,13 @@ import {zoomIn} from 'ng-animate';
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('zoomIn1', [transition('* => *', useAnimation(zoomIn, {
-            params: {timing: 2, delay: 2}
+            params: {timing: 0.5, delay: 1}
         }))]),
         trigger('zoomIn2', [transition('* => *', useAnimation(zoomIn, {
-            params: {timing: 2, delay: 2.5}
+            params: {timing: 0.5, delay: 1.25}
         }))]),
         trigger('zoomIn3', [transition('* => *', useAnimation(zoomIn, {
-            params: {timing: 2, delay: 3}
+            params: {timing: 0.5, delay: 1.5}
         }))])
     ]
 })
@@ -34,13 +34,13 @@ export class PricingComponent {
     constructor() {
         setTimeout(() => {
             this.visible1 = true;
-        }, 2100);
+        }, 1100);
         setTimeout(() => {
             this.visible2 = true;
-        }, 2600);
+        }, 1350);
         setTimeout(() => {
             this.visible3 = true;
-        }, 3100);
+        }, 1600);
     }
 
 }

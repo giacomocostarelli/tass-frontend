@@ -1,40 +1,42 @@
-<mat-toolbar class="p-0 mat-elevation-z1">
+<mat-toolbar class="p-0 mat-elevation-z1  ">
 
-    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+    <!-- LEFT SIDE NAVBAR -->
+    <div class="leftside-navbar" fxLayout="row" fxLayoutAlign="start center">
+        <a [routerLink]="'/homepage'">
+            <img class="deep-orange-300-bg" height="64" width="71" src="../../../../assets/images/logos/logonobg.png">
+        </a>
 
-        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+        <span class="nav-title mat-display-2 deep-orange-800-fg">Secret Places</span>
 
-            <button mat-icon-button class="navbar-toggle-button"
-                    *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
-                <mat-icon class="secondary-text">menu</mat-icon>
-            </button>
-
-            <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
-
-            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
-                <div class="logo ml-16">
-                    <img class="logo-icon" src="assets/images/logos/fuse.svg">
-                </div>
-            </div>
-
-            <!--<div class="px-8 px-md-16">
-                <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts>
-            </div>-->
-            <button mat-button routerLink="/homepage">
+        <div class="navbar-elements">
+            <a mat-button class="navbar-element no-hover-effect" [routerLink]="'/homepage'"
+               (mouseenter)="onMouseEnter(0)" (mouseleave)="onMouseLeave(0)"
+               [ngStyle]="{'color': getColor(0)}"
+               [ngClass]="" >
                 Homepage
-            </button>
-            <button mat-button routerLink="/secret_places">
-                Secret Places
-            </button>
-            <button mat-button routerLink="/ricerca_standard">
+            </a>
+            <a mat-button class="navbar-element no-hover-effect" [routerLink]="'/secret_places'"
+               (mouseenter)="onMouseEnter(1)" (mouseleave)="onMouseLeave(1)"
+               [ngStyle]="{'color': getColor(1)}"
+               [ngClass]="">
+                Secret places
+            </a>
+            <a mat-button class="navbar-element last-element no-hover-effect" [routerLink]="'/ricerca_standard'"
+               (mouseenter)="onMouseEnter(2)" (mouseleave)="onMouseLeave(2)"
+               [ngStyle]="{'color': getColor(2)}"
+               [ngClass]="">
                 Ricerca Standard
-            </button>
-
+            </a>
         </div>
+    </div>
 
-        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center" >
+
+    <!-- RIGHT SIDE NAVNBAR -->
+    <div class="rightside-navbar" fxFlex fxFill fxLayout="row" fxLayoutAlign="end center">
+
+        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
             <button *ngIf="logged" mat-button [matMenuTriggerFor]="userMenu"
-                    class="user-button" >
+                    class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar mr-0 mr-sm-16" src="assets/images/avatars/Velazquez.jpg">
                     <span class="username mr-12" fxHide fxShow.gt-sm>Charlie Adams</span>
@@ -57,7 +59,7 @@
                     <span>Inbox</span>
                 </button>
 
-                <button mat-menu-item class=""  (click)="logOut()">
+                <button mat-menu-item class="" (click)="logOut()">
                     <mat-icon>exit_to_app</mat-icon>
                     <span>Logout</span>
                 </button>
