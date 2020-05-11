@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {City} from './interfaceDB/city';
 import {catchError, map} from "rxjs/operators";
+import {AbstractControl, FormArray, ValidationErrors, ValidatorFn} from "@angular/forms";
 
 
 
@@ -25,7 +26,8 @@ export class CityService{
 
     // private serverUrl = 'http://localhost:8080';
     private serverUrl = 'http://87.8.225.138:8080';
-    returnList: StateGroup[] = [];
+    sortedCity: StateGroup[] = [];
+    cityRegion: Map<string, string> = new Map();
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
@@ -38,9 +40,6 @@ export class CityService{
     }
 
     getCity(): Observable<Map<string, any>> {
-       /* const cities: City[] = [{name: 'Cagliari'}, {name: 'China'}];
-        const lol: Map<string, any> = new Map([['returnedValue', cities]]);
-        return of(lol);*/
         const url = `${this.serverUrl}/cities`;
         return this.http.get<Map<string, any>>(url)
             .pipe(
@@ -48,29 +47,36 @@ export class CityService{
             );
     }
 
-    getSortedCity(): Observable<StateGroup[]>{
+    getSortedCity(updatelist: boolean = true): Observable<StateGroup[]>{
+        /*this.sortCity([{name: 'Cagliari'}, {name: 'China'}]);
+        return of(this.sortedCity);*/
+        if (updatelist === false){ return of(this.sortedCity); }
         this.getCity().subscribe((res) => this.sortCity(res['returnedValue']));
-        return of(this.returnList);
+        return of(this.sortedCity);
     }
 
     private sortCity(cities: City[]): void {
+        this.sortedCity.length = 0;
         cities.sort((one, two) => (one.name > two.name ? 1 : -1));
         let thisLetter = 'A';
         let citySameLetter: string[] = [];
         for (const c of cities) {
+            this.cityRegion.set(c.name, c.region);
             if (c.name[0].toUpperCase() !== thisLetter) {
                 if (citySameLetter.length > 0) {
-                    this.returnList.push({letter: thisLetter, names: citySameLetter});
+                    this.sortedCity.push({letter: thisLetter, names: citySameLetter});
                     citySameLetter = [];
                 }
                 thisLetter = c.name[0].toUpperCase();
             }
             citySameLetter.push(c.name);
         }
-        this.returnList.push({letter: thisLetter, names: citySameLetter});
+        this.sortedCity.push({letter: thisLetter, names: citySameLetter});
     }
 
-
+    getRegion(city: string): string {
+        return this.cityRegion.get(city);
+    }
     /*getAllHotels(): Observable<Hotel[]> {
         const url = `${this.serverUrl}/hotels`;
         return this.http.get<Hotel[]>(url)
@@ -94,6 +100,48 @@ export class CityService{
             console.error(error); // log to console instead
             // Let the app keep running by returning an empty result.
             return of(result as T);
+        };
+    }
+}
+
+
+export class CityValidator{
+
+    static checkCity(_cityService: CityService): ValidatorFn | null {
+        return (control: AbstractControl): ValidationErrors | null => {
+            let listCityGroup: StateGroup[] = [];
+            _cityService.getSortedCity(false).subscribe(
+                (value: StateGroup[]) => listCityGroup = value);
+            let exist = false;
+            if (control.value === ''){ return null; }
+            listCityGroup.forEach(value => {
+                if (value.letter === control.value[0].toUpperCase() && value.names.indexOf(control.value) >= 0) {
+                    exist = true;
+                }
+            });
+            return exist ? null : {'checkCity': true};
+            /*if (typeof control.value === 'string' && control.value !== ''){ // check per ricerca standard che passa una stringa
+                let exist = false;
+                listCityGroup.forEach(value => {
+                    if (value.letter === control.value[0].toUpperCase() && value.names.indexOf(control.value) >= 0) {
+                        exist = true;
+                    }
+                });
+                return exist ? null : {'checkCity': true};
+            }else{ // check per ricerca clips che passa un array di città
+                for (const city of control.value) {
+                    let exist = false;
+                    listCityGroup.forEach(value => {
+                        if (value.letter === city.name[0].toUpperCase() && value.names.indexOf(city.name) >= 0) {
+                            exist = true;
+                        }
+                    });
+                    if (!exist) {
+                        return { 'checkCity': true};
+                    }
+                }
+            }
+            return null;*/
         };
     }
 }

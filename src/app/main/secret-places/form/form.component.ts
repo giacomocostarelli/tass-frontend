@@ -1,40 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {
+    AbstractControl,
     FormArray,
     FormBuilder,
     FormControl,
-    FormGroup,
+    FormGroup, ValidationErrors, ValidatorFn,
     Validators
 } from '@angular/forms';
 import {City} from '../../interfaceDB/city';
 import {Observable, of} from 'rxjs';
 import {SpringService} from '../../spring.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
-import {CityService, REGIONS, StateGroup} from '../../city.service';
+import {CityService, CityValidator, REGIONS, StateGroup} from '../../city.service';
 
-
-class cityValidatorClass{
-    private listCityGroup: StateGroup[];
-
-    constructor(private stateGroupOptions: Observable<StateGroup[]>){
-        stateGroupOptions.subscribe(value => this.listCityGroup = value);
-    }
-
-    cityValidator(control: FormArray): { [key: string]: boolean } | null{
-        for (const city of control.value){
-            let exist = true;
-            this.listCityGroup.forEach( value => {
-                if (value.letter === city.value[0].toUpperCase() && value.names.indexOf(city) < 0) {
-                    exist = false;
-                }
-            });
-            if (!exist){
-                return null;
-            }
-        }
-        return { ValidCity: true };
-    }
-}
 
 
 @Component({
@@ -67,9 +45,8 @@ export class FormComponent implements OnInit {
 
 
     ngOnInit(): void {
-        // VALIDATOR MANCANTI: DATA ARRIVO < DATA RITORNO, CITTA IN LISTA CITTA, MINSTAR < MAXSTAR
         this.form = this._formBuilder.group({
-            cities: this._formBuilder.array([]),
+            cities: this._formBuilder.array([], ),
             maxBudget: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})*'), Validators.min(0.01)]],
             people: ['', [Validators.required, Validators.pattern('^[0-9]'), Validators.min(1)]],
             onlyRegion: [''],
@@ -115,10 +92,8 @@ export class FormComponent implements OnInit {
      * Finish the vertical stepper
      */
     finishVerticalStepper(): void {
-
-        alert(JSON.stringify(this.form.value));
-        // this._springService.searchClips(this.form.value)
-        // .subscribe(alternative => console.log(JSON.stringify(alternative)));
+        this._springService.searchClips(this.form.value)
+         .subscribe(alternative => console.log(JSON.stringify(alternative)));
     }
 
     onCheckChange(event: MatCheckboxChange): void {
@@ -143,7 +118,10 @@ export class FormComponent implements OnInit {
     addInput(input: HTMLInputElement): void {
         const value: string = input.value;
         if ( value === ''){ return; }
-        const newCity =  new FormGroup({name: new FormControl(value)});
+        const newCity =  this._formBuilder.group({
+            name: [value, { validators: [CityValidator.checkCity(this._cityService)], updateOn: 'blur'}],
+            region: [this._cityService.getRegion(value)],
+        });
         this.cities.push(newCity);
         input.value = '';
     }

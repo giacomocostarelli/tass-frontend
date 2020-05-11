@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {City} from '../interfaceDB/city';
-import {BehaviorSubject, merge, Observable, of} from 'rxjs';
+import {BehaviorSubject, merge, Observable} from 'rxjs';
 import {SpringService} from '../spring.service';
 import {Room} from '../interfaceDB/room';
 import {fuseAnimations} from '../../../@fuse/animations';
@@ -11,6 +11,7 @@ import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
+import {CityService, CityValidator} from '../city.service';
 
 
 export interface StateGroup {
@@ -49,21 +50,21 @@ export class RicercaStandardComponent implements OnInit {
     constructor(
         private _formBuilder: FormBuilder,
         private springService: SpringService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private _cityService: CityService,
     ) {
-        this.stateGroupOptions = this.sortCity();
         this.onProductChanged = new BehaviorSubject({});
     }
 
     ngOnInit(): void {
         this.dataSource = new FilesDataSource(this, this.paginator, this.sort);
         this.form = this._formBuilder.group({
-            city: ['', Validators.required],
+            city: ['', { validators: [Validators.required, CityValidator.checkCity(this._cityService)], updateOn: 'blur'}],
             personNumber: ['', [Validators.required, Validators.pattern('^[0-9]')]],
             arr: ['', Validators.required],
-            arrival: ['',],
+            arrival: [''],
             dep: ['', Validators.required],
-            departure: ['',]
+            departure: ['']
         });
         // aggiungere validators su città, non deve prendere città diverse dalle nostre
         this.form.controls['arr'].valueChanges.subscribe(arr => {
@@ -72,31 +73,13 @@ export class RicercaStandardComponent implements OnInit {
         this.form.controls['dep'].valueChanges.subscribe(dep => {
             this.setFinalDate('departure', dep);
         });
+        this.stateGroupOptions = this._cityService.getSortedCity();
     }
 
     private setFinalDate(param: string, value: any): void {
         const date = this.parse(value);
         const finalDate = date.getDate() + '/' + (1 + date.getMonth()) + '/' + date.getFullYear();
         this.form.controls[param].setValue(finalDate);
-    }
-
-    sortCity(): Observable<StateGroup[]> {
-        this.cities.sort((one, two) => (one.name > two.name ? 1 : -1));
-        let thisLetter = 'A';
-        let citySameLetter: string[] = [];
-        for (const c of this.cities) {
-            const city = c.name;
-            if (city[0].toUpperCase() !== thisLetter) {
-                if (citySameLetter.length > 0) {
-                    this.returnList.push({letter: thisLetter, names: citySameLetter});
-                    citySameLetter = [];
-                }
-                thisLetter = city[0].toUpperCase();
-            }
-            citySameLetter.push(city);
-        }
-        this.returnList.push({letter: thisLetter, names: citySameLetter});
-        return of(this.returnList);
     }
 
 

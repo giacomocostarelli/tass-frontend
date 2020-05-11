@@ -51,7 +51,8 @@
                             </mat-optgroup>
                         </mat-autocomplete>
                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
-                        <mat-error>La destinazione è richiesta!</mat-error>
+                        <mat-error *ngIf="form.get('city').hasError('required')">La destinazione è richiesta!</mat-error>
+                        <mat-error *ngIf="form.get('city').hasError('checkCity')">Al momento non abbiamo hotel disponibili per questa città</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" fxFlex="25">

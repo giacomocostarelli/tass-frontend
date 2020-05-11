@@ -1,46 +1,25 @@
-<div class="page-layout blank p-24" fusePerfectScrollbar>
-    <div class="vertical-stepper-wrapper">
-        <form [formGroup]="form">
-            <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
+    <div class="page-layout blank p-24" fusePerfectScrollbar>
+        <div class="vertical-stepper-wrapper">
+            <form [formGroup]="form">
+                <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
 
-                <!-- STEP CITTA'-->
-                <mat-step>
-                    <ng-template matStepLabel>Città da visitare</ng-template>
+                    <!-- STEP CITTA'-->
+                    <mat-step [completed]="!form.get('cities').invalid">
 
-                    <div fxFlex="1 0 auto" fxLayout="column" formArrayName="cities">
+                        <ng-template matStepLabel>Città da visitare</ng-template>
 
-                        <!-- CITTA' INSERITE-->
-                        <mat-form-field appearance="outline" fxFlex="100" *ngFor="let city of cities.controls; let bla=index" [formGroupName]="bla">
-                            <mat-label>Città selezionata N°{{bla+1}}</mat-label>
-                            <input type="text"
-                                   matInput
-                                   formControlName="name"
-                                   [matAutocomplete]="autoGroup">
-                            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="removeCity(bla)">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                            <mat-autocomplete #autoGroup="matAutocomplete">
-                                <mat-optgroup *ngFor="let group of stateGroupOptions | async"
-                                              [label]="group.letter">
-                                    <mat-option *ngFor="let name of group.names" [value]="name">
-                                        {{name}}
-                                    </mat-option>
-                                </mat-optgroup>
-                            </mat-autocomplete>
-                            <mat-error *ngIf="form.get('cities').hasError('ValidCity')">
-                                Al momento non abbiamo hotel disponibili per questa città
-                            </mat-error>
-                        </mat-form-field>
+                        <div fxFlex="1 0 auto" fxLayout="column" formArrayName="cities">
 
-
-                        <!-- INPUT CITTA'-->
-                        <div fxLayour="row" fxFlex="100">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Inserire una destinazione...</mat-label>
+                            <!-- CITTA' INSERITE-->
+                            <mat-form-field appearance="outline" fxFlex="100" *ngFor="let city of cities.controls; let bla=index" [formGroupName]="bla">
+                                <mat-label>Città selezionata N°{{bla+1}}</mat-label>
                                 <input type="text"
                                        matInput
-                                       #inputCity
+                                       formControlName="name"
                                        [matAutocomplete]="autoGroup">
+                                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="removeCity(bla)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
                                 <mat-autocomplete #autoGroup="matAutocomplete">
                                     <mat-optgroup *ngFor="let group of stateGroupOptions | async"
                                                   [label]="group.letter">
@@ -49,230 +28,249 @@
                                         </mat-option>
                                     </mat-optgroup>
                                 </mat-autocomplete>
-                                <mat-error *ngIf="form.get('cities').hasError('ValidCity')">
+                                <mat-error>
                                     Al momento non abbiamo hotel disponibili per questa città
                                 </mat-error>
-                                <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                             </mat-form-field>
-                            <button class="m-4" mat-fab color="accent" (click)="addInput(inputCity)">
-                                <mat-icon>add_box</mat-icon>
+
+
+                            <!-- INPUT CITTA'-->
+                            <div fxLayour="row" fxFlex="100">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Inserire una destinazione...</mat-label>
+                                    <input type="text"
+                                           matInput
+                                           #inputCity
+                                           [matAutocomplete]="autoGroup">
+                                    <mat-autocomplete #autoGroup="matAutocomplete">
+                                        <mat-optgroup *ngFor="let group of stateGroupOptions | async"
+                                                      [label]="group.letter">
+                                            <mat-option *ngFor="let name of group.names" [value]="name">
+                                                {{name}}
+                                            </mat-option>
+                                        </mat-optgroup>
+                                    </mat-autocomplete>
+                                    <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
+                                </mat-form-field>
+                                <button class="m-4" mat-fab color="accent" (click)="addInput(inputCity)">
+                                    <mat-icon>add_box</mat-icon>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Successivo
                             </button>
                         </div>
 
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <button mat-raised-button matStepperNext type="button" color="accent">
-                            Successivo
-                        </button>
-                    </div>
+                    </mat-step>
+                    <!-- STEP CITTA'-->
 
-                </mat-step>
-                <!-- STEP CITTA'-->
+                    <!-- STEP DATE-->
+                    <mat-step [completed]="!(form.get('arr').invalid || form.get('dep').invalid)">
 
-                <!-- STEP DATE-->
-                <mat-step [completed]="!(form.get('arr').invalid || form.get('dep').invalid)">
+                        <ng-template matStepLabel>Data di partenza e ritorno</ng-template>
 
-                    <ng-template matStepLabel>Data di partenza e ritorno</ng-template>
+                        <div fxFlex="1 0 auto" fxLayout="column">
+                            <label id="andata">Data di partenza:</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Data di partenza</mat-label>
+                                <input matInput formControlName="arr" [matDatepicker]="picker1" required readonly>
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                                <mat-error>La data di partenza è richiesta!</mat-error>
+                            </mat-form-field>
 
-                    <div fxFlex="1 0 auto" fxLayout="column">
-                        <label id="andata">Data di partenza:</label>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Data di partenza</mat-label>
-                            <input matInput formControlName="arr" [matDatepicker]="picker1" required readonly>
-                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
-                            <mat-error>La data di partenza è richiesta!</mat-error>
-                        </mat-form-field>
+                            <label id="ritorno">Data di ritorno:</label>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Data di ritorno</mat-label>
+                                <input matInput formControlName="dep" [matDatepicker]="picker2" required readonly>
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                                <mat-error>La data di ritorno è richiesta!</mat-error>
+                            </mat-form-field>
+                        </div>
 
-                        <label id="ritorno">Data di ritorno:</label>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Data di ritorno</mat-label>
-                            <input matInput formControlName="dep" [matDatepicker]="picker2" required readonly>
-                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                            <mat-datepicker #picker2></mat-datepicker>
-                            <mat-error>La data di ritorno è richiesta!</mat-error>
-                        </mat-form-field>
-                    </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Precedente
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Successivo
+                            </button>
+                        </div>
 
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
-                            Precedente
-                        </button>
-                        <button mat-raised-button matStepperNext type="button" color="accent">
-                            Successivo
-                        </button>
-                    </div>
+                    </mat-step>
+                    <!-- STEP DATE-->
 
-                </mat-step>
-                <!-- STEP DATE-->
+                    <!-- STEP BUDGET - PERSONE-->
+                    <mat-step [completed]="!(form.get('maxBudget').invalid || form.get('people').invalid)">
+                        <ng-template matStepLabel>Budget e Persone</ng-template>
 
-                <!-- STEP BUDGET - PERSONE-->
-                <mat-step [completed]="!(form.get('maxBudget').invalid || form.get('people').invalid)">
-                    <ng-template matStepLabel>Budget e Persone</ng-template>
+                        <div fxFlex="1 0 auto" fxLayout="column">
 
-                    <div fxFlex="1 0 auto" fxLayout="column">
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Budget</mat-label>
+                                <input matInput formControlName="maxBudget" required>
+                                <mat-error *ngIf="form.get('maxBudget').hasError('required')">
+                                    Specificare il budget a disposizione
+                                </mat-error>
+                                <mat-error *ngIf="form.get('maxBudget').hasError('min')">
+                                    Dove vuoi andare senza soldi?
+                                </mat-error>
+                                <mat-error *ngIf="form.get('maxBudget').hasError('pattern')">
+                                    Per favore inserire una cifra nel formato 0.00
+                                </mat-error>
+                            </mat-form-field>
 
-                        <mat-form-field appearance="outline" fxFlex="100">
-                            <mat-label>Budget</mat-label>
-                            <input matInput formControlName="maxBudget" required>
-                            <mat-error *ngIf="form.get('maxBudget').hasError('required')">
-                                Specificare il budget a disposizione
-                            </mat-error>
-                            <mat-error *ngIf="form.get('maxBudget').hasError('min')">
-                                Dove vuoi andare senza soldi?
-                            </mat-error>
-                            <mat-error *ngIf="form.get('maxBudget').hasError('pattern')">
-                                Per favore inserire una cifra nel formato 0.00
-                            </mat-error>
-                        </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Numero di persone</mat-label>
+                                <input matInput formControlName="people" required maxlength="1" >
+                                <mat-error *ngIf="form.get('people').hasError('required')">
+                                    Specificare il numero di viaggiatori
+                                </mat-error>
+                                <mat-error *ngIf="form.get('people').hasError('min')">
+                                    Dev'esserci almeno una persona per poter viaggiare ;)
+                                </mat-error>
+                                <mat-error *ngIf="form.get('people').hasError('pattern')">
+                                    Per favore inserire un valore numerico
+                                </mat-error>
+                            </mat-form-field>
 
-                        <mat-form-field appearance="outline" fxFlex="100">
-                            <mat-label>Numero di persone</mat-label>
-                            <input matInput formControlName="people" required maxlength="1" >
-                            <mat-error *ngIf="form.get('people').hasError('required')">
-                                Specificare il numero di viaggiatori
-                            </mat-error>
-                            <mat-error *ngIf="form.get('people').hasError('min')">
-                                Dev'esserci almeno una persona per poter viaggiare ;)
-                            </mat-error>
-                            <mat-error *ngIf="form.get('people').hasError('pattern')">
-                                Per favore inserire un valore numerico
-                            </mat-error>
-                        </mat-form-field>
+                        </div>
 
-                    </div>
-
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
-                            Precedente
-                        </button>
-                        <button mat-raised-button matStepperNext type="button" color="accent">
-                            Successivo
-                        </button>
-                    </div>
-
-
-                </mat-step>
-                <!-- STEP BUDGET - PERSONE-->
-
-                <!-- STEP STELLE - TOURISM TYPE-->
-                <mat-step>
-
-                    <ng-template matStepLabel>Preferenze</ng-template>
-
-                    <div fxFlex="1 0 auto" fxLayout="column">
-
-                        <label id="radio-group-1">Numero minimo di stelle per l'hotel:</label>
-                        <mat-radio-group formControlName="minStars" fxLayout="row" required>
-                            <div *ngFor="let star1 of starOne">
-                                {{star1}}
-                                <mat-radio-button [value]="star1"></mat-radio-button>
-                            </div>
-                        </mat-radio-group>
-
-                        <hr>
-
-                        <label id="radio-group-2">Numero massimo di stelle per l'hotel:</label>
-                        <mat-radio-group formControlName="maxStars" fxLayout="row" required>
-                            <div *ngFor="let star2 of starTwo">
-                                {{star2}}
-                                <mat-radio-button [value]="star2"></mat-radio-button>
-                            </div>
-                        </mat-radio-group>
-
-                        <hr>
-
-                        <label id="check-box">Preferenze di viaggio:</label>
-                        <div *ngFor="let tip of tourismTypes">
-                            <mat-checkbox [value]="tip" (change)="onCheckChange($event)">
-                                {{tip}}
-                            </mat-checkbox>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Precedente
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Successivo
+                            </button>
                         </div>
 
 
-                    </div>
+                    </mat-step>
+                    <!-- STEP BUDGET - PERSONE-->
 
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
-                            Precedente
-                        </button>
-                        <button mat-raised-button matStepperNext type="button" color="accent">
-                            Successivo
-                        </button>
-                    </div>
+                    <!-- STEP STELLE - TOURISM TYPE-->
+                    <mat-step>
 
+                        <ng-template matStepLabel>Preferenze</ng-template>
 
-                </mat-step>
-                <!-- STEP STELLE - TOURISM TYPE-->
+                        <div fxFlex="1 0 auto" fxLayout="column">
 
-                <!-- STEP REGIONI-->
-                <mat-step>
-
-
-                    <ng-template matStepLabel>Vincoli viaggio</ng-template>
-
-                    <div fxFlex="1 0 auto" fxLayout="column">
-
-                        <mat-form-field appearance="outline" fxFlex="100">
-                            <mat-label>Regione preferita</mat-label>
-                            <mat-select formControlName="onlyRegion" >
-                                <div *ngFor="let region of regions">
-                                    <mat-option [value]="region">
-                                        {{region}}
-                                    </mat-option>
+                            <label id="radio-group-1">Numero minimo di stelle per l'hotel:</label>
+                            <mat-radio-group formControlName="minStars" fxLayout="row" required>
+                                <div *ngFor="let star1 of starOne">
+                                    {{star1}}
+                                    <mat-radio-button [value]="star1"></mat-radio-button>
                                 </div>
-                            </mat-select>
-                        </mat-form-field>
+                            </mat-radio-group>
 
-                        <mat-form-field appearance="outline" fxFlex="100">
-                            <mat-label>Regione da escludere</mat-label>
-                            <mat-select formControlName="onlyNotRegion">
-                                <div *ngFor="let region of regions">
-                                    <mat-option [value]="region">
-                                        {{region}}
-                                    </mat-option>
+                            <hr>
+
+                            <label id="radio-group-2">Numero massimo di stelle per l'hotel:</label>
+                            <mat-radio-group formControlName="maxStars" fxLayout="row" required>
+                                <div *ngFor="let star2 of starTwo">
+                                    {{star2}}
+                                    <mat-radio-button [value]="star2"></mat-radio-button>
                                 </div>
-                            </mat-select>
-                        </mat-form-field>
+                            </mat-radio-group>
+
+                            <hr>
+
+                            <label id="check-box">Preferenze di viaggio:</label>
+                            <div *ngFor="let tip of tourismTypes">
+                                <mat-checkbox [value]="tip" (change)="onCheckChange($event)">
+                                    {{tip}}
+                                </mat-checkbox>
+                            </div>
 
 
-                    </div>
+                        </div>
 
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
-                            Precedente
-                        </button>
-                        <button mat-raised-button matStepperNext type="button" color="accent">
-                            Successivo
-                        </button>
-                    </div>
-
-                </mat-step>
-                <!-- STEP REGIONI-->
-
-                <!-- STEP FINE -->
-                <mat-step>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Precedente
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Successivo
+                            </button>
+                        </div>
 
 
-                    <ng-template matStepLabel>Finito</ng-template>
+                    </mat-step>
+                    <!-- STEP STELLE - TOURISM TYPE-->
 
-                    <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
-                        La procedura è conclusa!
-                    </div>
+                    <!-- STEP REGIONI-->
+                    <mat-step>
 
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
-                            Precedente
-                        </button>
-                        <button mat-raised-button type="button" color="accent" [disabled]="form.invalid" (click)="finishVerticalStepper()">
-                            Finito
-                        </button>
-                    </div>
 
-                </mat-step>
-                <!-- STEP FINE -->
+                        <ng-template matStepLabel>Vincoli viaggio</ng-template>
 
-            </mat-vertical-stepper>
-        </form>
+                        <div fxFlex="1 0 auto" fxLayout="column">
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Regione preferita</mat-label>
+                                <mat-select formControlName="onlyRegion" >
+                                    <div *ngFor="let region of regions">
+                                        <mat-option [value]="region">
+                                            {{region}}
+                                        </mat-option>
+                                    </div>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Regione da escludere</mat-label>
+                                <mat-select formControlName="onlyNotRegion">
+                                    <div *ngFor="let region of regions">
+                                        <mat-option [value]="region">
+                                            {{region}}
+                                        </mat-option>
+                                    </div>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Precedente
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent">
+                                Successivo
+                            </button>
+                        </div>
+
+                    </mat-step>
+                    <!-- STEP REGIONI-->
+
+                    <!-- STEP FINE -->
+                    <mat-step>
+
+
+                        <ng-template matStepLabel>Finito</ng-template>
+
+                        <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+                            La procedura è conclusa!
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                                Precedente
+                            </button>
+                            <button mat-raised-button type="button" color="accent" [disabled]="form.invalid" (click)="finishVerticalStepper()">
+                                Finito
+                            </button>
+                        </div>
+
+                    </mat-step>
+                    <!-- STEP FINE -->
+
+                </mat-vertical-stepper>
+            </form>
+        </div>
     </div>
-</div>
