@@ -1,18 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {
-    AbstractControl,
     FormArray,
     FormBuilder,
     FormControl,
-    FormGroup, ValidationErrors, ValidatorFn,
+    FormGroup,
     Validators
 } from '@angular/forms';
-import {City} from '../../interfaceDB/city';
 import {Observable, of} from 'rxjs';
 import {SpringService} from '../../spring.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {CityService, CityValidator, REGIONS, StateGroup} from '../../city.service';
-
 
 
 @Component({
@@ -46,7 +43,7 @@ export class FormComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = this._formBuilder.group({
-            cities: this._formBuilder.array([], ),
+            cities: this._formBuilder.array([],),
             maxBudget: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})*'), Validators.min(0.01)]],
             people: ['', [Validators.required, Validators.pattern('^[0-9]'), Validators.min(1)]],
             onlyRegion: [''],
@@ -93,7 +90,7 @@ export class FormComponent implements OnInit {
      */
     finishVerticalStepper(): void {
         this._springService.searchClips(this.form.value)
-         .subscribe(alternative => console.log(JSON.stringify(alternative)));
+            .subscribe(alternative => console.log(JSON.stringify(alternative)));
     }
 
     onCheckChange(event: MatCheckboxChange): void {
@@ -117,15 +114,16 @@ export class FormComponent implements OnInit {
 
     addInput(input: HTMLInputElement): void {
         const value: string = input.value;
-        if ( value === ''){ return; }
-        const newCity =  this._formBuilder.group({
-            name: [value, { validators: [CityValidator.checkCity(this._cityService)], updateOn: 'blur'}],
+        if (value === '') {
+            return;
+        }
+        const newCity = this._formBuilder.group({
+            name: [value, {validators: [CityValidator.checkCity(this._cityService)], updateOn: 'blur'}],
             region: [this._cityService.getRegion(value)],
         });
         this.cities.push(newCity);
         input.value = '';
     }
-
 
     parse(value: any): Date | null {
         if ((typeof value === 'string') && (value.indexOf('/') > -1)) {

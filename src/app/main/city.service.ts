@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {City} from './interfaceDB/city';
-import {catchError, map} from "rxjs/operators";
-import {AbstractControl, FormArray, ValidationErrors, ValidatorFn} from "@angular/forms";
+import {catchError, map} from 'rxjs/operators';
+import {AbstractControl, FormArray, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 
 

@@ -18,4 +18,12 @@ export class RicercaDialogComponent implements OnInit {
     ngOnInit() {
         // console.log(this._data.room.hotel.name);
     }
+
+    onSave() {
+        console.log('Salva');
+    }
+
+    onBook() {
+        console.log('Prenota');
+    }
 }

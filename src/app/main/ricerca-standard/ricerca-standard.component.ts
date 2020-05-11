@@ -32,7 +32,6 @@ export class RicercaStandardComponent implements OnInit {
     form: FormGroup;
     cities: City[] = [{name: 'United States of America'}, {name: 'China'}]; // ...
     stateGroupOptions: Observable<StateGroup[]>;
-    returnList: StateGroup[] = [];
     onProductChanged: BehaviorSubject<any>;
     roomList: Room[] = [];
     dataSource: FilesDataSource | null;
