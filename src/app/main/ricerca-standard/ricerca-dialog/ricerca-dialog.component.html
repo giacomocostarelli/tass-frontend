@@ -8,32 +8,33 @@
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <mat-dialog-content class="p-24 pb-0 m-0">
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="grow shrink initial">
-            <div class="card" fxLayout="column">
-                <div class="fuse-card">
+    <mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <div class="container" fxLayout="row" fxLayoutAlign="start center">
+            <div class="card-preview">
+                <div class="card" fxLayoutAlign="start start" fxLayout="column">
+                    <div class="fuse-card">
 
-                    <img src="assets/images/cards/card1.jpg">
+                        <img class="img" src="assets/images/cards/card1.jpg">
 
-                    <div class="p-16">
-                        <div class="h1">Kangaroo Valley Safari</div>
+                        <div class="p-16">
+                            <span class="mat-title">Kangaroo Valley Safari</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class = "description" fxLayoutAlign="start start" fxLayout="column">
-                <p class="pl-48">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p class="pl-48">{{_data.room.hotel.name}}</p>
-                <p class="pl-48">{{_data.room.hotel.address}}</p>
-                <p class="pl-48">{{_data.room.hotel.cap}}</p>
-                <p class="pl-48">{{_data.room.hotel.city}}</p>
-                <p class="pl-48">{{_data.room.hotel.cellNumber}}</p>
-                <p class="pl-48">{{_data.room.hotel.stars}}</p>
-                <p class="pl-48">{{_data.room.pricePerNight}}</p>
-                <p class="pl-48">{{_data.room.numPlaces}}</p>
+            <div class="description" fxLayoutAlign="start start" fxLayout="column">
+                <p class="pl-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p class="pl-12">{{_data.room.hotel.city}}</p>
+                <p class="pl-12">{{_data.room.hotel.cap}}</p>
+                <p class="pl-12">{{_data.room.hotel.address}}</p>
+                <p class="pl-12">{{_data.room.hotel.cellNumber}}</p>
+                <p class="pl-12">{{_data.room.hotel.stars}}</p>
+                <p class="pl-12">{{_data.room.pricePerNight}}</p>
+                <p class="pl-12">{{_data.room.numPlaces}}</p>
             </div>
         </div>
     </mat-dialog-content>

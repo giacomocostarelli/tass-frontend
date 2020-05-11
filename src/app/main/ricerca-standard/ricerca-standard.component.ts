@@ -58,7 +58,7 @@ export class RicercaStandardComponent implements OnInit {
     ngOnInit(): void {
         this.dataSource = new FilesDataSource(this, this.paginator, this.sort);
         this.form = this._formBuilder.group({
-            city: ['', { validators: [Validators.required, CityValidator.checkCity(this._cityService)], updateOn: 'blur'}],
+            city: ['', { validators: [Validators.required], updateOn: 'blur'}],
             personNumber: ['', [Validators.required, Validators.pattern('^[0-9]')]],
             arr: ['', Validators.required],
             arrival: [''],
@@ -108,6 +108,7 @@ export class RicercaStandardComponent implements OnInit {
 
     openDialog(roomRow: Room): void {
         const dialogRef = this.dialog.open(RicercaDialogComponent, {
+            panelClass: 'form-dialog',
             data: {
                 room: roomRow
             }
