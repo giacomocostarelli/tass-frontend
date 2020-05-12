@@ -11,32 +11,33 @@
                     <div fxFlex="1 0 auto" fxLayout="column" formArrayName="cities">
 
                         <!-- CITTA' INSERITE-->
-                        <mat-form-field appearance="outline" fxFlex="100"
-                                        *ngFor="let city of cities.controls; let bla=index" [formGroupName]="bla">
-                            <mat-label>Città selezionata N°{{bla + 1}}</mat-label>
-                            <input type="text"
-                                   matInput
-                                   formControlName="name"
-                                   [matAutocomplete]="autoGroup">
-                            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="removeCity(bla)">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                            <mat-autocomplete #autoGroup="matAutocomplete">
-                                <mat-optgroup *ngFor="let group of stateGroupOptions | async"
-                                              [label]="group.letter">
-                                    <mat-option *ngFor="let name of group.names" [value]="name">
-                                        {{name}}
-                                    </mat-option>
-                                </mat-optgroup>
-                            </mat-autocomplete>
-                            <mat-error>
-                                Al momento non abbiamo hotel disponibili per questa città
-                            </mat-error>
-                        </mat-form-field>
-
+                        <form *ngFor="let city of cities.controls; let bla=index" [formGroupName]="bla">
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Città selezionata N°{{bla + 1}}</mat-label>
+                                <input type="text"
+                                       matInput
+                                       formControlName="name"
+                                       [matAutocomplete]="autoGroup">
+                                <button mat-button matSuffix mat-icon-button aria-label="Clear"
+                                        (click)="removeCity(bla)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                                <mat-autocomplete #autoGroup="matAutocomplete">
+                                    <mat-optgroup *ngFor="let group of stateGroupOptions | async"
+                                                  [label]="group.letter">
+                                        <mat-option *ngFor="let name of group.names" [value]="name">
+                                            {{name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-autocomplete>
+                                <mat-error>
+                                    Al momento non abbiamo hotel disponibili per questa città
+                                </mat-error>
+                            </mat-form-field>
+                        </form>
 
                         <!-- INPUT CITTA'-->
-                        <div fxLayour="row" fxFlex="100">
+                        <form fxLayout="row" fxFlex="100">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Inserire una destinazione...</mat-label>
                                 <input type="text"
@@ -56,8 +57,7 @@
                             <button class="m-4" mat-fab color="accent" (click)="addInput(inputCity)">
                                 <mat-icon>add_box</mat-icon>
                             </button>
-                        </div>
-
+                        </form>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="center center">
                         <button mat-raised-button matStepperNext type="button" color="accent">
@@ -207,7 +207,6 @@
                 <!-- STEP REGIONI-->
                 <mat-step>
 
-
                     <ng-template matStepLabel>Vincoli viaggio</ng-template>
 
                     <div fxFlex="1 0 auto" fxLayout="column">
@@ -251,7 +250,6 @@
 
                 <!-- STEP FINE -->
                 <mat-step>
-
 
                     <ng-template matStepLabel>Finito</ng-template>
 
