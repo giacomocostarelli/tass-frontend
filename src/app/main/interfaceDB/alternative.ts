@@ -1,4 +1,5 @@
 export interface Alternative {
-    roomsHotels: Map<string, any>[];
-    days: number;
+    roomsHotels?: Map<string, any>[];
+    days?: number;
+    id: number;
 }

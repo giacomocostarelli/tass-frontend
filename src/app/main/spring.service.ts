@@ -28,16 +28,16 @@ export class SpringService {
     /*Cities: { city: string, region: string }[], Days: number, MaxBudget: string, People: number,
                 OnlyRegion: string, OnlyNotRegion: string, MaxStars: number, MinStars: number,
                 TourismType: string[], Arrival: string, Departure: string*/
-    searchClips(formdata: any): Observable<Alternative[]> {
+    searchClips(formdata: any): Observable<Map<string, any>> {
         /* const secretSearch = {
              cities: Cities, days: Days, maxBudget: MaxBudget, people: People,
              onlyRegion: OnlyRegion, onlyNotRegion: OnlyNotRegion, maxStars: MaxStars, minStars: MinStars,
              tourismTypes: TourismType, arrival: Arrival, departure: Departure
          };*/
         const url = `${this.serverUrl}/secretSearch`;
-        return this.http.post<Alternative[]>(url, formdata)
+        return this.http.post<Map<string, any>>(url, formdata)
             .pipe(
-                catchError(this.handleError<Alternative[]>('getSecretSearch', []))
+                catchError(this.handleError<Map<string, any>>('getSecretSearch', null))
             );
     }
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {
     FormArray,
     FormBuilder,
@@ -10,6 +10,9 @@ import {Observable, of} from 'rxjs';
 import {SpringService} from '../../spring.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {CityService, CityValidator, REGIONS, StateGroup} from '../../city.service';
+import {Alternative} from '../../interfaceDB/alternative';
+import {SecretPlacesService} from "../secret-places.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -36,7 +39,9 @@ export class FormComponent implements OnInit {
     constructor(
         private _formBuilder: FormBuilder,
         private _springService: SpringService,
-        private _cityService: CityService
+        private _cityService: CityService,
+        private _alternativeService: SecretPlacesService,
+        private router: Router
     ) {
     }
 
@@ -89,8 +94,15 @@ export class FormComponent implements OnInit {
      * Finish the vertical stepper
      */
     finishVerticalStepper(): void {
+
+        this.form.removeControl('arr');
+        this.form.removeControl('dep'); //da sistemare
         this._springService.searchClips(this.form.value)
-            .subscribe(alternative => console.log(JSON.stringify(alternative)));
+            .subscribe(mappa => { // sarebbe da controlalre se mappa.get('resultcode') va bene
+                    this._alternativeService.setAlternative(mappa['returnedValue']);
+                    console.log('form: ' + JSON.stringify(mappa['returnedValue']));
+            });
+        this.router.navigate(['secret_places/result']);
     }
 
     onCheckChange(event: MatCheckboxChange): void {
