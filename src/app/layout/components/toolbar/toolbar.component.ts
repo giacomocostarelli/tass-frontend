@@ -27,6 +27,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     userStatusOptions: any[];
     logged: boolean;
     hover: boolean[] = [false, false, false];
+    pageSelected: string = 'Homepage';
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -143,6 +144,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     getColor(ind: number): any {
         return this.hover[ind] === true ? '#d84315' : 'black';
     }
+
+    onSelect(page: string) {
+        this.pageSelected = page;
+    }
+
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------

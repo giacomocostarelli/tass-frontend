@@ -2,29 +2,34 @@
 
     <!-- LEFT SIDE NAVBAR -->
     <div class="leftside-navbar" fxLayout="row" fxLayoutAlign="start center">
-        <a [routerLink]="'/homepage'">
+
+        <a (click)="onSelect('Homepage')"
+           [routerLink]="'/homepage'">
             <img class="deep-orange-300-bg" height="64" width="71" src="../../../../assets/images/logos/logonobg.png">
         </a>
 
         <span class="nav-title mat-display-2 deep-orange-800-fg">Secret Places</span>
 
         <div class="navbar-elements">
-            <a mat-button class="navbar-element no-hover-effect" [routerLink]="'/homepage'"
+            <a mat-button disableRipple class="navbar-element no-hover-effect" [routerLink]="'/homepage'"
                (mouseenter)="onMouseEnter(0)" (mouseleave)="onMouseLeave(0)"
+               (click)="onSelect('Homepage')"
                [ngStyle]="{'color': getColor(0)}"
-               [ngClass]="" >
+               [ngClass]="{selected: pageSelected === 'Homepage'}">
                 Homepage
             </a>
-            <a mat-button class="navbar-element no-hover-effect" [routerLink]="'/secret_places'"
+            <a mat-button disableRipple class="navbar-element no-hover-effect" [routerLink]="'/secret_places'"
                (mouseenter)="onMouseEnter(1)" (mouseleave)="onMouseLeave(1)"
+               (click)="onSelect('Secret Places')"
                [ngStyle]="{'color': getColor(1)}"
-               [ngClass]="">
+               [ngClass]="{selected: pageSelected === 'Secret Places'}">
                 Secret places
             </a>
-            <a mat-button class="navbar-element last-element no-hover-effect" [routerLink]="'/ricerca_standard'"
+            <a mat-button disableRipple class="navbar-element last-element no-hover-effect" [routerLink]="'/ricerca_standard'"
                (mouseenter)="onMouseEnter(2)" (mouseleave)="onMouseLeave(2)"
+               (click)="onSelect('Ricerca Standard')"
                [ngStyle]="{'color': getColor(2)}"
-               [ngClass]="">
+               [ngClass]="{selected: pageSelected === 'Ricerca Standard'}">
                 Ricerca Standard
             </a>
         </div>

@@ -2,10 +2,12 @@
 
 
 toolbar {
-    position: relative;
+    position: sticky;
+    top:0;
     display: flex;
     flex: 0 0 auto;
     z-index: 4;
+    width: 100%;
 
     &.below {
         z-index: 2;
@@ -49,20 +51,24 @@ toolbar {
 
     }
 
-    .nav-title{
+    .nav-title {
         margin-right: 35px;
         margin-bottom: 5px;
         margin-left: 15px;
     }
 
     .navbar-element:not(.last-element):after {
-        content : "";
+        content: "";
         position: absolute;
-        right    : 0;
+        right: 0;
         z-index: 100;
-        width  : 2px;
-        height   : 100%;
+        width: 2px;
+        height: 100%;
         background: #e3d9d1;
+    }
+
+    .selected {
+        color: #d84315 !important;
     }
 
     .no-hover-effect.mat-button .mat-button-focus-overlay,

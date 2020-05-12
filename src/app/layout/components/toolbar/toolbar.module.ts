@@ -10,12 +10,13 @@ import { FuseSearchBarModule, FuseShortcutsModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.component';
+import {MatRippleModule} from '@angular/material';
 
 @NgModule({
     declarations: [
         ToolbarComponent
     ],
-    imports     : [
+    imports: [
         RouterModule,
         MatButtonModule,
         MatIconModule,
@@ -25,7 +26,8 @@ import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.componen
 
         FuseSharedModule,
         FuseSearchBarModule,
-        FuseShortcutsModule
+        FuseShortcutsModule,
+        MatRippleModule
     ],
     exports     : [
         ToolbarComponent
