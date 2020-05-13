@@ -1,9 +1,10 @@
+import {City} from './city';
+
 export interface Hotel {
     id?: number;
+    name?: string;
     address?: string;
-    cap?: number;
-    city?: string;
     cellNumber?: string;
     stars?: number;
-    name?: string;
+    city?: City;
 }

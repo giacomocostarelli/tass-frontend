@@ -1,5 +1,6 @@
+import {Room} from './room';
+
 export interface Alternative {
-    roomsHotels?: Map<string, any>[];
+    roomsHotels?: {DaysInRoom: number; Room: Room }[];
     days?: number;
-    id: number;
 }
