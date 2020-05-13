@@ -1,16 +1,29 @@
-:host {
-    display: flex;
-    flex: 0 0 auto;
-    z-index: 3;
 
-    .mat-toolbar {
-        background: inherit;
-        color: inherit;
-        box-shadow: 0px -1px 1px -1px rgba(0, 0, 0, 0.2), 0px 0px 1px 0px rgba(0, 0, 0, 0.14), 0px -1px 3px 0px rgba(0, 0, 0, 0.12);
-    }
-
-    &.above {
-        position: relative;
-        z-index: 99;
-    }
+.mat-toolbar {
+    height: auto;
+    flex-wrap: wrap;
+    color: inherit;
+    box-shadow: 0px -1px 1px -1px rgba(0, 0, 0, 0.2), 0px 0px 1px 0px rgba(0, 0, 0, 0.14), 0px -1px 3px 0px rgba(0, 0, 0, 0.12);
 }
+
+.page-wrapper {
+    margin: 15px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li:before {
+    content: '>';
+    color: #FFFFFF;
+    margin-left: -20px;
+    margin-right: 10px;
+}
+
+.no-hover-effect {
+    background-color: transparent;
+
+}
+
+

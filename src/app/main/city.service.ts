@@ -104,7 +104,6 @@ export class CityService{
     }
 }
 
-
 export class CityValidator{
 
     static checkCity(_cityService: CityService): ValidatorFn | null {
