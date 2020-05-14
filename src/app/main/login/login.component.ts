@@ -5,6 +5,7 @@ import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
 import {Md5} from 'ts-md5/dist/md5';
 import {Router} from '@angular/router';
+import {Guest} from "../interfaceDB/guest";
 
 
 @Component({
@@ -116,6 +117,15 @@ export class LoginComponent implements OnInit {
                 console.log('Image URL: ' + profile.getImageUrl());
                 console.log('Email: ' + profile.getEmail());
                 // YOUR CODE HERE
+
+                const g: Guest = {};
+                g.email = profile.getEmail;
+                g.name = profile.getName;
+                g.token = googleUser.getAuthResponse().id_token;
+                g.imageUrl = profile.getImageUrl;
+ // per logout =>   localStorage.clear();  scrivo qua poi creo servizio così non modifico toolbar
+                localStorage.setItem('user', JSON.stringify(g));
+                this.router.navigate(['/homepage']);
 
 
             }, (error) => {

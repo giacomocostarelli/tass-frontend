@@ -30,6 +30,7 @@ import {SpringService} from './main/spring.service';
 import {CityService} from './main/city.service';
 import {FooterModule} from './layout/components/footer/footer.module';
 import { BookingComponent } from './main/booking/booking.component';
+import {BookingModule} from "./main/booking/booking.module";
 
 
 export const MY_FORMATS = {
@@ -75,6 +76,10 @@ const appRoutes: Routes = [
         loadChildren: './main/errors/500/error-500.module#Error500Module'
     },
     {
+        path: 'profile',
+        loadChildren: './main/booking/booking.module#BookingModule'
+    },
+    {
         path: '**',
         pathMatch: 'full',
         redirectTo: 'errors/error-404'
@@ -84,7 +89,6 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        BookingComponent,
     ],
     imports: [
         BrowserModule,
@@ -120,7 +124,8 @@ const appRoutes: Routes = [
         // Errors
         Error404Module,
         Error500Module,
-        FooterModule
+        FooterModule,
+        BookingModule
     ],
     providers: [
         {

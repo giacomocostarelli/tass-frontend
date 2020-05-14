@@ -7,4 +7,6 @@ export interface Guest {
     username?: string;
     pwd?: string;
     booking?: Booking;
+    token?: string;
+    imageUrl?: string;
 }
