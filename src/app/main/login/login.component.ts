@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/homepage']);
     }
 
-    googleSDK() {
+    googleSDK(): void {
         window['googleSDKLoaded'] = () => {
             window['gapi'].load('auth2', () => {
                 this.auth2 = window['gapi'].auth2.init({
@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    prepareLoginButton() {
+    prepareLoginButton(): void {
 
         this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
             (googleUser) => {
@@ -121,6 +121,5 @@ export class LoginComponent implements OnInit {
             }, (error) => {
                 alert(JSON.stringify(error, undefined, 2));
             });
-
     }
 }
