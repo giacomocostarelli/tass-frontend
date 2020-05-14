@@ -29,6 +29,8 @@ import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {SpringService} from './main/spring.service';
 import {CityService} from './main/city.service';
 import {FooterModule} from './layout/components/footer/footer.module';
+import { BookingComponent } from './main/booking/booking.component';
+import {BookingModule} from "./main/booking/booking.module";
 
 
 export const MY_FORMATS = {
@@ -72,6 +74,10 @@ const appRoutes: Routes = [
     {
         path: 'errors/error-500',
         loadChildren: './main/errors/500/error-500.module#Error500Module'
+    },
+    {
+        path: 'profile',
+        loadChildren: './main/booking/booking.module#BookingModule'
     },
     {
         path: '**',
@@ -118,7 +124,8 @@ const appRoutes: Routes = [
         // Errors
         Error404Module,
         Error500Module,
-        FooterModule
+        FooterModule,
+        BookingModule
     ],
     providers: [
         {
