@@ -1,27 +1,21 @@
-<div class="navbar-top1 " [ngClass]="fuseConfig.layout.navbar.secondaryBackground ">
+<div class="navbar-top1 deep-orange-800-bg">
     <div class="logo">
-        <img alt="logo" class="logo-icon" src="assets/images/logos/logonobg.png">
-        <span class="logo-text secondary-text">SECRET PLACES</span>
+        <span class="logo-text secondary-text">IL MIO PROFILO</span>
     </div>
     <div class="buttons">
         <button mat-icon-button class="toggle-sidebar-folded"
                 (click)="toggleSidebarFolded()" fxHide.lt-lg>
-            <mat-icon class="secondary-text">menu</mat-icon>
-        </button>
-
-        <button mat-icon-button class="toggle-sidebar-opened"
-                (click)="toggleSidebarOpened()" fxHide.gt-md>
-            <mat-icon class="secondary-text">arrow_back</mat-icon>
+            <mat-icon class="secondary-text fuse-white-fg">menu</mat-icon>
         </button>
     </div>
 </div>
 
-<div class="navbar-scroll-container " [ngClass]="fuseConfig.layout.navbar.primaryBackground"
-     fusePerfectScrollbar [fusePerfectScrollbarOptions]="{suppressScrollX: true}">
+<div class="navbar-scroll-container " fusePerfectScrollbar
+     [fusePerfectScrollbarOptions]="{suppressScrollX: true}">
 
-    <div class="user " fxLayout="column" [ngClass]="fuseConfig.layout.navbar.secondaryBackground">
-        <div class="h3 username fuse-white-fg">Charlie Adams</div>
-        <div class="h5 email hint-text fuse-white-fg mt-8">adams.charlie@mail.com</div>
+    <div class="user deep-orange-50-bg" fxLayout="column">
+        <div id="username" class="h3 username">Charlie Adams</div>
+        <div id="email" class="h5 email hint-text  mt-8">adams.charlie@mail.com</div>
         <div class="avatar-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground">
             <img alt ="prof-pic"class="avatar" src="assets/images/avatars/Velazquez.jpg">
         </div>
