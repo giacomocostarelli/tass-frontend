@@ -1,3 +1,6 @@
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="186023141029-ar052kedeil5s30eeki31rbupi955t91.apps.googleusercontent.com">
+
 <div id="login" fxLayout="column">
 
     <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
@@ -57,12 +60,18 @@
                 <span class="text">OR</span>
             </div>
 
-            <button mat-raised-button class="google">
-                Log in with Google
-            </button>
+<!--            <button mat-raised-button class="google">-->
+<!--                Log in with Google-->
+<!--            </button>-->
+
+
+                <button class="google" #loginRef>
+                    Login with Google
+                </button>
+
 
             <button mat-raised-button class="facebook">
-                Log in with Facebook
+                Login with Facebook
             </button>
 
             <div class="register" fxLayout="column" fxLayoutAlign="center center">
@@ -75,3 +84,5 @@
     </div>
 
 </div>
+
+

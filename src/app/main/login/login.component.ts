@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
@@ -17,6 +16,8 @@ import {Router} from '@angular/router';
     providers: [SpringService]
 })
 export class LoginComponent implements OnInit {
+    auth2: any;
+    @ViewChild('loginRef', {static: true}) loginElement: ElementRef;
 
     /**
      * Constructor
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
             }
         };
     }
+
     loginForm: FormGroup;
 
     @ViewChild('email', {static: true}) email: ElementRef;
@@ -61,11 +63,13 @@ export class LoginComponent implements OnInit {
      * On init
      */
     ngOnInit(): void {
+        this.googleSDK();
         this.loginForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
     }
+
     onLoginSubmit(): void {
         const md5 = new Md5();
         const pwd = md5.appendStr(this.password.nativeElement.value).end();
@@ -74,4 +78,49 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/homepage']);
     }
 
+    googleSDK() {
+        window['googleSDKLoaded'] = () => {
+            window['gapi'].load('auth2', () => {
+                this.auth2 = window['gapi'].auth2.init({
+                    client_id: '341725123990-j1en30d6rkss0r7jkavk2er9n4moc2l3.apps.googleusercontent.com',
+                    cookiepolicy: 'single_host_origin',
+                    scope: 'profile email'
+                });
+                this.prepareLoginButton();
+            });
+        };
+
+        (function (d, s, id) {
+            let js = d.getElementsByTagName(s)[0];
+            const fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://apis.google.com/js/platform.js?onload=googleSDKLoaded';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'google-jssdk'));
+
+    }
+
+    prepareLoginButton() {
+
+        this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
+            (googleUser) => {
+
+                const profile = googleUser.getBasicProfile();
+                console.log('Token || ' + googleUser.getAuthResponse().id_token);
+                console.log('ID: ' + profile.getId());
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail());
+                // YOUR CODE HERE
+
+
+            }, (error) => {
+                alert(JSON.stringify(error, undefined, 2));
+            });
+
+    }
 }
