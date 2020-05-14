@@ -1,11 +1,47 @@
-<mat-toolbar>
+<mat-toolbar class="deep-orange-400-bg">
+    <div class="page-wrapper" fxFlex="row" fxLayoutAlign="space-between center">
 
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="space-between center" fxFlex>
 
-        <div fxLayout="row" fxLayoutAlign="start center" fxHide fxShow.gt-xs class="h6">
-            Developed by Giacomo Bonazzi, Alberto Guastalla, Giacomo Costarelli & Giuseppe Biondi
+        <!-- COLONNA 1 -->
+        <div class="colonna-left">
+            <img height="64" width="71" src="../../../../assets/images/logos/logonobg.png">
+            <span class="mat-display-2 fuse-white-fg">Secret Places</span>
         </div>
 
-    </div>
 
+        <!-- COLONNA 2 -->
+        <div class="colonna-mid">
+            <small class="fuse-white-fg">
+                <pre style="font-weight: lighter">
+Developed by:
+Alberto Guastalla, Giacomo Bonazzi
+Giacomo Costarelli, Giuseppe Biondi.
+                </pre>
+            </small>
+        </div>
+
+
+        <!-- COLONNA 3 -->
+        <div class="colonna-right ">
+            <ul>
+                <li>
+                    <a mat-button disableRipple class="no-hover-effect fuse-white-fg" [routerLink]="'/homepage'">
+                        Homepage
+                    </a>
+                </li>
+                <li>
+                    <a mat-button disableRipple class="no-hover-effect fuse-white-fg" [routerLink]="'/secret_places'">
+                        Secret Places
+                    </a>
+                </li>
+                <li>
+                    <a mat-button disableRipple class="no-hover-effect fuse-white-fg" [routerLink]="'/ricerca_standard'">
+                        Ricerca Standard
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
 </mat-toolbar>

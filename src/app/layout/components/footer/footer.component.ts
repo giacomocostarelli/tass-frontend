@@ -5,12 +5,14 @@ import { Component } from '@angular/core';
     templateUrl: './footer.component.html',
     styleUrls  : ['./footer.component.scss']
 })
-export class FooterComponent
-{
-    /**
-     * Constructor
-     */
-    constructor()
-    {
+export class FooterComponent {
+
+    page: string;
+
+    constructor() {
+    }
+
+    onSelect(page: string) {
+        
     }
 }
