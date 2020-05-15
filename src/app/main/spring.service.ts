@@ -8,6 +8,7 @@ import {Alternative} from './interfaceDB/alternative';
 import {Room} from './interfaceDB/room';
 import {Guest} from './interfaceDB/guest';
 import {Router} from '@angular/router';
+import {Booking} from "./interfaceDB/booking";
 
 @Injectable({providedIn: 'root'})
 export class SpringService {
@@ -69,6 +70,14 @@ export class SpringService {
     loginGoogle(googleUser: any): Observable<any> {
         const url = `${this.serverUrl}/guests/setAuthentication`;
         return this.http.post<any>(url, googleUser)
+            .pipe(
+                catchError(this.handleError<any>('guestLogin', null))
+            );
+    }
+
+    getBooking(): Observable<Booking[]> {
+        const url = `${this.serverUrl}/bookings`;
+        return this.http.get<Booking[]>(url)
             .pipe(
                 catchError(this.handleError<any>('guestLogin', null))
             );

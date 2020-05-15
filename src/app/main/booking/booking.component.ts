@@ -1,5 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../@fuse/animations";
+import {Booking} from "../interfaceDB/booking";
+import {Observable} from "rxjs";
+import {SpringService} from "../spring.service";
 
 @Component({
     selector: 'app-booking',
@@ -9,10 +12,17 @@ import {fuseAnimations} from "../../../@fuse/animations";
     animations: fuseAnimations
 })
 export class BookingComponent implements OnInit {
+    bookingList: Booking[];
 
-  constructor() { }
+    constructor(
+        private _springService: SpringService
+    ) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this._springService.getBooking()
+            .subscribe(b => this.bookingList = b);
+        console.log(this.bookingList);
+    }
 
 }
