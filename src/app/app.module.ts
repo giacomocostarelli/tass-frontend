@@ -120,12 +120,13 @@ const appRoutes: Routes = [
         HomepageModule,
         SecretPlacesModule,
         RicercaStandardModule,
+        BookingModule,
 
         // Errors
         Error404Module,
         Error500Module,
         FooterModule,
-        BookingModule
+
     ],
     providers: [
         {
