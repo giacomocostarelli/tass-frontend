@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
         window['googleSDKLoaded'] = () => {
             window['gapi'].load('auth2', () => {
                 this.auth2 = window['gapi'].auth2.init({
-                    client_id: '341725123990-j1en30d6rkss0r7jkavk2er9n4moc2l3.apps.googleusercontent.com',
+                    client_id: '744778791116-5mm7c9an5oe38kh86qi36imgem919gq1.apps.googleusercontent.com',
                     cookiepolicy: 'single_host_origin',
                     scope: 'profile email'
                 });
