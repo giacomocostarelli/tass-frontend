@@ -6,8 +6,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTabsModule} from "@angular/material/tabs";
-import {RicercaStandardComponent} from "../ricerca-standard/ricerca-standard.component";
 import {FuseSharedModule} from "../../../@fuse/shared.module";
+import {TabModule} from "./tab/tab.module";
 
 const routes = [
     {
@@ -19,7 +19,7 @@ const routes = [
 
 @NgModule({
     declarations: [
-        BookingComponent,
+        BookingComponent
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -31,6 +31,8 @@ const routes = [
         MatIconModule,
         MatTabsModule,
         FuseSharedModule,
+
+        TabModule
     ],
     exports: [
         BookingComponent

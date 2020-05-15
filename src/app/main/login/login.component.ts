@@ -127,7 +127,8 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('user', JSON.stringify(g));
                 this.router.navigate(['/homepage']);
 
-                this.springService.loginGoogle(JSON.stringify(googleUser));
+                this.springService.loginGoogle(googleUser)
+                    .subscribe(g => console.log(g));
 
 
 
