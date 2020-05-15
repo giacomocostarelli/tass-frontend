@@ -123,9 +123,12 @@ export class LoginComponent implements OnInit {
                 g.name = profile.getName;
                 g.token = googleUser.getAuthResponse().id_token;
                 g.imageUrl = profile.getImageUrl;
- // per logout =>   localStorage.clear();  scrivo qua poi creo servizio così non modifico toolbar
+                // per logout =>   localStorage.clear();  scrivo qua poi creo servizio così non modifico toolbar
                 localStorage.setItem('user', JSON.stringify(g));
                 this.router.navigate(['/homepage']);
+
+                this.springService.loginGoogle(JSON.stringify(googleUser));
+
 
 
             }, (error) => {

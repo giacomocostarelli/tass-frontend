@@ -66,6 +66,15 @@ export class SpringService {
             );
     }
 
+    loginGoogle(getBasicProfile: string): Observable<void> {
+        const url = `${this.serverUrl}/guests/setAuthentication`;
+        const param = {ciao: 'ciao'};
+        return this.http.post<void>(url, param)
+            .pipe(
+                catchError(this.handleError<void>('guestLogin', null))
+            );
+    }
+
 
     /**
      * Handle Http operation that failed.
