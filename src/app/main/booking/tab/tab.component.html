@@ -1,3 +1,8 @@
-<p>
-  tab works!
-</p>
+<div *ngIf="watchingDetails">
+    <booking-table></booking-table>
+</div>
+<div *ngIf="!watchingDetails">
+    <booking-detail></booking-detail>
+</div>
+
+<button (click)="watchingDetails=!watchingDetails"> clclcl</button>
