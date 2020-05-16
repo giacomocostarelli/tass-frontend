@@ -81,6 +81,9 @@ $typography: mat-typography-config(
 @import "src/app/main/login/login.theme";
 @import "src/app/main/register/register.theme";
 @import "src/app/layout/components/chat-panel/chat-panel.theme";
+@import "src/app/main/booking/tab/booking-detail/products.theme";
+@import "src/app/main/booking/tab/booking-table/cards.theme";
+@import "src/app/main/secret-places/alternative/alternative.theme";
 
 
 // Define a mixin for easier access
@@ -88,6 +91,10 @@ $typography: mat-typography-config(
 
     @include login-theme($theme);
     @include register-theme($theme);
+
+    @include e-commerce-products-theme($theme);
+    @include ui-cards-theme($theme);
+    @include pricing-style-3-theme($theme);
 
     // Layout components
     @include chat-panel-theme($theme);

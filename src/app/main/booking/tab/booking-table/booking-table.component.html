@@ -1,3 +1,28 @@
-<p>
-TABELLA
-</p>
+<div id="cards" class="page-layout simple fullwidth">
+        <div class="cards">
+
+            <div class="fuse-card" *ngFor="let b of booking">
+                <div class="position-relative">
+                    <img src="assets/images/cards/card3.jpg">
+                    <div class="position-absolute font-size-20 fuse-white-fg p-16 align-left align-bottom">
+                        Top 10 Holiday Locations
+                    </div>
+                </div>
+
+                <div class="p-16">
+                    <div class="h4 secondary-text">ID: {{b.id}}</div>
+                </div>
+
+                <div class="p-16 pt-0 line-height-1.75">
+                    Cards are a convenient means of displaying content composed of different elements.
+                </div>
+
+                <div class="p-8 pt-0" fxLayout="row" fxLayoutAlign="start center">
+                    <button mat-button color="accent">SHARE</button>
+                    <button mat-button color="accent" (click)="showBookingDetail(b)">DETAILS</button>
+                </div>
+
+            </div>
+
+        </div>
+</div>

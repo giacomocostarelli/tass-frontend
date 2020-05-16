@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Booking} from "../../interfaceDB/booking";
 
 @Component({
   selector: 'tab1',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tab.component.scss']
 })
 export class TabComponent implements OnInit {
-    watchingDetails = false;
+    bookingList: Booking[];
+    showDetail = false;
+    bookingDetailItem: Booking = null;
   constructor() { }
 
   ngOnInit() {
+      /*this._springService.getBooking()
+    .subscribe(b => this.bookingList = b);*/
+      this.bookingList = [{id: 1}, {id: 2}, {id: 3}];
   }
 
 }
