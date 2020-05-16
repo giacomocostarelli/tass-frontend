@@ -1,8 +1,13 @@
-<div *ngIf="watchingDetails">
-    <booking-table></booking-table>
+<div *ngIf="!showDetail">
+    <booking-table
+        [booking]="bookingList"
+        [(showDetail)]="showDetail"
+        [(bookingDetailItem)]="bookingDetailItem"
+    ></booking-table>
 </div>
-<div *ngIf="!watchingDetails">
-    <booking-detail></booking-detail>
+<div *ngIf="showDetail">
+    <booking-detail
+        [(showDetail)]="showDetail"
+        [(bookingDetailItem)]="bookingDetailItem"
+    ></booking-detail>
 </div>
-
-<button (click)="watchingDetails=!watchingDetails"> clclcl</button>

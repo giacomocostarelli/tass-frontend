@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
     }
 
     onLoginSubmit(): void {
+        // 0 NOSTRO, 1 GOOGLE DA METTERE NEL TOKEN token_info:{token:asdasdasd, type: 0/1}
         const md5 = new Md5();
         const pwd = md5.appendStr(this.password.nativeElement.value).end();
         this.springService.login(this.email.nativeElement.value, pwd)

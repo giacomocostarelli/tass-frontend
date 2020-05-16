@@ -129,7 +129,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     logOut(): void {
-        localStorage.removeItem('user');
+        localStorage.clear();
         this.logged = false;
     }
 
