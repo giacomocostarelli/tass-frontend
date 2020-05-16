@@ -99,6 +99,7 @@ export class LoginComponent implements OnInit {
             }
             js = d.createElement(s);
             js.id = id;
+//
             js.src = 'https://apis.google.com/js/platform.js?onload=googleSDKLoaded';
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'google-jssdk'));

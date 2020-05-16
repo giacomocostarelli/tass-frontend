@@ -1,18 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 @Component({
-    selector   : 'footer',
+    selector: 'footer',
     templateUrl: './footer.component.html',
-    styleUrls  : ['./footer.component.scss']
+    styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
 
-    page: string;
+    constructor(private menuColorChangerService: MenuColorChangerService) { }
 
-    constructor() {
-    }
-
-    onSelect(page: string) {
-        
-    }
 }

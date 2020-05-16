@@ -8,6 +8,7 @@
             <span class="mat-display-2 fuse-white-fg">Secret Places</span>
         </div>
 
+
         <!-- COLONNA 2 -->
         <div class="colonna-mid">
             <small class="fuse-white-fg">
@@ -23,21 +24,34 @@ Giacomo Costarelli, Giuseppe Biondi.
         <!-- COLONNA 3 -->
         <div class="colonna-right ">
             <ul>
+
                 <li>
-                    <a mat-button disableRipple class="no-hover-effect fuse-white-fg" [routerLink]="'/homepage'">
+                    <a mat-button disableRipple
+                       class="no-hover-effect fuse-white-fg"
+                       (click)="menuColorChangerService.changePageSelected('Homepage')"
+                       [routerLink]="'/homepage'">
                         Homepage
                     </a>
                 </li>
+
                 <li>
-                    <a mat-button disableRipple class="no-hover-effect fuse-white-fg" [routerLink]="'/secret_places'">
+                    <a mat-button disableRipple
+                       class="no-hover-effect fuse-white-fg"
+                       (click)="menuColorChangerService.changePageSelected('Secret Places')"
+                       [routerLink]="'/secret_places'">
                         Secret Places
                     </a>
                 </li>
+
                 <li>
-                    <a mat-button disableRipple class="no-hover-effect fuse-white-fg" [routerLink]="'/ricerca_standard'">
+                    <a mat-button disableRipple
+                       class="no-hover-effect fuse-white-fg"
+                       (click)="menuColorChangerService.changePageSelected('Ricerca Standard')"
+                       [routerLink]="'/ricerca_standard'">
                         Ricerca Standard
                     </a>
                 </li>
+
             </ul>
         </div>
 

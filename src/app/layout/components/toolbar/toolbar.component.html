@@ -3,7 +3,7 @@
     <!-- LEFT SIDE NAVBAR -->
     <div class="leftside-navbar" fxLayout="row" fxLayoutAlign="start center">
 
-        <a (click)="onSelect('Homepage')"
+        <a (click)="menuColorChangerService.changePageSelected('Homepage')"
            [routerLink]="'/homepage'">
             <img class="deep-orange-300-bg" height="64" width="71" src="../../../../assets/images/logos/logonobg.png">
         </a>
@@ -13,23 +13,23 @@
         <div class="navbar-elements">
             <a mat-button disableRipple class="navbar-element no-hover-effect" [routerLink]="'/homepage'"
                (mouseenter)="onMouseEnter(0)" (mouseleave)="onMouseLeave(0)"
-               (click)="onSelect('Homepage')"
+               (click)="menuColorChangerService.changePageSelected('Homepage')"
                [ngStyle]="{'color': getColor(0)}"
-               [ngClass]="{selected: pageSelected === 'Homepage'}">
+               [ngClass]="{selected: menuColorChangerService.pageSelected === 'Homepage'}">
                 Homepage
             </a>
             <a mat-button disableRipple class="navbar-element no-hover-effect" [routerLink]="'/secret_places'"
                (mouseenter)="onMouseEnter(1)" (mouseleave)="onMouseLeave(1)"
-               (click)="onSelect('Secret Places')"
+               (click)="menuColorChangerService.changePageSelected('Secret Places')"
                [ngStyle]="{'color': getColor(1)}"
-               [ngClass]="{selected: pageSelected === 'Secret Places'}">
+               [ngClass]="{selected: menuColorChangerService.pageSelected === 'Secret Places'}">
                 Secret places
             </a>
             <a mat-button disableRipple class="navbar-element last-element no-hover-effect" [routerLink]="'/ricerca_standard'"
                (mouseenter)="onMouseEnter(2)" (mouseleave)="onMouseLeave(2)"
-               (click)="onSelect('Ricerca Standard')"
+               (click)="menuColorChangerService.changePageSelected('Ricerca Standard')"
                [ngStyle]="{'color': getColor(2)}"
-               [ngClass]="{selected: pageSelected === 'Ricerca Standard'}">
+               [ngClass]="{selected: menuColorChangerService.pageSelected === 'Ricerca Standard'}">
                 Ricerca Standard
             </a>
         </div>

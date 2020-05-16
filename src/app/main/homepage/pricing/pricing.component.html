@@ -2,14 +2,12 @@
 
     <!-- HEADER -->
     <div class="header" fxLayout="row" fxLayoutAlign="start start">
-
         <div class="hero-text" id="header-home" fxLayout="column" fxLayoutAlign="center center" fxFlex>
             <div class="h1">
                 <img alt="logo" width="250" src="assets/images/logos/logonobg.png">
             </div>
             <div class="h1">Secret Places</div>
         </div>
-
     </div>
     <!-- / HEADER -->
 
@@ -42,7 +40,12 @@
                         </div>
                     </div>
 
-                    <button mat-raised-button class="cta-button deep-orange-800-bg" color="accent">Scopri di più
+                    <button mat-raised-button
+                            class="cta-button deep-orange-800-bg"
+                            color="accent"
+                            (click)="menuColorChangerService.changePageSelected('Secret Places')"
+                            [routerLink]="'/secret_places'">
+                        Scopri di più
                     </button>
 
                 </div>
@@ -70,7 +73,12 @@
                         </div>
                     </div>
 
-                    <button mat-raised-button class="cta-button deep-orange-800-bg" color="accent">Esplora Viaggi
+                    <button mat-raised-button
+                            class="cta-button deep-orange-800-bg"
+                            color="accent"
+                            (click)="menuColorChangerService.changePageSelected('Ricerca Standard')"
+                            [routerLink]="'/ricerca_standard'">
+                        Esplora Viaggi
                     </button>
 
                 </div>
@@ -100,7 +108,11 @@
                         </div>
                     </div>
 
-                    <button mat-raised-button class="cta-button deep-orange-800-bg" color="accent">Vai al Profilo
+                    <button mat-raised-button
+                            class="cta-button deep-orange-800-bg"
+                            color="accent"
+                            [routerLink]="">
+                        Vai al Profilo
                     </button>
 
                 </div>

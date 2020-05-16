@@ -6,9 +6,10 @@ import * as _ from 'lodash';
 
 import {FuseConfigService} from '@fuse/services/config.service';
 import {FuseSidebarService} from '@fuse/components/sidebar/sidebar.service';
+import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 import {navigation} from 'app/navigation/navigation';
-import {Event} from '@swimlane/ngx-datatable/release/events';
+
 
 @Component({
     selector: 'toolbar',
@@ -27,7 +28,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     userStatusOptions: any[];
     logged: boolean;
     hover: boolean[] = [false, false, false];
-    pageSelected: string = 'Homepage';
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -42,7 +42,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
-        private _translateService: TranslateService
+        private _translateService: TranslateService,
+        private menuColorChangerService: MenuColorChangerService
     ) {
         this.userStatusOptions = [
             {
@@ -146,7 +147,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     onSelect(page: string) {
-        this.pageSelected = page;
+        this.menuColorChangerService.changePageSelected(page);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -184,5 +185,4 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
-
 }

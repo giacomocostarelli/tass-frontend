@@ -1,6 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {trigger, transition, useAnimation} from '@angular/animations';
 import {zoomIn} from 'ng-animate';
+import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 @Component({
     selector: 'pricing',
@@ -28,19 +29,17 @@ export class PricingComponent {
     visible2 = false;
     visible3 = false;
 
-    /**
-     * Constructor
-     */
-    constructor() {
+    constructor(private menuColorChangerService: MenuColorChangerService) {
         setTimeout(() => {
             this.visible1 = true;
         }, 1100);
+
         setTimeout(() => {
             this.visible2 = true;
         }, 1350);
+
         setTimeout(() => {
             this.visible3 = true;
         }, 1600);
     }
-
 }

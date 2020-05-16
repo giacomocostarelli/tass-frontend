@@ -9,6 +9,7 @@ mat-form-field {
     .content {
 
         form {
+
             width: 100%;
             max-width: 800px !important;
         }
@@ -26,7 +27,10 @@ mat-form-field {
 #products {
 
     .top-bg {
-
+        margin-top: 25px;
+        margin-left: 25px;
+        margin-right: 25px;
+        border: 2px solid #d84315;
         @include media-breakpoint('lt-md') {
             height: 256px;
         }
