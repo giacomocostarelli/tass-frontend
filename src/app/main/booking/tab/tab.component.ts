@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Booking} from "../../interfaceDB/booking";
+import {Booking} from '../../interfaceDB/booking';
 
 @Component({
   selector: 'tab1',

@@ -5,7 +5,7 @@ import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
 import {Md5} from 'ts-md5/dist/md5';
 import {Router} from '@angular/router';
-import {Guest} from "../interfaceDB/guest";
+import {Guest} from '../interfaceDB/guest';
 
 declare var FB: any;
 

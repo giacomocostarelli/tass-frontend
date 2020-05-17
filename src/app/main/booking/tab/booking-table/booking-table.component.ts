@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {Booking} from "../../../interfaceDB/booking";
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {Booking} from '../../../interfaceDB/booking';
+import {fuseAnimations} from '../../../../../@fuse/animations';
 
 @Component({
     selector: 'booking-table',

@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from "../../../@fuse/animations";
-import {Booking} from "../interfaceDB/booking";
-import {Observable} from "rxjs";
-import {SpringService} from "../spring.service";
+import {fuseAnimations} from '../../../@fuse/animations';
+import {Booking} from '../interfaceDB/booking';
+import {Observable} from 'rxjs';
+import {SpringService} from '../spring.service';
 
 @Component({
     selector: 'app-booking',
