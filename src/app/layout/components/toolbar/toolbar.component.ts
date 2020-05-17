@@ -9,6 +9,7 @@ import {FuseSidebarService} from '@fuse/components/sidebar/sidebar.service';
 import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 import {navigation} from 'app/navigation/navigation';
+import {Guest} from "../../../main/interfaceDB/guest";
 
 
 @Component({
@@ -28,6 +29,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     userStatusOptions: any[];
     logged: boolean;
     hover: boolean[] = [false, false, false];
+    user;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -172,6 +174,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         if (localStorage.getItem('user')) {
             // this.user = JSON.parse(localStorage.getItem('user'));
             this.logged = true;
+            this.user = JSON.parse(localStorage.getItem('user')) as Guest;
         } else {
             this.logged = false;
         }
