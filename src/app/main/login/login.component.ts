@@ -7,6 +7,7 @@ import {Md5} from 'ts-md5/dist/md5';
 import {Router} from '@angular/router';
 import {Guest} from "../interfaceDB/guest";
 
+declare var FB: any;
 
 @Component({
     selector: 'login',
@@ -18,6 +19,7 @@ import {Guest} from "../interfaceDB/guest";
 })
 export class LoginComponent implements OnInit {
     auth2: any;
+
     @ViewChild('loginRef', {static: true}) loginElement: ElementRef;
 
     /**
@@ -65,6 +67,7 @@ export class LoginComponent implements OnInit {
      */
     ngOnInit(): void {
         this.googleSDK();
+        this.facebookSDK();
         this.loginForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
@@ -100,11 +103,35 @@ export class LoginComponent implements OnInit {
             }
             js = d.createElement(s);
             js.id = id;
-//
             js.src = 'https://apis.google.com/js/platform.js?onload=googleSDKLoaded';
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'google-jssdk'));
 
+    }
+
+    facebookSDK(): void{
+        (window as any).fbAsyncInit = function() {
+            FB.init({
+                appId      : '246982563186236',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v7.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+
+        (function (d, s, id) {
+            let js = d.getElementsByTagName(s)[0];
+            const fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     }
 
     prepareLoginButton(): void {
@@ -113,29 +140,51 @@ export class LoginComponent implements OnInit {
             (googleUser) => {
 
                 const profile = googleUser.getBasicProfile();
-                console.log('Token || ' + googleUser.getAuthResponse().id_token);
-                console.log('ID: ' + profile.getId());
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail());
                 // YOUR CODE HERE
 
-                const g: Guest = {};
-                g.email = profile.getEmail;
-                g.name = profile.getName;
-                g.token = googleUser.getAuthResponse().id_token;
-                g.imageUrl = profile.getImageUrl;
+                const g: Guest = {
+                    email: profile.getEmail,
+                    name: profile.getName,
+                    token: googleUser.getAuthResponse().id_token,
+                    imageUrl: profile.getImageUrl
+                };
                 // per logout =>   localStorage.clear();  scrivo qua poi creo servizio così non modifico toolbar
                 localStorage.setItem('user', JSON.stringify(g));
                 this.router.navigate(['/homepage']);
 
-                this.springService.loginGoogle(googleUser)
-                    .subscribe(g => console.log(g));
+                this.springService.loginGoogle(googleUser).subscribe();
 
 
 
             }, (error) => {
                 alert(JSON.stringify(error, undefined, 2));
+            });
+    }
+
+    onFacebookLoginSubmit(): void{
+            FB.login((response) =>
+            {
+                console.log('submitLogin', response);
+                if (response.authResponse)
+                {
+                    FB.api('/me', {fields: 'name, email, picture'}, (resp) =>{
+                        if (resp && !resp.error){
+                            const g: Guest = {
+                                name: resp.name,
+                                email: resp.email,
+                                imageUrl: resp.picture.data.url,
+                                token: response.token
+                            };
+                            localStorage.setItem('user', JSON.stringify(g));
+                        }
+                        this.router.navigate(['/homepage']);
+                        this.springService.loginFacebook(response.authResponse).subscribe();
+                    });
+                }
+                else
+                {
+                    alert(JSON.stringify(response.error, undefined, 2));
+                }
             });
     }
 }

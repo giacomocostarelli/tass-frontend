@@ -75,6 +75,14 @@ export class SpringService {
             );
     }
 
+    loginFacebook(facebookAuthentication: any): Observable<any> {
+        const url = `${this.serverUrl}/guests/???`; // da cambiare
+        return this.http.post<any>(url, facebookAuthentication)
+            .pipe(
+                catchError(this.handleError<any>('guestLogin', null))
+            );
+    }
+
     getBooking(): Observable<Booking[]> {
         const url = `${this.serverUrl}/bookings`;
         return this.http.get<Booking[]>(url)
