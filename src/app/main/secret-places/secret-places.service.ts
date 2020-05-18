@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Alternative} from "../interfaceDB/alternative";
+import {Alternative} from '../interfaceDB/alternative';
 
 @Injectable({
   providedIn: 'root'
