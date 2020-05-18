@@ -17,7 +17,7 @@ export class SpringService {
     private serverUrl = 'http://87.8.225.138:8080';
 
     httpOptions = {
-        headers: new HttpHeaders({'Content-Type': 'application/json'})
+        headers: new HttpHeaders({'Content-Type': 'application/json'}),
     };
 
     constructor(
@@ -26,16 +26,9 @@ export class SpringService {
     ) {
     }
 
-    /*Cities: { city: string, region: string }[], Days: number, MaxBudget: string, People: number,
-                OnlyRegion: string, OnlyNotRegion: string, MaxStars: number, MinStars: number,
-                TourismType: string[], Arrival: string, Departure: string*/
+    // SEARCH
     searchClips(formdata: any): Observable<Map<string, any>> {
-        /* const secretSearch = {
-             cities: Cities, days: Days, maxBudget: MaxBudget, people: People,
-             onlyRegion: OnlyRegion, onlyNotRegion: OnlyNotRegion, maxStars: MaxStars, minStars: MinStars,
-             tourismTypes: TourismType, arrival: Arrival, departure: Departure
-         };*/
-        const url = `${this.serverUrl}/secretSearch`;
+        const url = `${this.serverUrl}/hotels/secretSearch`;
         return this.http.post<Map<string, any>>(url, formdata)
             .pipe(
                 catchError(this.handleError<Map<string, any>>('getSecretSearch', null))
@@ -50,6 +43,8 @@ export class SpringService {
             );
     }
 
+
+    //REGISTER
     register(form: Guest): Observable<Guest> {
         const url = `${this.serverUrl}/guests/register`;
         return this.http.post<Guest>(url, form)
@@ -58,6 +53,8 @@ export class SpringService {
             );
     }
 
+
+    // LOGIN
     login(email: string, pwd: string | Int32Array): Observable<Guest> {
         const url = `${this.serverUrl}/guests/login`;
         const param = {email: email, pwd: pwd};
@@ -67,27 +64,22 @@ export class SpringService {
             );
     }
 
-    loginGoogle(googleUser: any): Observable<any> {
-        const url = `${this.serverUrl}/guests/setAuthentication`;
-        return this.http.post<any>(url, googleUser)
+    socialLogin(email: string): Observable<number> {
+        const url = `${this.serverUrl}/guests/socialLogin`;
+        return this.http.post<number>(url, {email: email})
             .pipe(
-                catchError(this.handleError<any>('guestLogin', null))
+                catchError(this.handleError<number>('socialLogin', null))
             );
     }
 
-    loginFacebook(facebookAuthentication: any): Observable<any> {
-        const url = `${this.serverUrl}/guests/???`; // da cambiare
-        return this.http.post<any>(url, facebookAuthentication)
-            .pipe(
-                catchError(this.handleError<any>('guestLogin', null))
-            );
-    }
-
+    // BOOKINGS
     getBooking(): Observable<Booking[]> {
-        const url = `${this.serverUrl}/bookings`;
-        return this.http.get<Booking[]>(url)
+        const url = `${this.serverUrl}/bookings/`;
+        this.httpOptions.headers.append('token_info', localStorage.getItem('token_info'));
+        const user = localStorage.getItem('user') as Guest;
+        return this.http.get<Booking[]>(url, {params: {id: user.id + ''}})
             .pipe(
-                catchError(this.handleError<any>('guestLogin', null))
+                catchError(this.handleError<any>('guestLogin', []))
             );
     }
 

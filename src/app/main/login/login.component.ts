@@ -146,16 +146,18 @@ export class LoginComponent implements OnInit {
                 const g: Guest = {
                     email: profile.getEmail(),
                     name: profile.getName(),
-                    token: googleUser.getAuthResponse().id_token,
                     imageUrl: profile.getImageUrl()
                 };
-                console.log(JSON.stringify(g));
-                console.log(profile.getEmail);
+                const tokenInfo = {
+                    token: googleUser.getAuthResponse().id_token,
+                    type: 1
+                };
                 // per logout =>   localStorage.clear();  scrivo qua poi creo servizio così non modifico toolbar
                 localStorage.setItem('user', JSON.stringify(g));
+                localStorage.setItem('token_info', JSON.stringify(tokenInfo));
                 this.router.navigate(['/homepage']);
 
-                this.springService.loginGoogle(googleUser).subscribe();
+                // this.springService.loginGoogle(googleUser).subscribe();
 
 
 
@@ -176,12 +178,16 @@ export class LoginComponent implements OnInit {
                                 name: resp.name,
                                 email: resp.email,
                                 imageUrl: resp.picture.data.url,
-                                token: response.token
+                            };
+                            const tokenInfo = {
+                                token: response.token,
+                                type: 2
                             };
                             localStorage.setItem('user', JSON.stringify(g));
+                            localStorage.setItem('token_info', JSON.stringify(tokenInfo));
                         }
                         this.router.navigate(['/homepage']);
-                        this.springService.loginFacebook(response.authResponse).subscribe();
+                        // this.springService.loginFacebook(response.authResponse).subscribe();
                     });
                 }
                 else
