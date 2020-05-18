@@ -1,7 +1,7 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Alternative} from "../../interfaceDB/alternative";
-import {SecretPlacesService} from "../secret-places.service";
-import {Router} from "@angular/router";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Alternative} from '../../interfaceDB/alternative';
+import {SecretPlacesService} from '../secret-places.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-alternative',

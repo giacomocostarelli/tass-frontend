@@ -30,7 +30,7 @@ import {SpringService} from './main/spring.service';
 import {CityService} from './main/city.service';
 import {FooterModule} from './layout/components/footer/footer.module';
 import { BookingComponent } from './main/booking/booking.component';
-import {BookingModule} from "./main/booking/booking.module";
+import {BookingModule} from './main/booking/booking.module';
 
 
 export const MY_FORMATS = {

@@ -9,7 +9,7 @@ import {FuseSidebarService} from '@fuse/components/sidebar/sidebar.service';
 import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 import {navigation} from 'app/navigation/navigation';
-import {Guest} from "../../../main/interfaceDB/guest";
+import {Guest} from '../../../main/interfaceDB/guest';
 
 
 @Component({
