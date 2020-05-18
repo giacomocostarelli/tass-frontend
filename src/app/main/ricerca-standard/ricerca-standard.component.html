@@ -1,188 +1,197 @@
-<div id="products" class="page-layout carded fullwidth deep-orange-50-bg ">
+<div class="page-layout blank p-24 fullwidth deep-orange-50-bg">
+    <div id="products" class="page-layout carded fullwidth deep-orange-50-bg">
 
-    <!-- TOP BACKGROUND -->
-    <div class="top-bg yellow-50-bg"></div>
-    <!-- / TOP BACKGROUND -->
+        <!-- TOP BACKGROUND -->
+        <div class="top-bg deep-orange-800-bg"></div>
+        <!-- / TOP BACKGROUND -->
 
-    <!-- CENTER -->
-    <div class="center">
+        <!-- CENTER -->
+        <div class="center">
 
-        <!-- HEADER -->
-        <div class="header "
-             fxLayout="column" fxLayoutAlign="start"
-             fxLayout.gt-sm="row" fxLayoutAlign.gt-md="space-between center">
+            <!-- HEADER -->
+            <div class="header "
+                 fxLayout="column" fxLayoutAlign="start"
+                 fxLayout.gt-sm="row" fxLayoutAlign.gt-md="space-between center">
 
-            <!-- APP TITLE -->
-            <div class="logo mb-24 mb-md-0"
-                 fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon s-32 mr-16 deep-orange-800-fg" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                    golf_course
-                </mat-icon>
-                <span class="logo-text h1 deep-orange-800-fg" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                <!-- APP TITLE -->
+                <div class="logo mb-24 mb-md-0"
+                     fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="logo-icon s-32 mr-16 deep-orange-50-fg"
+                              [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                        golf_course
+                    </mat-icon>
+                    <span class="logo-text h1 deep-orange-50-fg"
+                          [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     Trova il tuo hotel ideale e confronta i prezzi di tantissimi siti web!
                 </span>
+                </div>
+                <!-- / APP TITLE -->
             </div>
-            <!-- / APP TITLE -->
+            <!-- / HEADER -->
+
+            <!-- FORM RICERCA STANDARD -->
+            <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                <form class="mat-card mat-elevation-z8 p-24 mr-24 ml-28" fxLayout="column" fxLayoutAlign="start"
+                      fxFlex="1 0 auto" name="form" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+
+                    <div fxLayout="row" fxLayoutAlign="center center" fxFlex="0 0 auto">
+
+                        <mat-form-field appearance="outline" fxFlex="25">
+                            <mat-label>Destinazione</mat-label>
+                            <input type="text"
+                                   matInput
+                                   placeholder="States Group"
+                                   formControlName="city"
+                                   required
+                                   #i
+                                   [matAutocomplete]="autoGroup">
+                            <mat-autocomplete #autoGroup="matAutocomplete">
+                                <mat-optgroup *ngFor="let group of stateGroupOptions | async"
+                                              [label]="group.letter">
+                                    <mat-option *ngFor="let name of group.names" [value]="name">
+                                        {{name}}
+                                    </mat-option>
+                                </mat-optgroup>
+                            </mat-autocomplete>
+                            <mat-icon matSuffix class="deep-orange-800-fg secondary-text">outlined_flag</mat-icon>
+                            <mat-error *ngIf="form.get('city').hasError('required')">La destinazione è richiesta!
+                            </mat-error>
+                            <mat-error *ngIf="form.get('city').hasError('checkCity')">Al momento non abbiamo hotel
+                                disponibili per questa città
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="25">
+                            <mat-label>Data di partenza</mat-label>
+                            <input matInput formControlName="arr" [matDatepicker]="picker1" required readonly>
+                            <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix
+                                                   [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-error>La data di partenza è richiesta!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="25">
+                            <mat-label>Data di ritorno</mat-label>
+                            <input matInput formControlName="dep" [matDatepicker]="picker2" required readonly>
+                            <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix
+                                                   [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error>La data di ritorno è richiesta!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="25">
+                            <mat-label>Numero di persone</mat-label>
+                            <input matInput #personNumber formControlName="personNumber" maxlength="1" required>
+                            <mat-icon matSuffix class="deep-orange-800-fg secondary-text">account_circle</mat-icon>
+                            <mat-hint align="end">{{personNumber.value.length}} / 1</mat-hint>
+                            <mat-error *ngIf="form.get('personNumber').hasError('required')">
+                                Il numero di persone è richiesto!
+                            </mat-error>
+                            <mat-error *ngIf="form.get('personNumber').hasError('pattern')">
+                                Per favore inserire un valore numerico
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button type="submit" disabled [disabled]="form.invalid"
+                                [ngClass]="{'deep-orange-800-bg fuse-white-fg': !form.invalid } ">
+                            Finito
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- FORM RICERCA STANDARD-->
+
+            <!-- CONTENT CARD -->
+            <div class="mat-card mat-elevation-z4 p-24 mr-24 ml-28">
+                <mat-table class="products-table"
+                           #table [dataSource]="dataSource"
+                           matSort
+                           [@animateStagger]="{value:'50'}"
+                           fusePerfectScrollbar>
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                        <mat-cell *matCellDef="let product">
+                            <p class="text-truncate">{{product.id}}</p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Image Column -->
+                    <ng-container matColumnDef="image">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let product">
+                            IMMAGINE
+                            <!--<img class="product-image"
+                                 *ngIf="product.featuredImageId" [alt]="product.name"
+                                 [src]="product.images[product.featuredImageId].url"/>
+                            <img *ngIf="!product.featuredImageId"
+                                 [src]="">-->
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Hotel Column -->
+                    <ng-container matColumnDef="hotel_name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Hotel</mat-header-cell>
+                        <mat-cell *matCellDef="let product">
+                            <p class="text-truncate">{{product.hotel.name}}</p>
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <!-- Price Column -->
+                    <ng-container matColumnDef="price">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Price</mat-header-cell>
+                        <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
+                            <p class="price text-truncate">
+                                {{product.pricePerNight | currency:'USD':'symbol'}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Numero posti Column -->
+                    <ng-container matColumnDef="numPlaces">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Numero Posti
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
+                            <p>{{product.numPlaces}}</p>
+                            <!--<span class="quantity-indicator text-truncate"
+                                  [ngClass]="{'red-500':product.quantity <= 5, 'amber-500':product.quantity > 5 && product.quantity <= 25,'green-600':product.quantity > 25}">
+                            </span>-->
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Stelle Column -->
+                    <ng-container matColumnDef="hotel_stars">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Stelle</mat-header-cell>
+                        <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
+                            {{product.hotel.stars}}
+                            <!--<mat-icon *ngIf="product.active" class="active-icon green-600 s-16">check</mat-icon>
+                            <mat-icon *ngIf="!product.active" class="active-icon red-500 s-16">close</mat-icon>-->
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                    <mat-row *matRowDef="let product; columns: displayedColumns;"
+                             (click)="openDialog(product)">
+                    </mat-row>
+
+                </mat-table>
+
+                <mat-paginator #paginator
+                               [length]="dataSource.filteredData.length"
+                               [pageIndex]="0"
+                               [pageSize]="10"
+                               [pageSizeOptions]="[5, 10, 25, 100]">
+                    <!-- [length]="dataSource.filteredData.length" -->
+                </mat-paginator>
+
+            </div>
+            <!-- / CONTENT CARD -->
         </div>
-        <!-- / HEADER -->
-
-        <!-- FORM RICERCA STANDARD -->
-        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
-            <form class="mat-card mat-elevation-z8 p-24 mr-24 ml-28" fxLayout="column" fxLayoutAlign="start"
-                  fxFlex="1 0 auto" name="form" [formGroup]="form" (ngSubmit)="onFormSubmit()">
-
-                <div fxLayout="row" fxLayoutAlign="center center" fxFlex="0 0 auto">
-
-                    <mat-form-field appearance="outline" fxFlex="25">
-                        <mat-label>Destinazione</mat-label>
-                        <input type="text"
-                               matInput
-                               placeholder="States Group"
-                               formControlName="city"
-                               required
-                               #i
-                               [matAutocomplete]="autoGroup">
-                        <mat-autocomplete #autoGroup="matAutocomplete">
-                            <mat-optgroup *ngFor="let group of stateGroupOptions | async"
-                                          [label]="group.letter">
-                                <mat-option *ngFor="let name of group.names" [value]="name">
-                                    {{name}}
-                                </mat-option>
-                            </mat-optgroup>
-                        </mat-autocomplete>
-                        <mat-icon matSuffix class="deep-orange-800-fg secondary-text">outlined_flag</mat-icon>
-                        <mat-error *ngIf="form.get('city').hasError('required')">La destinazione è richiesta!</mat-error>
-                        <mat-error *ngIf="form.get('city').hasError('checkCity')">Al momento non abbiamo hotel disponibili per questa città</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" fxFlex="25">
-                        <mat-label>Data di partenza</mat-label>
-                        <input matInput formControlName="arr" [matDatepicker]="picker1" required readonly>
-                        <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                        <mat-error>La data di partenza è richiesta!</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" fxFlex="25">
-                        <mat-label>Data di ritorno</mat-label>
-                        <input matInput formControlName="dep" [matDatepicker]="picker2" required readonly>
-                        <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker #picker2></mat-datepicker>
-                        <mat-error>La data di ritorno è richiesta!</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" fxFlex="25">
-                        <mat-label>Numero di persone</mat-label>
-                        <input matInput #personNumber formControlName="personNumber" maxlength="1" required>
-                        <mat-icon matSuffix class="deep-orange-800-fg secondary-text">account_circle</mat-icon>
-                        <mat-hint align="end">{{personNumber.value.length}} / 1</mat-hint>
-                        <mat-error *ngIf="form.get('personNumber').hasError('required')">
-                            Il numero di persone è richiesto!
-                        </mat-error>
-                        <mat-error *ngIf="form.get('personNumber').hasError('pattern')">
-                            Per favore inserire un valore numerico
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <button mat-raised-button type="submit" disabled [disabled]="form.invalid" [ngClass]="{'deep-orange-800-bg fuse-white-fg': !form.invalid } ">
-                        Finito
-                    </button>
-                </div>
-            </form>
-        </div>
-        <!-- FORM RICERCA STANDARD-->
-
-        <!-- CONTENT CARD -->
-        <div class="mat-card mat-elevation-z4 p-24 mr-24 ml-28">
-            <mat-table class="products-table"
-                       #table [dataSource]="dataSource"
-                       matSort
-                       [@animateStagger]="{value:'50'}"
-                       fusePerfectScrollbar>
-
-                <!-- ID Column -->
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-                    <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.id}}</p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Image Column -->
-                <ng-container matColumnDef="image">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let product">
-                        IMMAGINE
-                        <!--<img class="product-image"
-                             *ngIf="product.featuredImageId" [alt]="product.name"
-                             [src]="product.images[product.featuredImageId].url"/>
-                        <img *ngIf="!product.featuredImageId"
-                             [src]="">-->
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Name Hotel Column -->
-                <ng-container matColumnDef="hotel_name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Hotel</mat-header-cell>
-                    <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.hotel.name}}</p>
-                    </mat-cell>
-                </ng-container>
-
-
-                <!-- Price Column -->
-                <ng-container matColumnDef="price">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Price</mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
-                        <p class="price text-truncate">
-                            {{product.pricePerNight | currency:'USD':'symbol'}}
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Numero posti Column -->
-                <ng-container matColumnDef="numPlaces">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Numero Posti
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
-                        <p>{{product.numPlaces}}</p>
-                        <!--<span class="quantity-indicator text-truncate"
-                              [ngClass]="{'red-500':product.quantity <= 5, 'amber-500':product.quantity > 5 && product.quantity <= 25,'green-600':product.quantity > 25}">
-                        </span>-->
-
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Stelle Column -->
-                <ng-container matColumnDef="hotel_stars">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Stelle</mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
-                        {{product.hotel.stars}}
-                        <!--<mat-icon *ngIf="product.active" class="active-icon green-600 s-16">check</mat-icon>
-                        <mat-icon *ngIf="!product.active" class="active-icon red-500 s-16">close</mat-icon>-->
-                    </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-
-                <mat-row *matRowDef="let product; columns: displayedColumns;"
-                         (click)="openDialog(product)">
-                </mat-row>
-
-            </mat-table>
-
-            <mat-paginator #paginator
-                           [length]="dataSource.filteredData.length"
-                           [pageIndex]="0"
-                           [pageSize]="10"
-                           [pageSizeOptions]="[5, 10, 25, 100]">
-                <!-- [length]="dataSource.filteredData.length" -->
-            </mat-paginator>
-
-        </div>
-        <!-- / CONTENT CARD -->
+        <!--CENTER-->
     </div>
-    <!--CENTER-->
 </div>
-

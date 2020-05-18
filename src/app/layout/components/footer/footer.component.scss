@@ -1,8 +1,19 @@
+@import "src/@fuse/scss/fuse";
+
 .mat-toolbar {
     height: auto;
     flex-wrap: wrap;
     color: inherit;
     box-shadow: 0px -1px 1px -1px rgba(0, 0, 0, 0.2), 0px 0px 1px 0px rgba(0, 0, 0, 0.14), 0px -1px 3px 0px rgba(0, 0, 0, 0.12);
+
+    @include media-breakpoint('xs') {
+        width: 100%;
+        .page-wrapper {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    }
 }
 
 .page-wrapper {
@@ -24,7 +35,6 @@ li:before {
     background-color: transparent;
 }
 
-span.mat-display-2{
+span.mat-display-2 {
     font-family: 'Caveat', cursive;
 }
-
