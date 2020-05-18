@@ -8,7 +8,7 @@ import {Alternative} from './interfaceDB/alternative';
 import {Room} from './interfaceDB/room';
 import {Guest} from './interfaceDB/guest';
 import {Router} from '@angular/router';
-import {Booking} from "./interfaceDB/booking";
+import {Booking} from './interfaceDB/booking';
 
 @Injectable({providedIn: 'root'})
 export class SpringService {

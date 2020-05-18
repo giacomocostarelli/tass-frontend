@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
     FormArray,
     FormBuilder,
@@ -11,8 +11,8 @@ import {SpringService} from '../../spring.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {CityService, CityValidator, REGIONS, StateGroup} from '../../city.service';
 import {Alternative} from '../../interfaceDB/alternative';
-import {SecretPlacesService} from "../secret-places.service";
-import {Router} from "@angular/router";
+import {SecretPlacesService} from '../secret-places.service';
+import {Router} from '@angular/router';
 
 
 @Component({

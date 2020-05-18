@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import { AlternativeComponent } from './alternative/alternative.component';
 import {FormComponent} from './form/form.component';
-import {MaterialModule} from "../../angular-material/material.module";
-import {FuseSharedModule} from "../../../@fuse/shared.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {MaterialModule} from '../../angular-material/material.module';
+import {FuseSharedModule} from '../../../@fuse/shared.module';
+import {ReactiveFormsModule} from '@angular/forms';
 import { AlternativeElementComponent } from './alternative/alternative-element/alternative-element.component';
 
 
