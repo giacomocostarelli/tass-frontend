@@ -140,14 +140,17 @@ export class LoginComponent implements OnInit {
             (googleUser) => {
 
                 const profile = googleUser.getBasicProfile();
+                console.log(googleUser);
                 // YOUR CODE HERE
 
                 const g: Guest = {
-                    email: profile.getEmail,
-                    name: profile.getName,
+                    email: profile.getEmail(),
+                    name: profile.getName(),
                     token: googleUser.getAuthResponse().id_token,
-                    imageUrl: profile.getImageUrl
+                    imageUrl: profile.getImageUrl()
                 };
+                console.log(JSON.stringify(g));
+                console.log(profile.getEmail);
                 // per logout =>   localStorage.clear();  scrivo qua poi creo servizio così non modifico toolbar
                 localStorage.setItem('user', JSON.stringify(g));
                 this.router.navigate(['/homepage']);
