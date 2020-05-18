@@ -1,46 +1,100 @@
-<div class="dialog-content-wrapper">
-    <mat-toolbar matDialogTitle class="mat-accent m-0">
-        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title dialog-title">{{_data.room.hotel.name}}</span>
-            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-toolbar-row>
-    </mat-toolbar>
+<!-- HEADER-->
+<mat-toolbar matDialogTitle class="fuse-white-bg rounded-container">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center">
+        <span class=" dialog-title deep-orange-800-fg"><!--{{_data.room.hotel.name}} --> Hotel Mirco & Marco</span>
+        <svg class="px-12" height="63" width="70">
+            <line x1="0" y1="31" x2="70" y2="31" style="stroke:darkgrey;stroke-width:1"/>
+        </svg>
+        <div fxLayout="row" fxLayoutAlign="start center" class="star-container">
+            <!-- IMPLEMENTARE DISPLAY IN BASE A NUMERO DI STELLE -->
+            <mat-icon class="amber-600-fg">star</mat-icon>
+            <mat-icon class="amber-600-fg">star</mat-icon>
+            <mat-icon class="amber-600-fg">star_border</mat-icon>
+            <mat-icon class="amber-600-fg">star_border</mat-icon>
+            <mat-icon class="amber-600-fg">star_border</mat-icon>
+        </div>
+        <svg class="px-12" height="63" width="1200">
+            <line x1="0" y1="31" x2="1200" y2="31" style="stroke:darkgrey;stroke-width:1"/>
+        </svg>
+        <mat-icon class="deep-orange-800-fg fuse-white-bg" (click)="matDialogRef.close()">close</mat-icon>
+    </mat-toolbar-row>
+</mat-toolbar>
+<!-- FINE HEADER-->
 
-    <mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
-        <div class="container" fxLayout="row" fxLayoutAlign="start center">
-            <div class="card-preview">
-                <div class="card" fxLayoutAlign="start start" fxLayout="column">
-                    <div class="fuse-card">
 
-                        <img class="img" src="assets/images/cards/card1.jpg">
-
-                        <div class="p-16">
-                            <span class="mat-title">Kangaroo Valley Safari</span>
+<!-- CONTENUTO-->
+<mat-dialog-content fusePerfectScrollbar>
+    <div class="container" fxLayout="row" fxLayoutAlign="start start">
+        <div class="card-preview">
+            <div class="card" fxLayoutAlign="start start" fxLayout="column">
+                <div class="fuse-card">
+                    <img class="img" src="assets/images/cards/card1.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="description" fxLayoutAlign="start start" fxLayout="row">
+            <div>
+                <p id="left" class="pl-12 m-o">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat ut labore et dolore sed do eiusmod sed
+                    Duis aute irure </p>
+                <!--
+                 <p class="pl-12">{{_data.room.hotel.city}}</p>
+                 <p class="pl-12">{{_data.room.hotel.cap}}</p>
+                 <p class="pl-12">{{_data.room.hotel.address}}</p>
+                 <p class="pl-12">{{_data.room.hotel.cellNumber}}</p>
+                 <p class="pl-12">{{_data.room.hotel.stars}}</p>
+                 <p class="pl-12">{{_data.room.pricePerNight}}</p>
+                 <p class="pl-12">{{_data.room.numPlaces}}</p>
+                 -->
+                <div class="mt-40" fxLayoutAlign="start center" fxLayout="row">
+                    <div class="mr-44" fxLayoutAlign="space-evenly start" fxLayout="column">
+                        <div fxLayoutAlign="start center" fxLayout="row">
+                            <mat-icon class="deep-orange-800-fg m-8">place</mat-icon>
+                            <!-- <p class="pl-12">{{_data.room.hotel.city}}</p>-->
+                            <p class="piccolo pl-12">Spagna</p>
+                        </div>
+                        <div fxLayoutAlign="start center" fxLayout="row">
+                            <mat-icon class="deep-orange-800-fg m-8">local_phone</mat-icon>
+                            <!-- {{_data.room.hotel.cellNumber}}-->
+                            <p class="piccolo pl-12">338 12345678</p>
+                        </div>
+                    </div>
+                    <div fxLayoutAlign="start start" fxLayout="column">
+                        <div fxLayoutAlign="start center" fxLayout="row">
+                            <mat-icon class="deep-orange-800-fg m-8">hotel</mat-icon>
+                            <!-- {{_data.room.numPlaces}}-->
+                            <p class="piccolo pl-12">6 Postiletto</p>
+                        </div>
+                        <div fxLayoutAlign="start center" fxLayout="row">
+                            <mat-icon class="deep-orange-800-fg m-8">euro_symbol</mat-icon>
+                            <!-- {{_data.room.pricePerNight}}-->
+                            <p class="piccolo pl-12">50/Notte</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="description" fxLayoutAlign="start start" fxLayout="column">
-                <p class="pl-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+            <div class="mr-20" fxLayout="column">
+                <p class="pl-12"> dolor in reprehenderit in
                     voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p class="pl-12">{{_data.room.hotel.city}}</p>
-                <p class="pl-12">{{_data.room.hotel.cap}}</p>
-                <p class="pl-12">{{_data.room.hotel.address}}</p>
-                <p class="pl-12">{{_data.room.hotel.cellNumber}}</p>
-                <p class="pl-12">{{_data.room.hotel.stars}}</p>
-                <p class="pl-12">{{_data.room.pricePerNight}}</p>
-                <p class="pl-12">{{_data.room.numPlaces}}</p>
+
+                <!-- SEZIONE BOTTONI -->
+                <div class="mt-60" fxLayoutAlign="flex-end flex-end" fxLayout="row">
+                    <button mat-raised-button
+                            class="m-8 cta-button deep-orange-800-bg"
+                            color="accent" (click)="onSave()">Salva
+                    </button>
+                    <button mat-raised-button
+                            class="m-8 cta-button deep-orange-800-bg"
+                            color="accent" (click)="onBook()">Prenota
+                    </button>
+                </div>
+                <!-- FINE SEZIONE BOTTONI-->
             </div>
         </div>
-    </mat-dialog-content>
+    </div>
+</mat-dialog-content>
+<!-- FINE CONTENUTO -->
 
-    <mat-dialog-actions align="end">
-        <button mat-button (click)="onSave()">Salva</button>
-        <button mat-button (click)="onBook()">Prenota</button>
-    </mat-dialog-actions>
-</div>
+
