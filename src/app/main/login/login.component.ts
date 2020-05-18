@@ -157,7 +157,7 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('token_info', JSON.stringify(tokenInfo));
                 this.router.navigate(['/homepage']);
 
-                // this.springService.loginGoogle(googleUser).subscribe();
+                this.springService.socialLogin();
 
 
 
@@ -169,7 +169,6 @@ export class LoginComponent implements OnInit {
     onFacebookLoginSubmit(): void{
             FB.login((response) =>
             {
-                console.log('submitLogin', response);
                 if (response.authResponse)
                 {
                     FB.api('/me', {fields: 'name, email, picture'}, (resp) =>{
@@ -180,14 +179,14 @@ export class LoginComponent implements OnInit {
                                 imageUrl: resp.picture.data.url,
                             };
                             const tokenInfo = {
-                                token: response.token,
+                                token: response.authResponse.token,
                                 type: 2
                             };
                             localStorage.setItem('user', JSON.stringify(g));
                             localStorage.setItem('token_info', JSON.stringify(tokenInfo));
                         }
                         this.router.navigate(['/homepage']);
-                        // this.springService.loginFacebook(response.authResponse).subscribe();
+                        this.springService.socialLogin();
                     });
                 }
                 else

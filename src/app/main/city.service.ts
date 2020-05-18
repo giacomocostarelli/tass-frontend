@@ -24,7 +24,7 @@ export interface StateGroup {
 @Injectable({providedIn: 'root'})
 export class CityService{
 
-    // private serverUrl = 'http://localhost:8080';
+     // private serverUrl = 'http://localhost:8080';
     private serverUrl = 'http://87.8.225.138:8080';
     sortedCity: StateGroup[] = [];
     cityRegion: Map<string, string> = new Map();

@@ -64,9 +64,10 @@ export class SpringService {
             );
     }
 
-    socialLogin(email: string): Observable<number> {
+    socialLogin(): Observable<number> {
         const url = `${this.serverUrl}/guests/socialLogin`;
-        return this.http.post<number>(url, {email: email})
+        const g = localStorage.getItem('user') as Guest;
+        return this.http.post<number>(url, {email: g.email})
             .pipe(
                 catchError(this.handleError<number>('socialLogin', null))
             );
