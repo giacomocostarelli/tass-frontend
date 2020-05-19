@@ -16,7 +16,9 @@
         <svg class="px-12" height="63" width="1200">
             <line x1="0" y1="31" x2="1200" y2="31" style="stroke:darkgrey;stroke-width:1"/>
         </svg>
-        <mat-icon class="deep-orange-800-fg fuse-white-bg" (click)="matDialogRef.close()">close</mat-icon>
+        <button mat-icon-button class="deep-orange-800-fg" (click)="matDialogRef.close()">
+            <mat-icon>close</mat-icon>
+        </button>
     </mat-toolbar-row>
 </mat-toolbar>
 <!-- FINE HEADER-->
@@ -74,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div class="column-righty mr-20" fxLayout="column" fxFlex="50">
+            <div class="column-righty" fxLayout="column" fxFlex="50">
                 <p class="pl-12"> dolor in reprehenderit in
                     voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

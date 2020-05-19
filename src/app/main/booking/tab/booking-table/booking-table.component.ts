@@ -23,10 +23,15 @@ export class BookingTableComponent implements OnInit {
     ngOnInit() {
     }
 
-    showBookingDetail(b: Booking): void{
+    showBookingDetail(b: Booking): void {
         this.showDetail = true;
         this.showDetailChange.emit(this.showDetail);
         this.bookingDetailItem = b;
         this.bookingDetailItemChange.emit(this.bookingDetailItem);
     }
+
+    onClose(index: number): void {
+        this.booking.splice(index, 1);
+    }
+
 }
