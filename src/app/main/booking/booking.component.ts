@@ -20,7 +20,6 @@ export class BookingComponent implements OnInit {
     }
 
     ngOnInit() {
-        localStorage.setItem('user', JSON.stringify({id: 1}));
         this._springService.getBooking()
             .subscribe(b => this.bookingList = b);
         /*this.bookingList = [{id: 1}, {id: 2}, {id: 3}];*/

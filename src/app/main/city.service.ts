@@ -19,13 +19,11 @@ export interface StateGroup {
     names: string[];
 }
 
-
-
 @Injectable({providedIn: 'root'})
 export class CityService{
 
      // private serverUrl = 'http://localhost:8080';
-    private serverUrl = 'http://87.8.225.138:8080';
+     private serverUrl = 'http://87.8.225.138:8080';
     sortedCity: StateGroup[] = [];
     cityRegion: Map<string, string> = new Map();
     httpOptions = {
@@ -39,11 +37,11 @@ export class CityService{
     ) {
     }
 
-    getCity(): Observable<Map<string, any>> {
-        const url = `${this.serverUrl}/cities`;
-        return this.http.get<Map<string, any>>(url)
+    getCity(): Observable<City[]> {
+        const url = `${this.serverUrl}/hotels/cities`;
+        return this.http.get<City[]>(url)
             .pipe(
-                catchError(this.handleError<Map<string, any>>('getCities', null))
+                catchError(this.handleError<City[]>('getCities', null))
             );
     }
 
@@ -51,7 +49,7 @@ export class CityService{
         /*this.sortCity([{name: 'Cagliari'}, {name: 'China'}]);
         return of(this.sortedCity);*/
         if (updatelist === false){ return of(this.sortedCity); }
-        this.getCity().subscribe((res) => this.sortCity(res['returnedValue']));
+        this.getCity().subscribe((res) => this.sortCity(res));
         return of(this.sortedCity);
     }
 

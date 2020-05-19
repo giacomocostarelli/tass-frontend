@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Hotel} from './interfaceDB/hotel';
@@ -18,6 +18,7 @@ export class SpringService {
 
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
+        params: new HttpParams()
     };
 
     constructor(
@@ -27,47 +28,46 @@ export class SpringService {
     }
 
     // SEARCH
-    searchClips(formdata: any): Observable<Map<string, any>> {
+    searchClips(formdata: any): Observable<Alternative[]> {
         const url = `${this.serverUrl}/hotels/secretSearch`;
-        return this.http.post<Map<string, any>>(url, formdata)
+        return this.http.post<Alternative[]>(url, formdata)
             .pipe(
-                catchError(this.handleError<Map<string, any>>('getSecretSearch', null))
+                catchError(this.handleError<Alternative[]>('getSecretSearch', null))
             );
     }
-
-    normalSearch(formData): Observable<Map<string, any>> {
-        const url = `${this.serverUrl}/freeRooms`;
-        return this.http.post<Map<string, any>>(url, formData)
+    normalSearch(formData): Observable<Room[]> {
+        const url = `${this.serverUrl}/hotels/freeRooms`;
+        return this.http.post<Room[]>(url, formData)
             .pipe(
-                catchError(this.handleError<Map<string, any>>('standardSearch', null))
+                catchError(this.handleError<Room[]>('standardSearch', null))
             );
     }
 
 
     //REGISTER
-    register(form: Guest): Observable<Guest> {
+    register(form: Guest): Observable<string> {
         const url = `${this.serverUrl}/guests/register`;
-        return this.http.post<Guest>(url, form)
+        return this.http.post<string>(url, form)
             .pipe(
-                catchError(this.handleError<Guest>('postRegisterItem', null))
+                catchError(this.handleError<string>('postRegisterItem', 'failed registration'))
             );
     }
 
 
     // LOGIN
-    login(email: string, pwd: string | Int32Array): Observable<Guest> {
+    login(email: string, pwd: string | Int32Array): Observable<any> {
         const url = `${this.serverUrl}/guests/login`;
         const param = {email: email, pwd: pwd};
-        return this.http.post<Guest>(url, param)
+        return this.http.post<any>(url, param)
             .pipe(
-                catchError(this.handleError<Guest>('guestLogin', null))
+                catchError(this.handleError<any>('guestLogin', null))
             );
     }
 
-    socialLogin(): Observable<number> {
+    socialLogin(): Observable<number> { // da modificare perchè non torna l'id
         const url = `${this.serverUrl}/guests/socialLogin`;
         const g = localStorage.getItem('user') as Guest;
-        return this.http.post<number>(url, {email: g.email})
+        return this.http.post<number>(url, g)
             .pipe(
                 catchError(this.handleError<number>('socialLogin', null))
             );
@@ -76,9 +76,15 @@ export class SpringService {
     // BOOKINGS
     getBooking(): Observable<Booking[]> {
         const url = `${this.serverUrl}/bookings/`;
-        this.httpOptions.headers.append('token_info', localStorage.getItem('token_info'));
-        const user = localStorage.getItem('user') as Guest;
-        return this.http.get<Booking[]>(url, {params: {id: user.id + ''}})
+        const user = JSON.parse(localStorage.getItem('user')) as Guest;
+        const headers = new HttpHeaders().set('token_info', 'ttt').set('content-type', 'application/json');
+        const params = new HttpParams().set('guest_id', JSON.stringify(user.id));
+        console.log(JSON.stringify(headers));
+        console.log(JSON.stringify(params));
+        return this.http.get<Booking[]>(url, {
+            headers: headers,
+            params: params
+        })
             .pipe(
                 catchError(this.handleError<any>('guestLogin', []))
             );
@@ -93,10 +99,18 @@ export class SpringService {
      */
     private handleError<T>(operation = 'operation', result?: T) {
         // this.router.navigate(['errors/error-500']);
-        return (error: any): Observable<T> => {
+        return (error: HttpErrorResponse): Observable<T> => {
+            console.log('ERRORERERERERE: ' + JSON.stringify(error)); // log to console instead
+            if (error.status === 401){
+                alert('username o password sbagliati');
+                this.router.navigate(['/login']);
+                return;
+            }
+            if (error.status === 500) {
+                this.router.navigate(['errors/error-500']);
+                return;
+            }
 
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
             // Let the app keep running by returning an empty result.
             return of(result as T);
         };
