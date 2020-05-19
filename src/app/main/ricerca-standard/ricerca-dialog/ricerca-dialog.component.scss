@@ -5,8 +5,12 @@
 
     @include media-breakpoint('xs') {
         width: 100%;
-
         .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .description {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -18,7 +22,8 @@
         align-items: flex-start;
         padding-right: 15px;
         padding-left: 15px;
-        p{
+
+        p {
 
             text-align: justify;
             font-size: 18px;
@@ -39,14 +44,19 @@
         }
     }
 
-    .rounded-container{
+    .rounded-container {
         border-radius: 25px;
     }
 
-    .piccolo{
+    .piccolo {
         font-size: 15px !important;
     }
 
+    .column-lefty {
+    }
+
+    .column-righty {
+    }
 
 }
 
