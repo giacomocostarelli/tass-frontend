@@ -21,9 +21,12 @@ export class BookingComponent implements OnInit {
 
     ngOnInit() {
         this._springService.getBooking()
-            .subscribe(b => this.bookingList = b);
+            .subscribe(b => {
+                this.bookingList = b;
+                console.log('B: ' + JSON.stringify(b));
+            });
         /*this.bookingList = [{id: 1}, {id: 2}, {id: 3}];*/
-        console.log(this.bookingList);
+        console.log(JSON.stringify(this.bookingList));
     }
 
 }

@@ -14,7 +14,7 @@ import {Booking} from './interfaceDB/booking';
 export class SpringService {
 
     // private serverUrl = 'http://localhost:8080';
-    private serverUrl = 'http://87.8.225.138:8080';
+     private serverUrl = 'http://87.8.225.138:8080';
 
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -75,15 +75,14 @@ export class SpringService {
 
     // BOOKINGS
     getBooking(): Observable<Booking[]> {
-        const url = `${this.serverUrl}/bookings/`;
         const user = JSON.parse(localStorage.getItem('user')) as Guest;
-        const headers = new HttpHeaders().set('token_info', 'ttt').set('content-type', 'application/json');
-        const params = new HttpParams().set('guest_id', JSON.stringify(user.id));
+        const url = `${this.serverUrl}/bookings/${JSON.stringify(user.id)}`;
+        const token = localStorage.getItem('token_info');
+        const headers = new HttpHeaders({'token_info': token});
+
         console.log(JSON.stringify(headers));
-        console.log(JSON.stringify(params));
         return this.http.get<Booking[]>(url, {
-            headers: headers,
-            params: params
+            headers: headers
         })
             .pipe(
                 catchError(this.handleError<any>('guestLogin', []))

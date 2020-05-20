@@ -87,8 +87,8 @@ export class RicercaStandardComponent implements OnInit {
         this.onProductChanged.next(this.roomList);
         /*this.springService.normalSearch(this.form.value)
             .subscribe(
-                mappa => { // sarebbe da controlalre se mappa.get('resultcode') va bene
-                    this.roomList = mappa['returnedValue'];
+                rooms => { // sarebbe da controlalre se mappa.get('resultcode') va bene
+                    this.roomList = rooms;
                     this.onProductChanged.next(this.roomList);
                 }
             );*/
