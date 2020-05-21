@@ -1,5 +1,9 @@
-import {Component, OnInit, ViewEncapsulation, Inject} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, Inject, Input} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Room} from "../../interfaceDB/room";
+import {Sojourn} from "../../interfaceDB/sojourn";
+import {Booking} from "../../interfaceDB/booking";
+import {SpringService} from "../../spring.service";
 
 
 @Component({
@@ -9,14 +13,18 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
     encapsulation: ViewEncapsulation.None
 })
 export class RicercaDialogComponent implements OnInit {
+    private soj: Sojourn = {}
 
     constructor(
         public matDialogRef: MatDialogRef<RicercaDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) private _data: any) {
-    }
+        @Inject(MAT_DIALOG_DATA) private _data: any,
+        private _springService: SpringService
+    ) {}
 
     ngOnInit() {
-        // console.log(this._data.room.hotel.name);
+        this.soj.room = this._data.room;
+        this.soj.arrival = this._data.startingDate;
+        this.soj.departure = this._data.returnDate;
     }
 
     onSave() {
@@ -27,8 +35,10 @@ export class RicercaDialogComponent implements OnInit {
          */
     }
 
-    onBook() {
+    onBook(): void{
         console.log('Prenota');
+        const newB: Booking = { sojourns: [this.soj]};
+        this._springService.newBooking(newB).subscribe();
         /*
         deve creare una nuova prenotazione nel carrello contenente solo un nuovo soggiono con le
         date della ricerca e la stanza della card
