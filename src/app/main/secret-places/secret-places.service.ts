@@ -6,6 +6,7 @@ import {Alternative} from '../interfaceDB/alternative';
 })
 export class SecretPlacesService {
     alternative: Alternative[] = [];
+    startingDate: Date = null;
 
     constructor() { }
 
@@ -17,5 +18,13 @@ export class SecretPlacesService {
     setAlternative(alt: Alternative[]): void{
         this.alternative.length = 0;
         alt.forEach(a => this.alternative.push(a));
+    }
+
+    getStartingDate(): Date{
+        return this.startingDate;
+    }
+
+    setStartingDate(d: Date): void{
+        this.startingDate = d;
     }
 }

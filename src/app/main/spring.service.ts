@@ -87,6 +87,19 @@ export class SpringService {
     }
 
 
+    newBooking(booking: Booking): any {
+        const url = `${this.serverUrl}/bookings/bookings/insert`;
+        const token = localStorage.getItem('token_info');
+        const headers = new HttpHeaders({'token_info': token});
+        const user = JSON.parse(localStorage.getItem('user')) as Guest;
+
+        return this.http.post<any>(url, {guest: user.id, booking: booking},{headers: headers})
+            .pipe(
+                catchError(this.handleError<any>('newBooking', null))
+            );
+    }
+
+
     /**
      * Handle Http operation that failed.
      * Let the app continue.

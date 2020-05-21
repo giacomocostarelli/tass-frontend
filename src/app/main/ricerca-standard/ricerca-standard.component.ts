@@ -83,15 +83,15 @@ export class RicercaStandardComponent implements OnInit {
 
 
     onFormSubmit(): void {
-        this.roomList = [{id: 2, hotel: {name: 'lol', stars: 3}, pricePerNight: 43, numPlaces: 3}, {id: 5, hotel: {name: 'yytty', stars: 1}, pricePerNight: 43, numPlaces: 3}];
-        this.onProductChanged.next(this.roomList);
-        /*this.springService.normalSearch(this.form.value)
+        /*this.roomList = [{id: 2, hotel: {name: 'lol', stars: 3}, pricePerNight: 43, numPlaces: 3}, {id: 5, hotel: {name: 'yytty', stars: 1}, pricePerNight: 43, numPlaces: 3}];
+        this.onProductChanged.next(this.roomList);*/
+        this.springService.normalSearch(this.form.value)
             .subscribe(
                 rooms => { // sarebbe da controlalre se mappa.get('resultcode') va bene
                     this.roomList = rooms;
                     this.onProductChanged.next(this.roomList);
                 }
-            );*/
+            );
     }
 
     parse(value: any): Date | null {

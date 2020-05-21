@@ -95,6 +95,7 @@ export class FormComponent implements OnInit {
      */
     finishVerticalStepper(): void {
 
+        this._alternativeService.setStartingDate(this.form.get('arr').value);
         this.form.removeControl('arr');
         this.form.removeControl('dep'); //da sistemare
         this._springService.searchClips(this.form.value)

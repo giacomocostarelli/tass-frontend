@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 export class AlternativeComponent implements OnInit {
 
     alternative: Alternative[] = [];
+    startingDate: Date;
 
     constructor(
         private _alternativeService: SecretPlacesService,
@@ -21,8 +22,13 @@ export class AlternativeComponent implements OnInit {
 
     ngOnInit() {
         this.alternative = this._alternativeService.getAlternative();
+        this.startingDate = this._alternativeService.getStartingDate();
         console.log(JSON.stringify(this.alternative));
         // if (this.alternative.length === 0){ this.router.navigate(['/secret_places'])}
+    }
+
+    createNewBooking(){
+
     }
 
 }
