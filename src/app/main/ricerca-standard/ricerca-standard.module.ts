@@ -10,6 +10,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {FuseSharedModule} from '@fuse/shared.module';
 import {MaterialModule} from '../../angular-material/material.module';
 import {RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
+import { StarsComponent } from './ricerca-dialog/stars/stars.component';
 
 
 const routes = [
@@ -22,7 +23,8 @@ const routes = [
 @NgModule({
     declarations: [
         RicercaStandardComponent,
-        RicercaDialogComponent
+        RicercaDialogComponent,
+        StarsComponent
     ],
     entryComponents: [RicercaDialogComponent
     ],
