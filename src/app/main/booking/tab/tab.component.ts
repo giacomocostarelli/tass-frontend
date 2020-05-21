@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Booking} from '../../interfaceDB/booking';
+import {SpringService} from "../../spring.service";
 
 @Component({
     selector: 'tab1',
@@ -11,13 +12,17 @@ export class TabComponent implements OnInit {
     showDetail = false;
     bookingDetailItem: Booking = null;
 
-    constructor() {
+    @Input() paid: boolean;
+
+    constructor(
+        private _springService: SpringService
+    ) {
     }
 
     ngOnInit() {
-        /*this._springService.getBooking()
-      .subscribe(b => this.bookingList = b);*/
-        this.bookingList = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}];
+        this._springService.getBooking()
+      .subscribe(b => this.bookingList = b);
+       //  this.bookingList = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}];
     }
 
 }

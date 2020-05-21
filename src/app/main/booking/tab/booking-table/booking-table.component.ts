@@ -16,6 +16,7 @@ export class BookingTableComponent implements OnInit {
     @Output() showDetailChange = new EventEmitter<boolean>();
     @Input() bookingDetailItem: Booking;
     @Output() bookingDetailItemChange = new EventEmitter<Booking>();
+    @Input() paid: boolean;
 
     constructor() {
     }

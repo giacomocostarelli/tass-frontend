@@ -3,11 +3,13 @@
         [booking]="bookingList"
         [(showDetail)]="showDetail"
         [(bookingDetailItem)]="bookingDetailItem"
+        [paid]="paid"
     ></booking-table>
 </div>
 <div *ngIf="showDetail">
     <booking-detail
         [(showDetail)]="showDetail"
         [(bookingDetailItem)]="bookingDetailItem"
+        [paid]="paid"
     ></booking-detail>
 </div>
