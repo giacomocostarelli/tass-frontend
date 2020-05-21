@@ -3,6 +3,7 @@ import {fuseAnimations} from '../../../@fuse/animations';
 import {Booking} from '../interfaceDB/booking';
 import {Observable} from 'rxjs';
 import {SpringService} from '../spring.service';
+import {MenuColorChangerService} from "../../menuColorChanger.service";
 
 @Component({
     selector: 'app-booking',
@@ -15,7 +16,8 @@ export class BookingComponent implements OnInit {
     bookingList: Booking[];
 
     constructor(
-        private _springService: SpringService
+        private _springService: SpringService,
+        private _menuColorChangerService: MenuColorChangerService
     ) {
     }
 
@@ -25,6 +27,7 @@ export class BookingComponent implements OnInit {
                 this.bookingList = b;
                 console.log('B: ' + JSON.stringify(b));
             });
+        this._menuColorChangerService.changePageSelected('profile');
         /*this.bookingList = [{id: 1}, {id: 2}, {id: 3}];*/
         console.log(JSON.stringify(this.bookingList));
     }

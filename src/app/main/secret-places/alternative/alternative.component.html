@@ -23,8 +23,12 @@
         <div class="price-tables" fxLayout="row wrap" fxLayoutAlign="center center">
             <!-- aggiungere un ngif somma (alternative days) == 0 per quando non si trovano risultati-->
             <!-- ALTERNATIVA migliore dovrebbe avere mat-elevation-z12 in class-->
-            <div *ngFor="let alt of alternative" class="price-table style-3 mat-elevation-z4" fxLayout="column">
-                <alternative-element [alternative]="alt"></alternative-element>
+            <div *ngFor="let alt of alternative; let i=index" class="price-table style-3 mat-elevation-z4" fxLayout="column">
+                <alternative-element
+                    [alternative]="alt"
+                    [numberAlternative]="i"
+                    (newBookingParent)="createNewBooking($event)"
+                ></alternative-element>
             </div>
         </div>
         <!-- / PRICE TABLES -->
