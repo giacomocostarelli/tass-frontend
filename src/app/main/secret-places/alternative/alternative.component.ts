@@ -27,7 +27,9 @@ export class AlternativeComponent implements OnInit {
         // if (this.alternative.length === 0){ this.router.navigate(['/secret_places'])}
     }
 
-    createNewBooking(){
+    createNewBooking(id: number): void{
+        console.log('prenota alternativa: ' + id);
+
 
     }
 
