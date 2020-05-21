@@ -14,7 +14,7 @@ import {Booking} from './interfaceDB/booking';
 export class SpringService {
 
     // private serverUrl = 'http://localhost:8080';
-     private serverUrl = 'http://87.8.225.138:8080';
+     private serverUrl = 'http://79.45.169.129:8080';
 
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -80,10 +80,7 @@ export class SpringService {
         const token = localStorage.getItem('token_info');
         const headers = new HttpHeaders({'token_info': token});
 
-        console.log(JSON.stringify(headers));
-        return this.http.get<Booking[]>(url, {
-            headers: headers
-        })
+        return this.http.get<Booking[]>(url, {headers: headers})
             .pipe(
                 catchError(this.handleError<any>('guestLogin', []))
             );
@@ -101,7 +98,7 @@ export class SpringService {
         return (error: HttpErrorResponse): Observable<T> => {
             console.log('ERRORERERERERE: ' + JSON.stringify(error)); // log to console instead
             if (error.status === 401){
-                alert('username o password sbagliati');
+                alert('ritenta sarai più fortunato'); // da sistemare, gestire quando fallisce token, quando user non esiste o quando pwd è sbagliata
                 this.router.navigate(['/login']);
                 return;
             }
