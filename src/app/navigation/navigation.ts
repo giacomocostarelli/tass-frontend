@@ -10,14 +10,8 @@ export const navigation: FuseNavigation[] = [
                 id: 'profile',
                 title: 'Il mio profilo',
                 type: 'item',
-                icon: 'shopping_cart',
+                icon: 'account_circle',
                 url: '/profile',
-                badge: {
-                    title: '25',
-                    translate: 'NAV.SAMPLE.BADGE',
-                    bg: '#F44336',
-                    fg: '#FFFFFF'
-                }
             }
         ]
     }
