@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Alternative} from '../../../interfaceDB/alternative';
 
 @Component({
@@ -9,10 +9,15 @@ import {Alternative} from '../../../interfaceDB/alternative';
 export class AlternativeElementComponent implements OnInit {
 
     @Input() alternative: Alternative;
-
+    @Input() numberAlternative: number;
+    @Output() newBookingParent = new EventEmitter<number>();
     constructor() { }
 
     ngOnInit() {
+    }
+
+    newBooking(): void{
+        this.newBookingParent.next();
     }
 
 }
