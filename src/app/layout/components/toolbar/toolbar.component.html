@@ -25,7 +25,8 @@
                [ngClass]="{selected: menuColorChangerService.pageSelected === 'Secret Places'}">
                 Secret places
             </a>
-            <a mat-button disableRipple class="navbar-element last-element no-hover-effect" [routerLink]="'/ricerca_standard'"
+            <a mat-button disableRipple class="navbar-element last-element no-hover-effect"
+               [routerLink]="'/ricerca_standard'"
                (mouseenter)="onMouseEnter(2)" (mouseleave)="onMouseLeave(2)"
                (click)="menuColorChangerService.changePageSelected('Ricerca Standard')"
                [ngStyle]="{'color': getColor(2)}"
@@ -45,30 +46,19 @@
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar mr-0 mr-sm-16" src="{{user.imageUrl}}">
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{user.name}}</span>
+
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
             </button>
             <button mat-button *ngIf="!logged" routerLink="/login">
-                login
+               Effettua il login
             </button>
 
             <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
-
-                <button mat-menu-item>
-                    <mat-icon>account_circle</mat-icon>
-                    <span>My Profile</span>
-                </button>
-
-                <button mat-menu-item class="">
-                    <mat-icon>mail</mat-icon>
-                    <span>Inbox</span>
-                </button>
-
                 <button mat-menu-item class="" (click)="logOut()">
                     <mat-icon>exit_to_app</mat-icon>
                     <span>Logout</span>
                 </button>
-
             </mat-menu>
 
             <div class="toolbar-separator"></div>

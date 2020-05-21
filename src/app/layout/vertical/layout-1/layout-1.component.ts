@@ -61,4 +61,11 @@ export class VerticalLayout1Component implements OnInit, OnDestroy
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
+    onLogin(): boolean {
+        if (localStorage.getItem('user') !== null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

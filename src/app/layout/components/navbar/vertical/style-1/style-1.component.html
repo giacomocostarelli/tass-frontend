@@ -1,28 +1,29 @@
-<div class="navbar-top1 deep-orange-800-bg">
-    <div class="logo">
-        <span class="logo-text secondary-text">IL MIO PROFILO</span>
-    </div>
-    <div class="buttons">
-        <button mat-icon-button class="toggle-sidebar-folded"
-                (click)="toggleSidebarFolded()" fxHide.lt-lg>
-            <mat-icon class="secondary-text fuse-white-fg">menu</mat-icon>
-        </button>
-    </div>
-</div>
 
-<div class="navbar-scroll-container " fusePerfectScrollbar
-     [fusePerfectScrollbarOptions]="{suppressScrollX: true}">
-
-    <div class="user deep-orange-50-bg" fxLayout="column">
-        <div id="username" class="h3 username">Charlie Adams</div>
-        <div id="email" class="h5 email hint-text  mt-8">adams.charlie@mail.com</div>
-        <div class="avatar-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground">
-            <img alt ="prof-pic"class="avatar" src="assets/images/avatars/Velazquez.jpg">
+    <div class="navbar-top1 deep-orange-800-bg">
+        <div class="logo">
+            <span class="logo-text secondary-text">IL MIO PROFILO</span>
+        </div>
+        <div class="buttons">
+            <button mat-icon-button class="toggle-sidebar-folded"
+                    (click)="toggleSidebarFolded()" fxHide.lt-lg>
+                <mat-icon class="secondary-text fuse-white-fg">menu</mat-icon>
+            </button>
         </div>
     </div>
 
-    <div class="navbar-content deep-orange-50-bg">
-        <fuse-navigation class="material2" layout="vertical"></fuse-navigation>
-    </div>
+    <div class="navbar-scroll-container " fusePerfectScrollbar
+         [fusePerfectScrollbarOptions]="{suppressScrollX: true}">
 
-</div>
+        <div class="user deep-orange-50-bg" fxLayout="column">
+            <div id="username" class="h3 username">Charlie Adams</div>
+            <div id="email" class="h5 email hint-text  mt-8">adams.charlie@mail.com</div>
+            <div class="avatar-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground">
+                <img alt="prof-pic" class="avatar" src="assets/images/avatars/Velazquez.jpg">
+            </div>
+        </div>
+
+        <div class="navbar-content deep-orange-50-bg">
+            <fuse-navigation class="material2" layout="vertical"></fuse-navigation>
+        </div>
+
+    </div>

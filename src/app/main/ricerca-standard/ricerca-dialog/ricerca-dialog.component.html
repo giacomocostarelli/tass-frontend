@@ -1,7 +1,7 @@
 <!-- HEADER-->
 <mat-toolbar matDialogTitle class="fuse-white-bg rounded-container">
     <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center">
-        <span class=" dialog-title deep-orange-800-fg"><!--{{_data.room.hotel.name}} --> Hotel Mirco & Marco</span>
+        <span class=" dialog-title deep-orange-800-fg">{{_data.room.hotel.name}}</span>
         <svg class="px-12" height="63" width="70">
             <line x1="0" y1="31" x2="70" y2="31" style="stroke:darkgrey;stroke-width:1"/>
         </svg>
@@ -22,7 +22,6 @@
     </mat-toolbar-row>
 </mat-toolbar>
 <!-- FINE HEADER-->
-
 
 <!-- CONTENUTO-->
 <mat-dialog-content fusePerfectScrollbar>
@@ -54,24 +53,24 @@
                         <div fxLayoutAlign="start center" fxLayout="row">
                             <mat-icon class="deep-orange-800-fg m-8">place</mat-icon>
                             <!-- <p class="pl-12">{{_data.room.hotel.city}}</p>-->
-                            <p class="piccolo pl-12">Spagna</p>
+                            <p class="piccolo pl-12">{{_data.room.hotel.city.name}}</p>
                         </div>
                         <div fxLayoutAlign="start center" fxLayout="row">
                             <mat-icon class="deep-orange-800-fg m-8">local_phone</mat-icon>
                             <!-- {{_data.room.hotel.cellNumber}}-->
-                            <p class="piccolo pl-12">338 12345678</p>
+                            <p class="piccolo pl-12">{{_data.room.hotel.cellNumber}}</p>
                         </div>
                     </div>
                     <div fxLayoutAlign="start start" fxLayout="column">
                         <div fxLayoutAlign="start center" fxLayout="row">
                             <mat-icon class="deep-orange-800-fg m-8">hotel</mat-icon>
                             <!-- {{_data.room.numPlaces}}-->
-                            <p class="piccolo pl-12">6 Postiletto</p>
+                            <p class="piccolo pl-12">{{_data.room.numPlaces}} Postiletto</p>
                         </div>
                         <div fxLayoutAlign="start center" fxLayout="row">
                             <mat-icon class="deep-orange-800-fg m-8">euro_symbol</mat-icon>
                             <!-- {{_data.room.pricePerNight}}-->
-                            <p class="piccolo pl-12">50/Notte</p>
+                            <p class="piccolo pl-12">{{_data.room.pricePerNight}}/Notte</p>
                         </div>
                     </div>
                 </div>
