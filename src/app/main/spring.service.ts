@@ -88,7 +88,7 @@ export class SpringService {
 
 
     newBooking(booking: Booking): any {
-        const url = `${this.serverUrl}/bookings/bookings/insert`;
+        const url = `${this.serverUrl}/bookings/insert`;
         const token = localStorage.getItem('token_info');
         const headers = new HttpHeaders({'token_info': token});
         const user = JSON.parse(localStorage.getItem('user')) as Guest;

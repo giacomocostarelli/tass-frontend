@@ -110,7 +110,9 @@ export class RicercaStandardComponent implements OnInit {
         const dialogRef = this.dialog.open(RicercaDialogComponent, {
             panelClass: 'form-dialog',
             data: {
-                room: roomRow
+                room: roomRow,
+                startingDate: this.form.get('arrival').value,
+                returnDate: this.form.get('departure').value
             }
         });
 

@@ -30,6 +30,7 @@ export class AlternativeComponent implements OnInit {
     createNewBooking(id: number): void{
         console.log('prenota alternativa: ' + id);
 
+
     }
 
 }
