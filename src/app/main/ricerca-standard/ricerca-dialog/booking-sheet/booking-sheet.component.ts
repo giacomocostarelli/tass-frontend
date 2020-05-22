@@ -8,8 +8,9 @@ import {MatBottomSheetRef} from "@angular/material/bottom-sheet";
 })
 export class BookingSheetComponent implements OnInit {
 
-    constructor(private _bottomSheetRef: MatBottomSheetRef<BookingSheetComponent>) {
-    }
+    constructor(
+        private _bottomSheetRef: MatBottomSheetRef<BookingSheetComponent>
+    ) {}
 
 
     ngOnInit() {

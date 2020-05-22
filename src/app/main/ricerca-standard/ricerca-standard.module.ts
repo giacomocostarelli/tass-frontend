@@ -11,7 +11,7 @@ import {FuseSharedModule} from '@fuse/shared.module';
 import {MaterialModule} from '../../angular-material/material.module';
 import { RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
 import { BookingSheetComponent } from './ricerca-dialog/booking-sheet/booking-sheet.component';
-import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 
 const routes = [
@@ -27,7 +27,9 @@ const routes = [
         RicercaDialogComponent,
         BookingSheetComponent
     ],
-    entryComponents: [RicercaDialogComponent
+    entryComponents: [
+        RicercaDialogComponent,
+        BookingSheetComponent
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -38,6 +40,7 @@ const routes = [
         MatInputModule,
         MatSelectModule,
         MatStepperModule,
+        MatBottomSheetModule,
 
         FuseSharedModule,
         MaterialModule,

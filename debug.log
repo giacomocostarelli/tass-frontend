@@ -302,3 +302,5 @@
 [0521/140802.908:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0521/141407.139:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0521/141407.141:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0522/143248.086:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0522/143248.102:ERROR:crash_report_database_win.cc(469)] failed to stat report

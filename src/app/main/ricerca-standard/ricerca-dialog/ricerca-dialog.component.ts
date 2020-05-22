@@ -14,7 +14,7 @@ import {BookingSheetComponent} from './booking-sheet/booking-sheet.component';
     encapsulation: ViewEncapsulation.None
 })
 export class RicercaDialogComponent implements OnInit {
-    private soj: Sojourn = {}
+    private soj: Sojourn = {};
 
 
     constructor(
