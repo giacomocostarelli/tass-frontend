@@ -7,7 +7,7 @@
             </mat-icon>
         </span>
     </button>
-    <button *ngFor="let id of [1,2,3,4] "mat-list-item (click)="selectBooking(id)">
+    <button *ngFor="let id of listID" mat-list-item  (click)="selectBooking(id)">
         <span mat-line>Aggiungi a: {{id}}</span>
     </button>
 

@@ -38,18 +38,22 @@ export class RicercaDialogComponent implements OnInit {
     showBooking(): void{
         const bookingSelected = this._bottomSheet.open(BookingSheetComponent);
         bookingSelected.afterDismissed().subscribe(
-            (dataFromBottomSheet: number) => this.saveBooking(dataFromBottomSheet)
+            (dataFromBottomSheet: number) => {
+                if (typeof dataFromBottomSheet === 'number'){
+                    this.saveBooking(dataFromBottomSheet);
+                }
+            }
         );
     }
 
     private saveBooking(id: number): void { // TODO => cosa farà dopo aver salvato booking?
         if (id < 0){    // nuovo booking
-            console.log('crea nuovo booking');
             const newB: Booking = { sojourns: [this.soj] };
-            // this._springService.newBooking(newB).subscribe();
+            console.log('crea nuovo booking');
+            this._springService.newBooking(newB).subscribe();
         } else { // booking esistente
             console.log('aggiung soggiorno a booking: ' + id);
-            // this._springService.addToExistingBooking(id, newB).subscribe();
+            this._springService.addToExistingBooking(id, this.soj).subscribe();
         }
     }
 

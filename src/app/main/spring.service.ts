@@ -2,13 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Hotel} from './interfaceDB/hotel';
-import {Item} from './interfaceDB/item';
 import {Alternative} from './interfaceDB/alternative';
 import {Room} from './interfaceDB/room';
 import {Guest} from './interfaceDB/guest';
 import {Router} from '@angular/router';
 import {Booking} from './interfaceDB/booking';
+import {Sojourn} from './interfaceDB/sojourn';
 
 @Injectable({providedIn: 'root'})
 export class SpringService {
@@ -35,6 +34,8 @@ export class SpringService {
                 catchError(this.handleError<Alternative[]>('getSecretSearch', null))
             );
     }
+
+
     normalSearch(formData): Observable<Room[]> {
         const url = `${this.serverUrl}/hotels/freeRooms`;
         return this.http.post<Room[]>(url, formData)
@@ -44,7 +45,7 @@ export class SpringService {
     }
 
 
-    //REGISTER
+    // REGISTER
     register(form: Guest): Observable<string> {
         const url = `${this.serverUrl}/guests/register`;
         return this.http.post<string>(url, form)
@@ -75,30 +76,56 @@ export class SpringService {
 
     // BOOKINGS
     getBooking(): Observable<Booking[]> {
-        const user = JSON.parse(localStorage.getItem('user')) as Guest;
-        const url = `${this.serverUrl}/bookings/${JSON.stringify(user.id)}`;
-        const token = localStorage.getItem('token_info');
-        const headers = new HttpHeaders({'token_info': token});
+        const url = `${this.serverUrl}/bookings/${JSON.stringify(this.getUser().id)}`;
+        const headers = new HttpHeaders({'token_info': this.getToken()});
 
         return this.http.get<Booking[]>(url, {headers: headers})
             .pipe(
-                catchError(this.handleError<any>('guestLogin', []))
+                catchError(this.handleError<any>('getBooking', []))
+            );
+    }
+
+    getBookingsID(): Observable<number[]> {
+        const url = `${this.serverUrl}/bookings/id/${JSON.stringify(this.getUser().id)}`;
+        const headers = new HttpHeaders({'token_info': this.getToken()});
+
+        return this.http.get<number[]>(url, {headers: headers})
+            .pipe(
+                catchError(this.handleError<any>('getBookingsID', []))
             );
     }
 
 
-    newBooking(booking: Booking): any {
+    newBooking(booking: Booking): Observable<Booking> {
         const url = `${this.serverUrl}/bookings/insert`;
         const token = localStorage.getItem('token_info');
         const headers = new HttpHeaders({'token_info': token});
         const user = JSON.parse(localStorage.getItem('user')) as Guest;
 
-        return this.http.post<any>(url, {guest: user.id, booking: booking},{headers: headers})
+        return this.http.post<Booking>(url, {guest: user.id, booking: booking}, {headers: headers})
             .pipe(
-                catchError(this.handleError<any>('newBooking', null))
+                catchError(this.handleError<Booking>('newBooking', null))
             );
     }
 
+
+    addToExistingBooking(id: number, soj: Sojourn): Observable<Booking> {
+        const url = `${this.serverUrl}/bookings/addSojourn`;
+        const token = localStorage.getItem('token_info');
+        const headers = new HttpHeaders({'token_info': token});
+        return this.http.post<Booking>(url, {bookingId: id, sojourn: soj}, {headers: headers})
+            .pipe(
+                catchError(this.handleError<Booking>('addSojournToExistingBooking', null))
+            );
+    }
+
+    private getUser(): Guest{
+        return JSON.parse(localStorage.getItem('user')) as Guest;
+    }
+
+    private getToken(): string{
+        return localStorage.getItem('token_info');
+    }
 
     /**
      * Handle Http operation that failed.
@@ -106,8 +133,7 @@ export class SpringService {
      * @param operation - name of the operation that failed
      * @param result - optional value to return as the observable result
      */
-    private handleError<T>(operation = 'operation', result?: T) {
-        // this.router.navigate(['errors/error-500']);
+    private handleError<T>(operation = 'operation', result?: T): any {
         return (error: HttpErrorResponse): Observable<T> => {
             console.log('ERRORERERERERE: ' + JSON.stringify(error)); // log to console instead
             if (error.status === 401){
@@ -124,4 +150,5 @@ export class SpringService {
             return of(result as T);
         };
     }
+
 }
