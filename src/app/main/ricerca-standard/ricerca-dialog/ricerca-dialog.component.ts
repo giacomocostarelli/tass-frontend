@@ -31,7 +31,7 @@ export class RicercaDialogComponent implements OnInit {
         this.soj.departure = this._data.returnDate;
     }
 
-    getLogged(): boolean{ // TODO => disabilitiare button salva se utente non loggato
+    getLogged(): boolean{ // TODO => disabilitiare button salva se utente non loggato o reindirizzare a login (ma perde dati ricerca standard)
         return localStorage.getItem('user') !== null;
     }
 
@@ -46,7 +46,7 @@ export class RicercaDialogComponent implements OnInit {
         );
     }
 
-    private saveBooking(id: number): void { // TODO => cosa farà dopo aver salvato booking?
+    private saveBooking(id: number): void {
         if (id < 0){    // nuovo booking
             const newB: Booking = { sojourns: [this.soj] };
             console.log('crea nuovo booking');
@@ -55,6 +55,7 @@ export class RicercaDialogComponent implements OnInit {
             console.log('aggiung soggiorno a booking: ' + id);
             this._springService.addToExistingBooking(id, this.soj).subscribe();
         }
+        // TODO => cosa farà dopo aver salvato booking?
     }
 
 }
