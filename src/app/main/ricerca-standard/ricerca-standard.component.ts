@@ -26,7 +26,7 @@ export interface StateGroup {
     styleUrls: ['./ricerca-standard.component.scss'],
     animations: fuseAnimations,
     encapsulation: ViewEncapsulation.None,
-    providers: [SpringService]
+    providers: []
 })
 export class RicercaStandardComponent implements OnInit {
     form: FormGroup;
@@ -58,7 +58,7 @@ export class RicercaStandardComponent implements OnInit {
     ngOnInit(): void {
         this.dataSource = new FilesDataSource(this, this.paginator, this.sort);
         this.form = this._formBuilder.group({
-            city: ['', { validators: [Validators.required], updateOn: 'blur'}],
+            city: ['', {validators: [Validators.required], updateOn: 'blur'}],
             personNumber: ['', [Validators.required, Validators.pattern('^[0-9]')]],
             arr: ['', Validators.required],
             arrival: [''],
@@ -84,8 +84,8 @@ export class RicercaStandardComponent implements OnInit {
 
     onFormSubmit(): void {
         this.roomList = [{id: 2, hotel: {name: 'lol', stars: 3, city: {name: 'nnnnn'}}, pricePerNight: 43, numPlaces: 3}, {id: 5, hotel: {name: 'yytty', stars: 1, city: {name: 'mmmmmm'}}, pricePerNight: 43, numPlaces: 3}];
-        this.onProductChanged.next(this.roomList);
-        /*this.springService.normalSearch(this.form.value)
+        this.onProductChanged.next(this.roomList);/*
+        this.springService.normalSearch(this.form.value)
             .subscribe(
                 rooms => { // sarebbe da controlalre se mappa.get('resultcode') va bene
                     this.roomList = rooms;

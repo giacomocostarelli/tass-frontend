@@ -25,7 +25,7 @@ const routes = [
     declarations: [
         RicercaStandardComponent,
         RicercaDialogComponent,
-        BookingSheetComponent
+        StarsComponent
     ],
     entryComponents: [
         RicercaDialogComponent,
