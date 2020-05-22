@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {MatBottomSheetRef} from "@angular/material/bottom-sheet";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {SpringService} from "../../../spring.service";
 
 @Component({
     selector: 'app-booking-sheet',
@@ -9,15 +10,16 @@ import {MatBottomSheetRef} from "@angular/material/bottom-sheet";
 export class BookingSheetComponent implements OnInit {
 
     constructor(
-        private _bottomSheetRef: MatBottomSheetRef<BookingSheetComponent>
+        private _bottomSheetRef: MatBottomSheetRef<BookingSheetComponent>,
+        private _springService: SpringService
     ) {}
 
 
     ngOnInit() {
+        // this._springService.getBookingsID
     }
 
-    openLink(event: MouseEvent): void {
-        this._bottomSheetRef.dismiss();
-        event.preventDefault();
+    selectBooking(num: number): void {
+        this._bottomSheetRef.dismiss(num);
     }
 }

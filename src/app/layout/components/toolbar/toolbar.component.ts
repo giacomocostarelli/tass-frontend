@@ -10,6 +10,7 @@ import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 import {navigation} from 'app/navigation/navigation';
 import {Guest} from '../../../main/interfaceDB/guest';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -45,7 +46,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
-        private menuColorChangerService: MenuColorChangerService
+        private menuColorChangerService: MenuColorChangerService,
+        private router: Router
     ) {
         this.userStatusOptions = [
             {
@@ -134,6 +136,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     logOut(): void {
         localStorage.clear();
         this.logged = false;
+        this.router.navigate(['']);
+
     }
 
     onMouseEnter(ind: number): any {

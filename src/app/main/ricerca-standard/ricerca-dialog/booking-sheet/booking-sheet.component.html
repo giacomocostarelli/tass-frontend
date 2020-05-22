@@ -1,7 +1,14 @@
 <mat-nav-list>
-    <a href="https://keep.google.com/" mat-list-item (click)="openLink($event)">
-        <span mat-line>Google Keep</span>
-        <span mat-line>Add to a note</span>
-    </a>
+    <button mat-list-item (click)="selectBooking(-1)">
+        <span mat-line>
+            Nuova prenotazione
+            <mat-icon class="logo-icon s-32 mr-16 deep-orange-50-fg">
+                add_shopping_cart
+            </mat-icon>
+        </span>
+    </button>
+    <button *ngFor="let id of [1,2,3,4] "mat-list-item (click)="selectBooking(id)">
+        <span mat-line>Aggiungi a: {{id}}</span>
+    </button>
 
 </mat-nav-list>

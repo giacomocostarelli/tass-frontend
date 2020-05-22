@@ -31,25 +31,26 @@ export class RicercaDialogComponent implements OnInit {
         this.soj.departure = this._data.returnDate;
     }
 
-    getLogged(): boolean{
+    getLogged(): boolean{ // TODO => disabilitiare button salva se utente non loggato
         return localStorage.getItem('user') !== null;
     }
 
-    onBook(): void{
-        console.log('Prenota');
-        const newB: Booking = { sojourns: [this.soj]};
-        this._springService.newBooking(newB).subscribe();
-        /*
-        deve creare una nuova prenotazione nel carrello contenente solo un nuovo soggiono con le
-        date della ricerca e la stanza della card
-         */
-    }
-    /*
-      deve visualizzare tutte le prenotazioni e selezionare in quale aggiungere un nuovo soggiorno
-      con le date della ricerca e la stanza della card
-       */
     showBooking(): void{
-        this._bottomSheet.open(BookingSheetComponent);
+        const bookingSelected = this._bottomSheet.open(BookingSheetComponent);
+        bookingSelected.afterDismissed().subscribe(
+            (dataFromBottomSheet: number) => this.saveBooking(dataFromBottomSheet)
+        );
+    }
+
+    private saveBooking(id: number): void { // TODO => cosa farà dopo aver salvato booking?
+        if (id < 0){    // nuovo booking
+            console.log('crea nuovo booking');
+            const newB: Booking = { sojourns: [this.soj] };
+            // this._springService.newBooking(newB).subscribe();
+        } else { // booking esistente
+            console.log('aggiung soggiorno a booking: ' + id);
+            // this._springService.addToExistingBooking(id, newB).subscribe();
+        }
     }
 
 }
