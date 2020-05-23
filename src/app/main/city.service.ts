@@ -41,7 +41,7 @@ export class CityService{
         const url = `${this.serverUrl}/hotels/cities`;
         return this.http.get<City[]>(url)
             .pipe(
-                catchError(this.handleError<City[]>('getCities', null))
+                catchError(this.handleError<City[]>('getCities', []))
             );
     }
 
@@ -90,7 +90,7 @@ export class CityService{
      * @param operation - name of the operation that failed
      * @param result - optional value to return as the observable result
      */
-    private handleError<T>(operation = 'operation', result?: T) {
+    private handleError<T>(operation = 'operation', result?: T): any {
         // this.router.navigate(['errors/error-500']);
         return (error: any): Observable<T> => {
 

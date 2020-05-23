@@ -75,13 +75,23 @@ export class SpringService {
     }
 
     // BOOKINGS
-    getBooking(): Observable<Booking[]> {
-        const url = `${this.serverUrl}/bookings/${JSON.stringify(this.getUser().id)}`;
+    getSavedBooking(): Observable<Booking[]> {
+        const url = `${this.serverUrl}/bookings/saved/${JSON.stringify(this.getUser().id)}`;
         const headers = new HttpHeaders({'token_info': this.getToken()});
 
         return this.http.get<Booking[]>(url, {headers: headers})
             .pipe(
-                catchError(this.handleError<any>('getBooking', []))
+                catchError(this.handleError<any>('getSavedBooking', []))
+            );
+    }
+
+    getPaidBooking(): Observable<Booking[]> {
+        const url = `${this.serverUrl}/bookings/paid/${JSON.stringify(this.getUser().id)}`;
+        const headers = new HttpHeaders({'token_info': this.getToken()});
+
+        return this.http.get<Booking[]>(url, {headers: headers})
+            .pipe(
+                catchError(this.handleError<any>('getPaidBooking', []))
             );
     }
 

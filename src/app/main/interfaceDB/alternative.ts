@@ -1,6 +1,6 @@
-import {Room} from './room';
+import {Sojourn} from './sojourn';
 
 export interface Alternative {
-    roomsHotels?: {DaysInRoom: number; Room: Room }[];
+    sojournList?: Sojourn[];
     days?: number;
 }

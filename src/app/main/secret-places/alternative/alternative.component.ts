@@ -2,6 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Alternative} from '../../interfaceDB/alternative';
 import {SecretPlacesService} from '../secret-places.service';
 import {Router} from '@angular/router';
+import {Booking} from "../../interfaceDB/booking";
+import {SpringService} from "../../spring.service";
 
 @Component({
     selector: 'app-alternative',
@@ -16,11 +18,12 @@ export class AlternativeComponent implements OnInit {
 
     constructor(
         private _alternativeService: SecretPlacesService,
-        private router: Router
+        private router: Router,
+        private _springService: SpringService
     ) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.alternative = this._alternativeService.getAlternative();
         this.startingDate = this._alternativeService.getStartingDate();
         console.log(JSON.stringify(this.alternative));
@@ -28,9 +31,10 @@ export class AlternativeComponent implements OnInit {
     }
 
     createNewBooking(id: number): void{
-        console.log('prenota alternativa: ' + id);
+        const newB: Booking = { sojourns: this.alternative[id].sojournList };
+        this._springService.newBooking(newB).subscribe();
+        this.router.navigate(['']);
+    } // TODO => cosa farà dopo aver salvato booking?
 
-
-    }
 
 }
