@@ -1,6 +1,6 @@
 import {Sojourn} from './sojourn';
 
 export interface Alternative {
-    sojournList?: Sojourn[];
+    sojourns?: Sojourn[];
     days?: number;
 }

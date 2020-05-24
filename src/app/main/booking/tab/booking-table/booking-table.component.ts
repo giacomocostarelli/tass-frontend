@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {Booking} from '../../../interfaceDB/booking';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import {SpringService} from "../../../spring.service";
 
 @Component({
     selector: 'booking-table',
@@ -11,17 +12,29 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 })
 export class BookingTableComponent implements OnInit {
 
-    @Input() booking: Booking[];
+    booking: Booking[];
     @Input() showDetail: boolean;
     @Output() showDetailChange = new EventEmitter<boolean>();
     @Input() bookingDetailItem: Booking;
     @Output() bookingDetailItemChange = new EventEmitter<Booking>();
     @Input() paid: boolean;
 
-    constructor() {
+    constructor(
+        private _springService: SpringService
+    ) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
+        if (this.paid){
+            this._springService.getPaidBooking()
+                .subscribe(b => this.booking = b);
+        }else {
+            this._springService.getSavedBooking()
+                .subscribe(b => {
+                    this.booking = b;
+                    console.log(this.paid + ':    ' + JSON.stringify(this.booking));
+                });
+        }
     }
 
     showBookingDetail(b: Booking): void {
@@ -31,8 +44,13 @@ export class BookingTableComponent implements OnInit {
         this.bookingDetailItemChange.emit(this.bookingDetailItem);
     }
 
-    onClose(index: number): void {
-        this.booking.splice(index, 1);
+    delete(id: number): void { // TODO chiamare server e cancellare prenotazione
+        if (confirm('Are you sure to delete this booking?')){
+            this._springService.deleteBooking(id).subscribe( x =>
+                this.booking.splice(this.booking.findIndex(b => b.id === id), 1)
+            );
+
+        }
     }
 
 }

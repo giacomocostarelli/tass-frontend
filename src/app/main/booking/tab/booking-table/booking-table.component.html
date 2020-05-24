@@ -1,10 +1,7 @@
 <div id="cards" class="page-layout simple fullwidth">
     <div class="cards">
-        <div class="fuse-card" *ngFor="let b of booking; let i = index">
+        <div class="fuse-card" *ngFor="let b of booking;">
             <div class="position-relative">
-                <button mat-icon-button class="deep-orange-800-fg" (click)="onClose(i)">
-                    <mat-icon>close</mat-icon>
-                </button>
                 <img src="assets/images/cards/card3.jpg">
                 <div class="position-absolute font-size-20 fuse-white-fg p-16 align-left align-bottom">
                     Top 10 Holiday Locations
@@ -20,9 +17,10 @@
             </div>
 
             <div class="p-8 pt-0" fxLayout="row" fxLayoutAlign="start center">
-                <button mat-button class="deep-orange-800-fg" color="accent">Prenota</button>
-                <button mat-button class="deep-orange-800-fg" color="accent" (click)="showBookingDetail(b)">Dettagli
+                <button *ngIf="!paid" mat-button class="deep-orange-800-fg" color="accent" (click)="delete(b.id)">Cancella
+                    <mat-icon>close</mat-icon>
                 </button>
+                <button mat-button class="deep-orange-800-fg" color="accent" (click)="showBookingDetail(b)">Dettagli</button>
             </div>
 
         </div>

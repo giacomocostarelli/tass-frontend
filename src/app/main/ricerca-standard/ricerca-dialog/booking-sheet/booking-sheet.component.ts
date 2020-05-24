@@ -19,7 +19,6 @@ export class BookingSheetComponent implements OnInit {
 
     ngOnInit(): void {
          this._springService.getBookingsID().subscribe( list => this.listID = list);
-         console.log(this.listID);
     }
 
     selectBooking(num: number): void {
