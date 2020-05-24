@@ -16,12 +16,11 @@
                 <!-- APP TITLE -->
                 <div class="logo mb-24 mb-md-0"
                      fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon class="logo-icon s-32 mr-16 deep-orange-50-fg"
+                    <mat-icon class="logo-icon s-32 mx-24 deep-orange-50-fg"
                               [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
                         golf_course
                     </mat-icon>
-                    <span class="logo-text h1 deep-orange-50-fg"
-                          [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <span class="logo-text h1 deep-orange-50-fg">
                     Trova il tuo hotel ideale e confronta i prezzi di tantissimi siti web!
                 </span>
                 </div>
@@ -42,7 +41,6 @@
                                    matInput
                                    placeholder="States Group"
                                    formControlName="city"
-
                                    #i
                                    [matAutocomplete]="autoGroup">
                             <mat-autocomplete #autoGroup="matAutocomplete">
@@ -124,7 +122,9 @@
                     <ng-container matColumnDef="image">
                         <mat-header-cell *matHeaderCellDef></mat-header-cell>
                         <mat-cell *matCellDef="let product">
-                            IMMAGINE
+                            <img src="../../../assets/images/cards/card1.jpg"
+                                 class="m-8"
+                                 alt="Destinazione">
                             <!--<img class="product-image"
                                  *ngIf="product.featuredImageId" [alt]="product.name"
                                  [src]="product.images[product.featuredImageId].url"/>
@@ -135,9 +135,9 @@
 
                     <!-- Name Hotel Column -->
                     <ng-container matColumnDef="hotel_name">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Hotel</mat-header-cell>
+                        <mat-header-cell class="ml-8" *matHeaderCellDef mat-sort-header>Hotel</mat-header-cell>
                         <mat-cell *matCellDef="let product">
-                            <p class="text-truncate">{{product.hotel.name}}</p>
+                            <p class="ml-8 text-truncate">{{product.hotel.name}}</p>
                         </mat-cell>
                     </ng-container>
 
@@ -147,8 +147,9 @@
                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Price</mat-header-cell>
                         <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                             <p class="price text-truncate">
-                                {{product.pricePerNight | currency:'USD':'symbol'}}
+                                {{product.pricePerNight}}
                             </p>
+                            <mat-icon class="deep-orange-800-fg m-8">euro_symbol</mat-icon>
                         </mat-cell>
                     </ng-container>
 
@@ -157,7 +158,8 @@
                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Numero Posti
                         </mat-header-cell>
                         <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
-                            <p>{{product.numPlaces}}</p>
+                            <p>{{product.numPlaces}} </p>
+                            <mat-icon class="deep-orange-800-fg m-8">hotel</mat-icon>
                             <!--<span class="quantity-indicator text-truncate"
                                   [ngClass]="{'red-500':product.quantity <= 5, 'amber-500':product.quantity > 5 && product.quantity <= 25,'green-600':product.quantity > 25}">
                             </span>-->
@@ -169,7 +171,7 @@
                     <ng-container matColumnDef="hotel_stars">
                         <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Stelle</mat-header-cell>
                         <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
-                            {{product.hotel.stars}}
+                            <stars [starsNumber]="product.hotel.stars"></stars>
                             <!--<mat-icon *ngIf="product.active" class="active-icon green-600 s-16">check</mat-icon>
                             <mat-icon *ngIf="!product.active" class="active-icon red-500 s-16">close</mat-icon>-->
                         </mat-cell>

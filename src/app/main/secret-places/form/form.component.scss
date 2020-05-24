@@ -3,7 +3,7 @@
     .content {
 
         form {
-            width: 100%;
+            width: 80%;
             max-width: 800px !important;
         }
 
@@ -22,3 +22,52 @@
 
     }
 }
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+    position: sticky;
+    width: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+    position: absolute;
+    z-index: 100;
+    color: #fff;
+    top: 10%;
+    left: 15%;
+    right: 15%;
+    margin-bottom: 50px;
+}
+
+blockquote p {
+    font-size: 51px;
+}
+
+blockquote footer {
+    font-size: 33px;
+}
+
+mark {
+    background: rgba(0, 0, 0, 0.30); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+}
+
+.seconda-meta {
+    position: relative;
+    margin-left: 16px;
+    margin-top: 80px;
+    padding-left: 5px;
+    padding-right:  5px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.30); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    font-size: 60px;
+}
+.preform {
+
+    width: 90%;
+    margin:auto;
+    margin-top: 40px;
+}
+

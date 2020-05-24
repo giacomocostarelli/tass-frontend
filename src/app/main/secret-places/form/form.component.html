@@ -1,5 +1,37 @@
-<div class="page-layout blank p-24 deep-orange-50-bg" fusePerfectScrollbar>
-    <div class="vertical-stepper-wrapper">
+<div class="page-layout blank  deep-orange-50-bg" fusePerfectScrollbar>
+
+    <!-- INIZIO VIDEO -->
+    <video autoplay muted loop id="myVideo">
+        <source src="../../../../assets/videos/vista-scogli.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+        <h1>
+            <blockquote>
+                <p>
+                    <mark>Le strade sono fatte per i viaggi, non per le destinazioni.</mark>
+                </p>
+                <footer>
+                    Confucio
+                </footer>
+            </blockquote>
+        </h1>
+        <mat-icon [inline]="true"
+                  class="seconda-meta"
+                  id="video-icon"
+                  (click)="scrollToElement(target)">
+            keyboard_arrow_down
+        </mat-icon>
+    </div>
+    <!-- FINE VIDEO-->
+
+
+    <div #target></div>
+    <h1 class="preform deep-orange-800-fg font-size-34">
+        Compila i campi con le tue preferenze e noi di Secret Places
+        provvederemo a creare la vacanza perfetta per te.
+    </h1>
+
+    <div  class="m-80 vertical-stepper-wrapper">
         <form [formGroup]="form">
             <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
 
@@ -60,7 +92,7 @@
                         </form>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="center center">
-                        <button mat-raised-button matStepperNext class="deep-orange-800-bg fuse-white-fg" type="button" >
+                        <button mat-raised-button matStepperNext class="deep-orange-800-bg fuse-white-fg" type="button">
                             Successivo
                         </button>
                     </div>
@@ -94,7 +126,8 @@
                     </div>
 
                     <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious type="button" color="accent">
+                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious
+                                type="button" color="accent">
                             Precedente
                         </button>
                         <button mat-raised-button matStepperNext type="button" class="deep-orange-800-bg fuse-white-fg">
@@ -142,7 +175,8 @@
                     </div>
 
                     <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious type="button" color="accent">
+                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious
+                                type="button" color="accent">
                             Precedente
                         </button>
                         <button mat-raised-button matStepperNext type="button" class="deep-orange-800-bg fuse-white-fg">
@@ -192,7 +226,8 @@
                     </div>
 
                     <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious type="button" >
+                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious
+                                type="button">
                             Precedente
                         </button>
                         <button mat-raised-button matStepperNext type="button" class="deep-orange-800-bg fuse-white-fg">
@@ -237,7 +272,8 @@
                     </div>
 
                     <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious type="button" color="accent">
+                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious
+                                type="button" color="accent">
                             Precedente
                         </button>
                         <button mat-raised-button matStepperNext type="button" class="deep-orange-800-bg fuse-white-fg">
@@ -258,10 +294,12 @@
                     </div>
 
                     <div fxLayout="row" fxLayoutAlign="center center">
-                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious type="button" >
+                        <button class="mr-8 deep-orange-800-bg fuse-white-fg" mat-raised-button matStepperPrevious
+                                type="button">
                             Precedente
                         </button>
-                        <button mat-raised-button type="button" class="deep-orange-800-bg fuse-white-fg" [disabled]="form.invalid"
+                        <button mat-raised-button type="button" class="deep-orange-800-bg fuse-white-fg"
+                                [disabled]="form.invalid"
                                 (click)="finishVerticalStepper()">
                             Finito
                         </button>

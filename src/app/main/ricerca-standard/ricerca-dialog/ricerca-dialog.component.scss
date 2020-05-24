@@ -2,7 +2,6 @@
 
 .form-dialog {
     width: 60%;
-
     @include media-breakpoint('xs') {
         width: 100%;
         .container {

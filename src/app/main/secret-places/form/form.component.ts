@@ -100,8 +100,8 @@ export class FormComponent implements OnInit {
         this.form.removeControl('dep'); //da sistemare
         this._springService.searchClips(this.form.value)
             .subscribe(alternatives => {
-                    this._alternativeService.setAlternative(alternatives);
-                    console.log('form: ' + JSON.stringify(alternatives));
+                this._alternativeService.setAlternative(alternatives);
+                console.log('form: ' + JSON.stringify(alternatives));
             });
         this.router.navigate(['secret_places/result']);
     }
@@ -148,5 +148,12 @@ export class FormComponent implements OnInit {
         }
         const timestamp = typeof value === 'number' ? value : Date.parse(value);
         return isNaN(timestamp) ? null : new Date(timestamp);
+    }
+
+
+    scrollToElement($element): void {
+        console.log($element);
+        $element.scrollIntoView();
+
     }
 }

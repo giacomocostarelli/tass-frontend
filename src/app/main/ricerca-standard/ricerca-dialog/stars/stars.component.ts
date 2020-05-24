@@ -13,7 +13,6 @@ export class StarsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.starsNumber);
     }
 
 }
