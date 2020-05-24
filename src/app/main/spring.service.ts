@@ -23,8 +23,7 @@ export class SpringService {
     constructor(
         private http: HttpClient,
         private router: Router
-    ) {
-    }
+    ) {}
 
     // SEARCH
     searchClips(formdata: any): Observable<Alternative[]> {
@@ -48,7 +47,7 @@ export class SpringService {
     // REGISTER
     register(form: Guest): Observable<string> {
         const url = `${this.serverUrl}/guests/register`;
-        return this.http.post<string>(url, form)
+        return this.http.post(url, form, {responseType: 'text'})
             .pipe(
                 catchError(this.handleError<string>('postRegisterItem', 'failed registration'))
             );
@@ -58,8 +57,7 @@ export class SpringService {
     // LOGIN
     login(email: string, pwd: string | Int32Array): Observable<any> {
         const url = `${this.serverUrl}/guests/login`;
-        const param = {email: email, pwd: pwd};
-        return this.http.post<any>(url, param)
+        return this.http.post<any>(url, {email: email, pwd: pwd})
             .pipe(
                 catchError(this.handleError<any>('guestLogin', null))
             );
@@ -67,8 +65,7 @@ export class SpringService {
 
     socialLogin(): Observable<number> { // da modificare perchè non torna l'id
         const url = `${this.serverUrl}/guests/socialLogin`;
-        const g = localStorage.getItem('user') as Guest;
-        return this.http.post<number>(url, g)
+        return this.http.post<number>(url, this.getUser())
             .pipe(
                 catchError(this.handleError<number>('socialLogin', null))
             );
@@ -77,9 +74,8 @@ export class SpringService {
     // BOOKINGS
     getSavedBooking(): Observable<Booking[]> {
         const url = `${this.serverUrl}/bookings/saved/${JSON.stringify(this.getUser().id)}`;
-        const headers = new HttpHeaders({'token_info': this.getToken()});
 
-        return this.http.get<Booking[]>(url, {headers: headers})
+        return this.http.get<Booking[]>(url, {headers: this.getHeaderWithToken()})
             .pipe(
                 catchError(this.handleError<any>('getSavedBooking', []))
             );
@@ -87,9 +83,8 @@ export class SpringService {
 
     getPaidBooking(): Observable<Booking[]> {
         const url = `${this.serverUrl}/bookings/paid/${JSON.stringify(this.getUser().id)}`;
-        const headers = new HttpHeaders({'token_info': this.getToken()});
 
-        return this.http.get<Booking[]>(url, {headers: headers})
+        return this.http.get<Booking[]>(url, {headers: this.getHeaderWithToken()})
             .pipe(
                 catchError(this.handleError<any>('getPaidBooking', []))
             );
@@ -97,9 +92,8 @@ export class SpringService {
 
     getBookingsID(): Observable<number[]> {
         const url = `${this.serverUrl}/bookings/id/${JSON.stringify(this.getUser().id)}`;
-        const headers = new HttpHeaders({'token_info': this.getToken()});
 
-        return this.http.get<number[]>(url, {headers: headers})
+        return this.http.get<number[]>(url, {headers: this.getHeaderWithToken()})
             .pipe(
                 catchError(this.handleError<any>('getBookingsID', []))
             );
@@ -108,22 +102,26 @@ export class SpringService {
 
     newBooking(booking: Booking): Observable<Booking> {
         const url = `${this.serverUrl}/bookings/insert`;
-        const token = localStorage.getItem('token_info');
-        const headers = new HttpHeaders({'token_info': token});
-        const user = JSON.parse(localStorage.getItem('user')) as Guest;
+        return this.http.post<Booking>(url,
+            {guest: this.getUser().id, booking: booking},
+            {headers: this.getHeaderWithToken()})
+                .pipe(
+                    catchError(this.handleError<Booking>('newBooking', null))
+                );
+    }
 
-        return this.http.post<Booking>(url, {guest: user.id, booking: booking}, {headers: headers})
+    deleteBooking(bookingId: number): Observable<string> {
+        const url = `${this.serverUrl}/bookings/delete/${JSON.stringify(bookingId)}`;
+        return this.http.delete(url, {headers: this.getHeaderWithToken(), responseType: 'text'})
             .pipe(
-                catchError(this.handleError<Booking>('newBooking', null))
+                catchError(this.handleError<string>('deleteBooking', 'failed'))
             );
     }
 
 
     addToExistingBooking(id: number, soj: Sojourn): Observable<Booking> {
         const url = `${this.serverUrl}/bookings/addSojourn`;
-        const token = localStorage.getItem('token_info');
-        const headers = new HttpHeaders({'token_info': token});
-        return this.http.post<Booking>(url, {bookingId: id, sojourn: soj}, {headers: headers})
+        return this.http.post<Booking>(url, {bookingId: id, sojourn: soj}, {headers: this.getHeaderWithToken()})
             .pipe(
                 catchError(this.handleError<Booking>('addSojournToExistingBooking', null))
             );
@@ -133,8 +131,9 @@ export class SpringService {
         return JSON.parse(localStorage.getItem('user')) as Guest;
     }
 
-    private getToken(): string{
-        return localStorage.getItem('token_info');
+    private getHeaderWithToken(): HttpHeaders{
+        const token = localStorage.getItem('token_info');
+        return new HttpHeaders({token_info: token});
     }
 
     /**
@@ -161,4 +160,11 @@ export class SpringService {
         };
     }
 
+    payBooking(id: number, s: number): any {
+        const url = `${this.serverUrl}/bookings/pay`;
+        return this.http.post<any>(url, {bookingId: id, totalPayment: s},{headers: this.getHeaderWithToken()})
+            .pipe(
+                catchError(this.handleError<string>('payBooking', 'failed'))
+            );
+    }
 }

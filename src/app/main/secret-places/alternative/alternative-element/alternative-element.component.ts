@@ -14,6 +14,7 @@ export class AlternativeElementComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        console.log(this.alternative);
     }
 
     newBooking(): void{

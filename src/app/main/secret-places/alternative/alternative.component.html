@@ -21,14 +21,14 @@
 
         <!-- PRICE TABLES -->
         <div class="price-tables" fxLayout="row wrap" fxLayoutAlign="center center">
-            <!-- aggiungere un ngif somma (alternative days) == 0 per quando non si trovano risultati-->
             <!-- ALTERNATIVA migliore dovrebbe avere mat-elevation-z12 in class-->
             <div *ngFor="let alt of alternative; let i=index" class="price-table style-3 mat-elevation-z4" fxLayout="column">
-                <alternative-element
+                <alternative-element *ngIf="alt.days > 0"
                     [alternative]="alt"
                     [numberAlternative]="i"
                     (newBookingParent)="createNewBooking($event)"
                 ></alternative-element>
+                <p *ngIf="alt.days===0"> Spiacenti, non ci sono ulteriori offerte per questi filtri di ricerca</p>
             </div>
         </div>
         <!-- / PRICE TABLES -->

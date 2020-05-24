@@ -1,6 +1,6 @@
 <div class="package-type">
-    <div class="title">Alternativa di Marcolino</div>
-    <div class="subtitle">lol</div>
+    <div class="title">Offerta {{numberAlternative + 1}}</div>
+    <div class="subtitle">{{alternative.days}} giorni </div>
 </div>
 
 <div class="price primary-300" fxLayout="row" fxLayoutAlign="center start">
@@ -11,15 +11,20 @@
     </div>
 </div>
 
-<div class="terms" fxLayout="column" fxLayoutAlign="start center" *ngFor="let room of alternative.roomsHotels">
-    <div class="term">Hotel: {{room.Room.hotel.name}}</div>
-    <div class="term">Situato in : {{room.Room.hotel.city.name}} - {{room.Room.hotel.city.region}}</div>
-    <div class="term">Prezzo per notte: {{room.Room.pricePerNight}}</div>
-    <div class="term">Posti letto: {{room.Room.numPlaces}}</div>
-    <div class="term">giorni: {{room.DaysInRoom}}</div>
+<div class="terms" fxLayout="column" fxLayoutAlign="start center" *ngFor="let sojourn of alternative.sojourns">
+    <div class="term">da: {{sojourn.arrival}}  a: {{sojourn.departure}}</div>
+    <div class="term">Hotel: {{sojourn.room.hotel.name}}</div>
+    <div class="term">Situato in : {{sojourn.room.hotel.city.name}} - {{sojourn.room.hotel.city.region}}</div>
+    <div class="term">Prezzo per notte: {{sojourn.room.pricePerNight}}</div>
+    <div class="term">Posti letto: {{sojourn.room.numPlaces}}</div>
 <!--ci servirebbe un divisore ma mat-diviser non va-->
 </div>
 
-<button mat-raised-button class="cta-button" color="accent" (click)="newBookingParent.next(this.numberAlternative)">Prenota</button>
+<button mat-raised-button class="cta-button" color="accent" (click)="newBookingParent.next(this.numberAlternative)">
+    Prenota
+    <mat-icon class="logo-icon s-32 mr-16 deep-orange-50-fg">
+        add_shopping_cart
+    </mat-icon>
+</button>
 
 <div class="note">7 day free trial to start</div>
