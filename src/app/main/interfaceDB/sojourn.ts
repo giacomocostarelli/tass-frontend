@@ -5,4 +5,5 @@ export interface Sojourn {
     arrival?: string;
     departure?: string;
     room?: Room;
+    totalPrice?: number;
 }

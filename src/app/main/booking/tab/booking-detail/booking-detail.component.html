@@ -45,10 +45,11 @@
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
                                 <div class="terms" fxLayout="column" fxLayoutAlign="start center" *ngFor="let sojourn of bookingDetailItem.sojourns">
-                                    <div class="term">da: {{sojourn.departure}}  a: {{sojourn.arrival}}</div>
+                                    <div class="term">da: {{sojourn.arrival}}  a: {{sojourn.departure}}</div>
                                     <div class="term">Hotel: {{sojourn.room.hotel.name}}</div>
                                     <div class="term">Situato in : {{sojourn.room.hotel.city.name}} - {{sojourn.room.hotel.city.region}}</div>
                                     <div class="term">Prezzo per notte: {{sojourn.room.pricePerNight}}</div>
+                                    <div class="term">Prezzo totale: {{sojourn.totalPrice}}</div>
                                     <div class="term">Posti letto: {{sojourn.room.numPlaces}}</div>
                                     <!--ci servirebbe un divisore ma mat-diviser non va-->
                                 </div>
@@ -89,7 +90,9 @@
                         <mat-tab *ngIf="!paid" label="Pricing">
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
-
+                                <div class="p-16 pt-0 line-height-1.75">
+                                    Totale: {{bookingDetailItem.totalPrice}}
+                                </div>
                                 <button (click)="PayBooking()"> paga bello</button>
 
                             </div>

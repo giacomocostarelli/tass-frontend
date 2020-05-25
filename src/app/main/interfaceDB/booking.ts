@@ -6,4 +6,5 @@ export interface Booking {
     id?: number;
     sojourns?: Sojourn[];
     rentedItems?: Item[];
+    totalPrice?: number;
 }
