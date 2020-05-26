@@ -18,6 +18,7 @@ declare var FB: any;
     providers: [SpringService]
 })
 export class LoginComponent implements OnInit {
+    // TODO => nel login se user non ha img metterne una di default dall'assets
     auth2: any;
 
     @ViewChild('loginRef', {static: true}) loginElement: ElementRef;
