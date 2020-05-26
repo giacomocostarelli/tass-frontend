@@ -17,11 +17,9 @@
         <link href="assets/icons/meteocons/style.css" rel="stylesheet">
         <link href="assets/icons/material-icons/outline/style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">
-        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-            AOS.init();
-        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
         <!-- FUSE Splash Screen CSS -->
         <style type="text/css">
             #fuse-splash-screen {
@@ -219,6 +217,17 @@
         <!-- / FUSE Splash Screen -->
 
         <app></app>
+
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                easing: 'ease-out-back',
+                duration: 800,
+                delay: 300,
+                once: true,
+                disable: 'mobile'
+            });
+        </script>
 
     </body>
 

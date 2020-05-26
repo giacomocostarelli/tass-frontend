@@ -13,7 +13,7 @@ import {CityService, CityValidator, REGIONS, StateGroup} from '../../city.servic
 import {Alternative} from '../../interfaceDB/alternative';
 import {SecretPlacesService} from '../secret-places.service';
 import {Router} from '@angular/router';
-
+import AOS from 'aos';
 
 @Component({
     selector: 'form-secret-places',
@@ -42,11 +42,12 @@ export class FormComponent implements OnInit {
         private _cityService: CityService,
         private _alternativeService: SecretPlacesService,
         private router: Router
-    ) {
-    }
+
+    ) {}
 
 
     ngOnInit(): void {
+        window.addEventListener('load', AOS.init());
         this.form = this._formBuilder.group({
             cities: this._formBuilder.array([],),
             maxBudget: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})*'), Validators.min(300)]],

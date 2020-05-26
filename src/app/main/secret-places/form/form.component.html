@@ -2,9 +2,9 @@
 
     <!-- INIZIO VIDEO -->
     <video autoplay muted loop id="myVideo">
-        <source src="../../../../assets/videos/vista-scogli.mp4" type="video/mp4">
+        <source src="../../../../assets/videos/video1.mp4" type="video/mp4">
     </video>
-    <div class="content">
+    <div data-aos="fade-up" class="content">
         <h1>
             <blockquote>
                 <p>
@@ -25,13 +25,13 @@
     <!-- FINE VIDEO-->
 
 
+
     <div #target></div>
-    <h1 class="preform deep-orange-800-fg font-size-34">
+    <h1 data-aos="fade-up" class="preform deep-orange-800-fg font-size-34">
         Compila i campi con le tue preferenze e noi di Secret Places
         provvederemo a creare la vacanza perfetta per te.
     </h1>
-
-    <div  class="m-80 vertical-stepper-wrapper">
+    <div class="mx-160 my-80 vertical-stepper-wrapper">
         <form [formGroup]="form">
             <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
 
