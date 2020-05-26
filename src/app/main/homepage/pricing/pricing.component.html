@@ -85,12 +85,19 @@
                     </div>
 
                     <button mat-raised-button
-                            disabled
                             class="cta-button deep-orange-800-bg"
+                            *ngIf="logged"
                             color="accent"
                             (click)="menuColorChangerService.changePageSelected('Profilo')"
                             [routerLink]="'/profile'">
                         Vai al Profilo
+                    </button>
+                    <button mat-raised-button
+                            *ngIf="!logged"
+                            class="cta-button deep-orange-800-bg"
+                            color="accent"
+                            [routerLink]="'/login'">
+                        Sign in
                     </button>
 
                 </div>

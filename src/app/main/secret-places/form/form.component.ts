@@ -102,7 +102,6 @@ export class FormComponent implements OnInit {
         this._springService.searchClips(this.form.value)
             .subscribe(alternatives => {
                 this._alternativeService.setAlternative(alternatives);
-                console.log('form: ' + JSON.stringify(alternatives));
             });
         this.router.navigate(['secret_places/result']);
     }
