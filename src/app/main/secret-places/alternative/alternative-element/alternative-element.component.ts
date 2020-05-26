@@ -11,10 +11,12 @@ export class AlternativeElementComponent implements OnInit {
     @Input() alternative: Alternative;
     @Input() numberAlternative: number;
     @Output() newBookingParent = new EventEmitter<number>();
-    constructor() { }
+    logged: boolean;
+    constructor() {
+        this.logged = localStorage.getItem('user') !== null;
+    }
 
-    ngOnInit() {
-        console.log(this.alternative);
+    ngOnInit(): void {
     }
 
     newBooking(): void{

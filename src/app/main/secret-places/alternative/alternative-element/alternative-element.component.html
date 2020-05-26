@@ -20,7 +20,9 @@
 <!--ci servirebbe un divisore ma mat-diviser non va-->
 </div>
 
-<button mat-raised-button class="cta-button" color="accent" (click)="newBookingParent.next(this.numberAlternative)">
+<button mat-raised-button class="cta-button" color="accent"
+        [disabled]="!logged"
+        (click)="newBookingParent.next(this.numberAlternative)">
     Prenota
     <mat-icon class="logo-icon s-32 mr-16 deep-orange-50-fg">
         add_shopping_cart

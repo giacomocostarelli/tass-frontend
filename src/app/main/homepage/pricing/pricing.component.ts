@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {trigger, transition, useAnimation} from '@angular/animations';
 import {fadeInLeft} from 'ng-animate';
 import {MenuColorChangerService} from '../../../menuColorChanger.service';
@@ -20,7 +20,7 @@ import {MenuColorChangerService} from '../../../menuColorChanger.service';
         }))])
     ]
 })
-export class PricingComponent {
+export class PricingComponent implements OnInit{
     zoomIn1: any;
     zoomIn2: any;
     zoomIn3: any;
@@ -28,6 +28,8 @@ export class PricingComponent {
     visible1 = false;
     visible2 = false;
     visible3 = false;
+
+    logged: boolean
 
     constructor(private menuColorChangerService: MenuColorChangerService) {
         setTimeout(() => {
@@ -41,5 +43,9 @@ export class PricingComponent {
         setTimeout(() => {
             this.visible3 = true;
         }, 1600);
+    }
+
+    ngOnInit(): void {
+        this.logged = localStorage.getItem('user') !== null;
     }
 }

@@ -26,7 +26,6 @@ export class AlternativeComponent implements OnInit {
     ngOnInit(): void {
         this.alternative = this._alternativeService.getAlternative();
         this.startingDate = this._alternativeService.getStartingDate();
-        console.log(JSON.stringify(this.alternative));
         // if (this.alternative.length === 0){ this.router.navigate(['/secret_places'])}
     }
 
