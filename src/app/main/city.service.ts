@@ -4,8 +4,7 @@ import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {City} from './interfaceDB/city';
 import {catchError, map} from 'rxjs/operators';
-import {AbstractControl, FormArray, ValidationErrors, ValidatorFn} from '@angular/forms';
-
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 
 export const REGIONS: string[] = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania',
@@ -20,10 +19,10 @@ export interface StateGroup {
 }
 
 @Injectable({providedIn: 'root'})
-export class CityService{
+export class CityService {
 
-     // private serverUrl = 'http://localhost:8080';
-     private serverUrl = 'http://82.54.103.107:8080';
+    // private serverUrl = 'http://localhost:8080';
+    private serverUrl = 'http://82.54.103.107:8080';
     sortedCity: StateGroup[] = [];
     cityRegion: Map<string, string> = new Map();
     httpOptions = {
@@ -45,10 +44,12 @@ export class CityService{
             );
     }
 
-    getSortedCity(updatelist: boolean = true): Observable<StateGroup[]>{
+    getSortedCity(updatelist: boolean = true): Observable<StateGroup[]> {
         /*this.sortCity([{name: 'Cagliari'}, {name: 'China'}]);
         return of(this.sortedCity);*/
-        if (updatelist === false){ return of(this.sortedCity); }
+        if (updatelist === false) {
+            return of(this.sortedCity);
+        }
         this.getCity().subscribe((res) => this.sortCity(res));
         return of(this.sortedCity);
     }
@@ -75,6 +76,7 @@ export class CityService{
     getRegion(city: string): string {
         return this.cityRegion.get(city);
     }
+
     /*getAllHotels(): Observable<Hotel[]> {
         const url = `${this.serverUrl}/hotels`;
         return this.http.get<Hotel[]>(url)
@@ -102,7 +104,7 @@ export class CityService{
     }
 }
 
-export class CityValidator{
+export class CityValidator {
 
     static checkCity(_cityService: CityService): ValidatorFn | null {
         return (control: AbstractControl): ValidationErrors | null => {
@@ -110,35 +112,15 @@ export class CityValidator{
             _cityService.getSortedCity(false).subscribe(
                 (value: StateGroup[]) => listCityGroup = value);
             let exist = false;
-            if (control.value === ''){ return null; }
+            if (control.value === '') {
+                return null;
+            }
             listCityGroup.forEach(value => {
                 if (value.letter === control.value[0].toUpperCase() && value.names.indexOf(control.value) >= 0) {
                     exist = true;
                 }
             });
             return exist ? null : {'checkCity': true};
-            /*if (typeof control.value === 'string' && control.value !== ''){ // check per ricerca standard che passa una stringa
-                let exist = false;
-                listCityGroup.forEach(value => {
-                    if (value.letter === control.value[0].toUpperCase() && value.names.indexOf(control.value) >= 0) {
-                        exist = true;
-                    }
-                });
-                return exist ? null : {'checkCity': true};
-            }else{ // check per ricerca clips che passa un array di città
-                for (const city of control.value) {
-                    let exist = false;
-                    listCityGroup.forEach(value => {
-                        if (value.letter === city.name[0].toUpperCase() && value.names.indexOf(city.name) >= 0) {
-                            exist = true;
-                        }
-                    });
-                    if (!exist) {
-                        return { 'checkCity': true};
-                    }
-                }
-            }
-            return null;*/
         };
     }
 }

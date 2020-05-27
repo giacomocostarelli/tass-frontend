@@ -42,8 +42,8 @@ export class FormComponent implements OnInit {
         private _cityService: CityService,
         private _alternativeService: SecretPlacesService,
         private router: Router
-
-    ) {}
+    ) {
+    }
 
 
     ngOnInit(): void {

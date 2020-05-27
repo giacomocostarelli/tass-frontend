@@ -1,24 +1,41 @@
 <div class="package-type">
     <div class="title">Offerta {{numberAlternative + 1}}</div>
-    <div class="subtitle">{{alternative.days}} giorni </div>
+    <div class="subtitle">{{alternative.days}} giorni</div>
 </div>
 
 <div class="price primary-300" fxLayout="row" fxLayoutAlign="center start">
     <div class="currency">$</div>
     <div fxLayout="row" fxLayoutAlign="center end">
         <div class="value">{{alternative.totalPrice}}</div>
-        <div class="period">masdadsaar</div>
+        <div class="period">IVA inclusa</div>
     </div>
 </div>
 
-<div class="terms" fxLayout="column" fxLayoutAlign="start center" *ngFor="let sojourn of alternative.sojourns">
-    <div class="term">da: {{sojourn.arrival}}  a: {{sojourn.departure}}</div>
-    <div class="term">Hotel: {{sojourn.room.hotel.name}}</div>
-    <div class="term">Situato in : {{sojourn.room.hotel.city.name}} - {{sojourn.room.hotel.city.region}}</div>
-    <div class="term">Prezzo per notte: {{sojourn.room.pricePerNight}}</div>
-    <div class="term">Posti letto: {{sojourn.room.numPlaces}}</div>
-<!--ci servirebbe un divisore ma mat-diviser non va-->
-</div>
+<mat-list class="terms" fxLayout="column" fxLayoutAlign="start center" *ngFor="let sojourn of alternative.sojourns">
+    <mat-list-item class="term">
+        <mat-icon class="deep-orange-800-fg m-8">date_range</mat-icon>
+        da: {{sojourn.arrival}}  a: {{sojourn.departure}}
+    </mat-list-item>
+
+    <mat-list-item class="term">
+        <mat-icon class="deep-orange-800-fg m-8">domain</mat-icon>
+        {{sojourn.room.hotel.name}}
+    </mat-list-item>
+
+    <mat-list-item class="term">
+        <mat-icon class="deep-orange-800-fg m-8">place</mat-icon>
+        {{sojourn.room.hotel.city.name}} - {{sojourn.room.hotel.city.region}}
+    </mat-list-item>
+
+    <mat-list-item class="term">
+        <mat-icon class="deep-orange-800-fg m-8">euro_symbol</mat-icon>
+        {{sojourn.room.pricePerNight}}</mat-list-item>
+
+    <mat-list-item class="term">
+        <mat-icon class="deep-orange-800-fg m-8">hotel</mat-icon>
+        {{sojourn.room.numPlaces}}
+    </mat-list-item>
+</mat-list>
 
 <button mat-raised-button class="cta-button" color="accent"
         [disabled]="!logged"
@@ -29,4 +46,4 @@
     </mat-icon>
 </button>
 
-<div class="note">7 day free trial to start</div>
+<div class="note">Rimborsi avviabili fino a 30 giorni prima della partenza!</div>

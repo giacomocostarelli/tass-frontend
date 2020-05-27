@@ -6,9 +6,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import 'animate.compat.css';
 
 @NgModule({
-    declarations: [
-
-    ],
+    declarations: [],
     imports: [
         MaterialModule,
         FuseSharedModule,

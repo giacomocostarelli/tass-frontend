@@ -1,4 +1,4 @@
-.vertical-stepper-wrapper{
+.vertical-stepper-wrapper {
     margin: auto auto 50px;
 }
 
@@ -37,12 +37,13 @@ blockquote footer {
     margin-left: 16px;
     margin-top: 80px;
     padding-left: 5px;
-    padding-right:  5px;
+    padding-right: 5px;
     z-index: 100;
     background: rgba(0, 0, 0, 0.30); /* Black background with 0.5 opacity */
     color: #f1f1f1; /* Grey text */
     font-size: 60px;
 }
+
 .preform {
     width: 70%;
     margin-top: 40px;
@@ -52,38 +53,39 @@ blockquote footer {
     text-align: center;
 }
 
-.explanation-sp{
+.explanation-sp {
     width: 70%;
     margin: auto;
 
-    .explanation-sx{
+    .explanation-sx {
         font-size: 27px;
         text-align: justify;
         padding: 15px;
     }
 
-    .explanation-dx{
+    .explanation-dx {
         font-size: 27px;
         text-align: justify;
         padding: 15px;
 
     }
+
     mark {
-        background:rgba(255, 229, 0, 0.50);
+        background: rgba(255, 229, 0, 0.50);
 
     }
 }
 
-.explanation-clips{
+.explanation-clips {
     width: 70%;
     margin: auto;
 
-    .clips-sx{
+    .clips-sx {
         margin: 20px;
         padding: 15px;
     }
 
-    .clips-dx{
+    .clips-dx {
         font-size: 27px;
         text-align: justify;
         padding: 15px;

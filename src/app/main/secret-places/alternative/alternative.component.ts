@@ -2,8 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Alternative} from '../../interfaceDB/alternative';
 import {SecretPlacesService} from '../secret-places.service';
 import {Router} from '@angular/router';
-import {Booking} from "../../interfaceDB/booking";
-import {SpringService} from "../../spring.service";
+import {Booking} from '../../interfaceDB/booking';
+import {SpringService} from '../../spring.service';
 
 @Component({
     selector: 'app-alternative',
@@ -29,8 +29,8 @@ export class AlternativeComponent implements OnInit {
         // if (this.alternative.length === 0){ this.router.navigate(['/secret_places'])}
     }
 
-    createNewBooking(id: number): void{
-        const newB: Booking = { sojourns: this.alternative[id].sojourns };
+    createNewBooking(id: number): void {
+        const newB: Booking = {sojourns: this.alternative[id].sojourns};
         this._springService.newBooking(newB).subscribe();
         this.router.navigate(['']);
     } // TODO => cosa farà dopo aver salvato booking?

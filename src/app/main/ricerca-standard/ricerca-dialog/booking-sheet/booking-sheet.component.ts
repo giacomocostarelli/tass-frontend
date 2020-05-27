@@ -1,11 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import {SpringService} from "../../../spring.service";
+import {SpringService} from '../../../spring.service';
 
 @Component({
     selector: 'app-booking-sheet',
-    templateUrl: './booking-sheet.component.html',
-    styleUrls: ['./booking-sheet.component.scss']
+    templateUrl: './booking-sheet.component.html'
 })
 export class BookingSheetComponent implements OnInit {
 

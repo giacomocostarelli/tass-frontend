@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation, Inject, Input} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Sojourn} from '../../interfaceDB/sojourn';
 import {Booking} from '../../interfaceDB/booking';

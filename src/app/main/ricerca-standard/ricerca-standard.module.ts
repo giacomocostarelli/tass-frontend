@@ -9,8 +9,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {FuseSharedModule} from '@fuse/shared.module';
 import {MaterialModule} from '../../angular-material/material.module';
-import { RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
-import { BookingSheetComponent } from './ricerca-dialog/booking-sheet/booking-sheet.component';
+import {RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
+import {BookingSheetComponent} from './ricerca-dialog/booking-sheet/booking-sheet.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {StarsComponent} from './ricerca-dialog/stars/stars.component';
 
