@@ -4,11 +4,14 @@
     <video autoplay muted loop id="myVideo">
         <source src="../../../../assets/videos/video1.mp4" type="video/mp4">
     </video>
-    <div data-aos="fade-up" class="content">
+    <div class="content"
+         data-aos="fade-up"
+         data-aos-delay="700"
+         data-aos-duration="1300">
         <h1>
             <blockquote>
                 <p>
-                    <mark>Le strade sono fatte per i viaggi, non per le destinazioni.</mark>
+                    <mark class="marked-grigio">Le strade sono fatte per i viaggi, non per le destinazioni.</mark>
                 </p>
                 <footer>
                     Confucio
@@ -25,13 +28,77 @@
     <!-- FINE VIDEO-->
 
 
-
+    <!-- ANCHOR PER FRECCIA SLIDER VIDEO-->
     <div #target></div>
-    <h1 data-aos="fade-up" class="preform deep-orange-800-fg font-size-34">
+
+
+    <!-- INIZIO SECRET PLACES TESTUALE -->
+    <h1 class="preform deep-orange-800-fg font-size-40">
         Compila i campi con le tue preferenze e noi di Secret Places
         provvederemo a creare la vacanza perfetta per te.
     </h1>
-    <div class="mx-160 my-80 vertical-stepper-wrapper">
+    <br>
+    <div class="explanation-sp">
+        <div fxFlex="row" fxLayoutAlign="center center">
+            <p class="explanation-sx">
+                Dicono che il mondo sia un libro e quelli che non viaggiano leggono solo una pagina.
+                <mark class="deep-orange-800-fg">Secret Places</mark>
+                è nata da persone con la passione per i viaggi la cui missione è quella
+                di aiutare i viaggiatori a trovare quel posto assolutamente speciale in cui soggiornare,
+                indipendentemente dalle loro preferenze e budget.
+                Offrendo le migliori sistemazioni, i nostri clienti torneranno sicuramente dai loro viaggi
+            </p>
+            <p class="explanation-dx">
+                non solo con un soggiorno memorabile, ma anche con un'esperienza culturale arricchente.
+                Secret Places è stato ideato per aiutarti a scegliere la sistemazione ideale. Forse vuoi seguire un
+                percorso gastronomico, magari fare trekking nei pressi di un rifugio di montagna o semplicemente vuoi
+                ammirare meravigliosi paesaggi. Qualunque siano i tuoi interessi e il tuo budget,
+                <mark class="deep-orange-800-fg">Secret Places</mark>
+                saprà aiutarti a trovare il posto perfetto.
+            </p>
+        </div>
+    </div>
+    <!-- FINE SECRET PLACES TESTUALE -->
+
+
+    <!-- INIZIO CLIPS-->
+    <h1 class="preform deep-orange-800-fg font-size-40">
+        Secret Places: un'Intelligenza Artificiale come motore delle tue ricerche.
+    </h1>
+    <div class="explanation-clips">
+        <div class="mt-" fxFlex="row" fxLayoutAlign="center center">
+            <img src="assets/images/logos/clips-logo.png"
+                 alt="clips-logo"
+                 class="clips-sx">
+
+
+            <p class="clips-dx">
+                Secret Places nasce come un sistema esperto ovvero un programma che cerca di riprodurre
+                le prestazioni di una o più persone esperte in un determinato campo di attività, ed è un'applicazione o
+                una branca
+                dell'intelligenza artificiale. I programmi utilizzati dai sistemi esperti sono in grado di porre in atto
+                procedure di inferenza
+                adeguate alla risoluzione di problemi particolarmente complessi, a cui potrebbe, se posto in una
+                dimensione umana, porre
+                rimedio solo un esperto del settore disciplinare in cui rientra la questione da risolvere. Il linguaggio
+                su cui Secret places
+                si basa è CLIPS ('C' Language Integrated Production System), sviluppato presso il Johnson Space Center
+                della NASA dal 1985 al 1996,
+                è un linguaggio di programmazione basato su regole. Utile per creare sistemi esperti e altri programmi
+                in cui una
+                soluzione euristica è più facile da implementare e mantenere rispetto a una soluzione algoritmica.
+                Essendoscritto in C,
+                CLIPS può essere installato e utilizzato su un'ampia varietà di piattaforme. Dal 1996, CLIPS è
+                disponibile come software di dominio pubblico. <br>
+                <a href="http://www.clipsrules.net/index.html" target="_blank"> - Sito ufficiale CLIPS -</a>
+            </p>
+        </div>
+
+    </div>
+    <!--FINE CLIPS -->
+
+    <!-- INIZIO FORM SECRET PLACES -->
+    <div class="w-70-p vertical-stepper-wrapper">
         <form [formGroup]="form">
             <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
 

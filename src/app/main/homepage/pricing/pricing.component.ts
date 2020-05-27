@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {trigger, transition, useAnimation} from '@angular/animations';
-import {zoomIn} from 'ng-animate';
+import {fadeInLeft} from 'ng-animate';
 import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 @Component({
@@ -9,13 +9,13 @@ import {MenuColorChangerService} from '../../../menuColorChanger.service';
     styleUrls: ['./pricing.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
-        trigger('zoomIn1', [transition('* => *', useAnimation(zoomIn, {
+        trigger('zoomIn1', [transition('* => *', useAnimation(fadeInLeft, {
             params: {timing: 0.5, delay: 1}
         }))]),
-        trigger('zoomIn2', [transition('* => *', useAnimation(zoomIn, {
+        trigger('zoomIn2', [transition('* => *', useAnimation(fadeInLeft, {
             params: {timing: 0.5, delay: 1.25}
         }))]),
-        trigger('zoomIn3', [transition('* => *', useAnimation(zoomIn, {
+        trigger('zoomIn3', [transition('* => *', useAnimation(fadeInLeft, {
             params: {timing: 0.5, delay: 1.5}
         }))])
     ]

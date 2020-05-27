@@ -5,10 +5,9 @@
 
         <div class="hero-text" fxLayout="column" fxLayoutAlign="center center" fxFlex>
 
-            <div class="h1">Simple Pricing!</div>
+            <div class="h1">I migliori viaggi</div>
             <div class="h3">
-                The most advanced customer support tools with a simple and affordable pricing. And you can always try
-                for 30 days, free!
+                Con i dati da te forniti queste sono le 3 migliori offerte possibili
             </div>
 
         </div>
@@ -26,14 +25,14 @@
                 <alternative-element *ngIf="alt.days > 0"
                     [alternative]="alt"
                     [numberAlternative]="i"
-                    (newBookingParent)="createNewBooking($event)"
-                ></alternative-element>
+                    (newBookingParent)="createNewBooking($event)">
+                </alternative-element>
                 <p *ngIf="alt.days===0"> Spiacenti, non ci sono ulteriori offerte per questi filtri di ricerca</p>
             </div>
         </div>
         <!-- / PRICE TABLES -->
 
-        <div class="faq" fxLayout="row wrsap">
+        <div class="faq" fxLayout="row wrap">
 
             <div class="title" fxFlex="100">Frequently Asked Questions</div>
 
