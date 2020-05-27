@@ -13,7 +13,7 @@ import {Sojourn} from './interfaceDB/sojourn';
 export class SpringService {
 
     // private serverUrl = 'http://localhost:8080';
-     private serverUrl = 'http://82.56.152.69:8080';
+     private serverUrl = 'http://82.54.103.107:8080';
 
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
