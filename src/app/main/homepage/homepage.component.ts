@@ -3,8 +3,7 @@ import {FuseConfigService} from '../../../@fuse/services/config.service';
 
 @Component({
     selector: 'homepage',
-    templateUrl: './homepage.component.html',
-    styleUrls: ['./homepage.component.scss']
+    templateUrl: './homepage.component.html'
 })
 export class HomepageComponent implements OnInit {
 

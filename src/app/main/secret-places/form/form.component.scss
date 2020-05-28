@@ -1,3 +1,5 @@
+@import "src/@fuse/scss/fuse";
+
 .vertical-stepper-wrapper {
     margin: auto auto 50px;
 }
@@ -17,6 +19,11 @@
     left: 15%;
     right: 15%;
     margin-bottom: 50px;
+
+    @include media-breakpoint('xs') {
+        visibility: hidden;
+    }
+
 }
 
 blockquote p {
@@ -50,12 +57,12 @@ blockquote footer {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 10px;
-    text-align: center;
 }
 
 .explanation-sp {
     width: 70%;
     margin: auto;
+    color: rgba(0, 0, 0, 0.54);
 
     .explanation-sx {
         font-size: 27px;
@@ -79,10 +86,13 @@ blockquote footer {
 .explanation-clips {
     width: 70%;
     margin: auto;
+    color: rgba(0, 0, 0, 0.54);
 
     .clips-sx {
         margin: 20px;
         padding: 15px;
+        height: 200px;
+        width: 200px;
     }
 
     .clips-dx {

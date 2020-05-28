@@ -1,14 +1,11 @@
-<div id="price-tables" class="page-layout simple fullwidth">
+<div id="price-tables" class="page-layout simple fullwidth deep-orange-50-bg">
 
     <!-- HEADER -->
     <div class="header" fxLayout="row" fxLayoutAlign="start start">
 
         <div class="hero-text" fxLayout="column" fxLayoutAlign="center center" fxFlex>
 
-            <div class="h1">I migliori viaggi</div>
-            <div class="h3">
-                Con i dati da te forniti queste sono le 3 migliori offerte possibili
-            </div>
+            <div class="h1">I migliori viaggi con i dati da te forniti</div>
 
         </div>
 
@@ -21,11 +18,12 @@
         <!-- PRICE TABLES -->
         <div class="price-tables" fxLayout="row wrap" fxLayoutAlign="center center">
             <!-- ALTERNATIVA migliore dovrebbe avere mat-elevation-z12 in class-->
-            <div *ngFor="let alt of alternative; let i=index" class="price-table style-3 mat-elevation-z4" fxLayout="column">
+            <div *ngFor="let alt of alternative; let i=index" class="price-table style-3 mat-elevation-z4"
+                 fxLayout="column">
                 <alternative-element *ngIf="alt.days > 0"
-                    [alternative]="alt"
-                    [numberAlternative]="i"
-                    (newBookingParent)="createNewBooking($event)">
+                                     [alternative]="alt"
+                                     [numberAlternative]="i"
+                                     (newBookingParent)="createNewBooking($event)">
                 </alternative-element>
                 <p *ngIf="alt.days===0"> Spiacenti, non ci sono ulteriori offerte per questi filtri di ricerca</p>
             </div>
@@ -34,10 +32,10 @@
 
         <div class="faq" fxLayout="row wrap">
 
-            <div class="title" fxFlex="100">Frequently Asked Questions</div>
+            <div class="title deep-orange-800-fg " fxFlex="100">Frequently Asked Questions</div>
 
             <div class="item" fxFlex="100" fxFlex.gt-xs="50">
-                <div class="question">How does free trial work?</div>
+                <div class="question deep-orange-800-fg ">How does free trial work?</div>
                 <div class="answer">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a diam nec augue tincidunt
                     accumsan. In dignissim laoreet ipsum eu interdum.
@@ -45,7 +43,7 @@
             </div>
 
             <div class="item" fxFlex="100" fxFlex.gt-xs="50">
-                <div class="question">Can I cancel any time?</div>
+                <div class="question deep-orange-800-fg ">Can I cancel any time?</div>
                 <div class="answer">
                     Aliquam erat volutpat. Etiam luctus massa ex, at tempus tellus blandit quis. Sed quis neque tellus.
                     Donec maximus ipsum in malesuada hendrerit.
@@ -53,7 +51,7 @@
             </div>
 
             <div class="item" fxFlex="100" fxFlex.gt-xs="50">
-                <div class="question">What happens after my trial ended?</div>
+                <div class="question deep-orange-800-fg ">What happens after my trial ended?</div>
                 <div class="answer">
                     Aliquam erat volutpat. Etiam luctus massa ex, at tempus tellus blandit quis. Sed quis neque tellus.
                     Donec maximus ipsum in malesuada hendrerit.
@@ -61,16 +59,13 @@
             </div>
 
             <div class="item" fxFlex="100" fxFlex.gt-xs="50">
-                <div class="question">Can I have a discount?</div>
+                <div class="question deep-orange-800-fg ">Can I have a discount?</div>
                 <div class="answer">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a diam nec augue tincidunt
                     accumsan. In dignissim laoreet ipsum eu interdum.
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
 

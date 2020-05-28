@@ -1,4 +1,4 @@
-@import "../../../../@fuse/scss/fuse";
+@import "src/@fuse/scss/fuse";
 
 pricing {
 
@@ -60,7 +60,6 @@ pricing {
         .price-tables {
             flex: 1 0 auto;
             margin-top: -300px;
-            visibility: hidden;
 
             @include media-breakpoint('xs') {
                 margin-top: -128px;
@@ -69,7 +68,6 @@ pricing {
             .price-table {
                 margin: 12px;
             }
-
         }
 
         .price-table-title {
@@ -101,6 +99,7 @@ pricing {
                     text-align: justify;
                     font-size: 22px;
                     line-height: 1.5;
+                    color: rgba(0, 0, 0, 0.54);
                 }
             }
         }

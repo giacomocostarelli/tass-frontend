@@ -37,13 +37,14 @@
     </mat-list-item>
 </mat-list>
 
-<button mat-raised-button class="cta-button" color="accent"
-        [disabled]="!logged"
-        (click)="newBookingParent.next(this.numberAlternative)">
-    Prenota
-    <mat-icon class="logo-icon s-32 mr-16 deep-orange-50-fg">
-        add_shopping_cart
-    </mat-icon>
-</button>
-
+<div fxLayout="row" fxLayoutAlign="center center">
+    <button mat-raised-button class="m-8 cta-button deep-orange-800-bg"
+            color="accent"
+            [disabled]="!logged"
+            (click)="newBookingParent.next(this.numberAlternative)">
+        <mat-icon class="fuse-white-fg">
+            add_shopping_cart
+        </mat-icon>
+    </button>
+</div>
 <div class="note">Rimborsi avviabili fino a 30 giorni prima della partenza!</div>

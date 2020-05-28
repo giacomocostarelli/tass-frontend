@@ -6,7 +6,6 @@
         padding: 24px;
         height: 600px;
         min-height: 600px;
-        background: #1A237E;
         background: linear-gradient(to right, #d84315  0%, #fbe9e7  100%);
 
         @include media-breakpoint('xs') {
@@ -23,6 +22,7 @@
 
             .h1 {
                 color: white;
+                font-family: 'Caveat', cursive;
                 font-size: 48px;
                 font-weight: 400;
                 letter-spacing: 0.01em;
@@ -32,28 +32,15 @@
                     font-size: 32px;
                 }
             }
-
-            .h3 {
-                color: rgba(255, 255, 255, 0.75);
-                max-width: 480px;
-                text-align: center;
-                margin-top: 16px;
-                font-weight: 300;
-                letter-spacing: 0.05em;
-
-                @include media-breakpoint('xs') {
-                    font-size: 14px;
-                }
-            }
         }
     }
 
     .price-tables {
         flex: 1 0 auto;
-        margin-top: -192px;
+        margin-top: -200px;
 
         @include media-breakpoint('xs') {
-            margin-top: -128px;
+            margin-top: -64px;
         }
 
         .price-table {
@@ -64,11 +51,12 @@
     .faq {
         flex: 1 0 auto;
         margin: 96px auto;
-        max-width: 840px;
+        max-width: 1200px;
+        margin-top: 300px;
 
         .title {
-            font-size: 32px;
-            font-weight: 300;
+            font-size: 50px;
+            font-weight: 700;
             text-align: center;
             margin-bottom: 64px;
             padding: 0 16px;
@@ -78,12 +66,12 @@
             padding: 24px;
 
             .question {
-                font-size: 18px;
+                font-size: 25px;
                 margin-bottom: 8px;
             }
 
             .answer {
-                font-size: 16px;
+                font-size: 22px;
                 line-height: 1.5;
                 color: rgba(0, 0, 0, 0.54);
             }
