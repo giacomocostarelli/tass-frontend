@@ -1,7 +1,7 @@
 <div id="product" class="page-layout carded fullwidth inner-scroll">
 
     <!-- CENTER -->
-    <div class="center">
+    <div class="center my-40">
 
         <!-- HEADER -->
         <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
@@ -14,16 +14,17 @@
                 </button>
 
                 <div class="product-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Maja_desnuda_%28museo_del_Prado%29.jpg">
+                    <img src="../../../../../assets/images/profile/a-walk-amongst-friends-small.jpg">
                 </div>
 
                 <div fxLayout="column" fxLayoutAlign="start start"
                      [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     <div class="h2" >
-                        {{bookingDetailItem.id}}
+                        METTERE NOME PRENOTAZIONE
+                        <!-- {{bookingDetailItem.id}}-->
                     </div>
                     <div class="subtitle secondary-text">
-                        <span>Product Detail</span>
+                        <span>Dettagli Prenotazione</span>
                     </div>
                 </div>
             </div>
@@ -41,9 +42,10 @@
 
                     <mat-tab-group>
 
-                        <mat-tab label="Basic Info">
+                        <mat-tab label="Informazioni">
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
+                                <app-image-slider></app-image-slider>
                                 <div class="terms" fxLayout="column" fxLayoutAlign="start center" *ngFor="let sojourn of bookingDetailItem.sojourns">
                                     <div class="term">da: {{sojourn.arrival}}  a: {{sojourn.departure}}</div>
                                     <div class="term">Hotel: {{sojourn.room.hotel.name}}</div>
@@ -68,11 +70,13 @@
                                                (matChipInputTokenEnd)="product.addCategory($event)"/>
 
                                     </mat-chip-list>-->
+
+
                             </div>
 
                         </mat-tab>
 
-                        <mat-tab label="Images">
+                        <mat-tab label="Immagini">
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
                                 <div fxLayout="row wrap" fxLayoutAlign="start start">
@@ -87,7 +91,7 @@
 
                         </mat-tab>
 
-                        <mat-tab *ngIf="!paid" label="Pricing">
+                        <mat-tab *ngIf="!paid" label="Prezzo">
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
                                 <div class="p-16 pt-0 line-height-1.75">

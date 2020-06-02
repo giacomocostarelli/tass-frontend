@@ -6,7 +6,7 @@
 
         <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
              fxLayoutAlign.gt-sm="start center">
-            <img class="profile-image avatar huge" src="{{user.imageUrl}}"
+            <img class="profile-image avatar huge" src="../../../assets/images/avatars/Velazquez.jpg"
                  [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
             <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                 {{user.name}}
@@ -17,7 +17,7 @@
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content">
+    <div class="content deep-orange-50-bg">
 
         <mat-tab-group dynamicHeight="true">
 

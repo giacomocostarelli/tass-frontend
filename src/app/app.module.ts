@@ -31,7 +31,8 @@ import {CityService} from './main/city.service';
 import {FooterModule} from './layout/components/footer/footer.module';
 import { BookingComponent } from './main/booking/booking.component';
 import {BookingModule} from './main/booking/booking.module';
-
+import { NgImageSliderModule } from 'ng-image-slider';
+import { ImageSliderComponent } from './main/booking/tab/image-slider/image-slider.component';
 
 export const MY_FORMATS = {
     parse: {
@@ -89,6 +90,7 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
+
     ],
     imports: [
         BrowserModule,
@@ -127,6 +129,8 @@ const appRoutes: Routes = [
         Error500Module,
         FooterModule,
 
+        //Image Slider
+        NgImageSliderModule,
     ],
     providers: [
         {

@@ -8,13 +8,16 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {FuseSharedModule} from '../../../../@fuse/shared.module';
+import {ImageSliderComponent} from './image-slider/image-slider.component';
+import {NgImageSliderModule} from 'ng-image-slider';
 
 
 @NgModule({
     declarations: [
         TabComponent,
         BookingDetailComponent,
-        BookingTableComponent
+        BookingTableComponent,
+        ImageSliderComponent
     ],
     imports: [
         CommonModule,
@@ -24,6 +27,7 @@ import {FuseSharedModule} from '../../../../@fuse/shared.module';
         MatIconModule,
         MatTabsModule,
         FuseSharedModule,
+        NgImageSliderModule,
 
     ],
     exports: [

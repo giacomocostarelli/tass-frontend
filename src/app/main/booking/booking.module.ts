@@ -35,7 +35,8 @@ const routes = [
         TabModule
     ],
     exports: [
-        BookingComponent
+        BookingComponent,
+
     ]
 })
 export class BookingModule {
