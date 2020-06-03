@@ -46,17 +46,39 @@
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
                                 <app-image-slider class="my-50 images"></app-image-slider>
-                                <div class="terms" fxLayout="column" fxLayoutAlign="start center"
-                                     *ngFor="let sojourn of bookingDetailItem.sojourns">
-                                    <div class="mt-32 fs">da: {{sojourn.arrival}}  a: {{sojourn.departure}}</div>
-                                    <div class="fs">Hotel: {{sojourn.room.hotel.name}}</div>
-                                    <div class="fs">Situato in : {{sojourn.room.hotel.city.name}}
-                                        - {{sojourn.room.hotel.city.region}}</div>
-                                    <div class="fs">Prezzo per notte: {{sojourn.room.pricePerNight}}</div>
-                                    <div class="fs">Prezzo totale: {{sojourn.totalPrice}}</div>
-                                    <div class=" fs">Posti letto: {{sojourn.room.numPlaces}}</div>
-                                    <!--ci servirebbe un divisore ma mat-diviser non va-->
+                                <div class="terms" fxLayout="column" fxLayoutAlign="center center">
+                                    <div *ngFor="let sojourn of bookingDetailItem.sojourns">
+                                        <div class="mt-32 fs">
+                                            <mark>da:</mark>
+                                            {{sojourn.arrival}}
+                                            <mark>a:</mark>
+                                            {{sojourn.departure}}</div>
+                                        <div class="fs">
+                                            <mark>Hotel:</mark>
+                                            {{sojourn.room.hotel.name}}</div>
+                                        <div class="fs">
+                                            <mark>Situato in :</mark>
+                                            {{sojourn.room.hotel.city.name}}
+                                            - {{sojourn.room.hotel.city.region}}</div>
+                                        <div class="fs">
+                                            <mark>Prezzo per notte:</mark>
+                                            {{sojourn.room.pricePerNight}}</div>
+                                        <div class="fs">
+                                            <mark>Prezzo totale:</mark>
+                                            {{sojourn.totalPrice}}</div>
+                                        <div class=" fs">
+                                            <mark>Posti letto:</mark>
+                                            {{sojourn.room.numPlaces}}</div>
+                                        <mat-icon>directions_run</mat-icon>
+                                        <!--ci servirebbe un divisore ma mat-diviser non va-->
+                                    </div>
+                                    <button mat-raised-button
+                                            class="horizontal-centered mt-32 deep-orange-800-bg fuse-white-fg"
+                                            (click)="PayBooking()">
+                                        Paga Ora
+                                    </button>
                                 </div>
+
 
                                 <!--<mat-chip-list #categoryList name="categories" formControlName="categories">
                                 si può usare per il tipo di turismo
@@ -82,7 +104,11 @@
                                 <div class="p-16 pt-0 line-height-1.75">
                                     Totale: {{bookingDetailItem.totalPrice}}
                                 </div>
-                                <button (click)="PayBooking()"> Paga Ora</button>
+                                <button mat-raised-button
+                                        class="deep-orange-800-bg fuse-white-fg"
+                                        (click)="PayBooking()">
+                                    Paga Ora
+                                </button>
                             </div>
                         </mat-tab>
 

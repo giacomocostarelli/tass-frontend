@@ -33,7 +33,7 @@
         .tab-content{
             flex: 1 1 auto;
             max-width: 100%;
-            height: 800px;
+            min-height: 800px;
         }
 
         .mat-tab-body-content {
@@ -66,10 +66,16 @@
         }
     }
     .fs{
+        width: auto;
+        margin: 0 auto;
         font-size: 20px;
     }
     .c{
         color:#d84315;
+    }
+    .horizontal-centered{
+        font-size: 25px;
+        padding: 10px;
     }
 
 }
