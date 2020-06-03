@@ -3,7 +3,6 @@ import {Booking} from '../../../interfaceDB/booking';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {SpringService} from "../../../spring.service";
 import {Router} from "@angular/router";
-import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'booking-detail',

@@ -19,8 +19,8 @@
 
                 <div fxLayout="column" fxLayoutAlign="start start"
                      [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    <div class="h2" >
-                        METTERE NOME PRENOTAZIONE
+                    <div class="h2">
+                        PRENOTAZIONE
                         <!-- {{bookingDetailItem.id}}-->
                     </div>
                     <div class="subtitle secondary-text">
@@ -45,48 +45,33 @@
                         <mat-tab label="Informazioni">
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
-                                <app-image-slider></app-image-slider>
-                                <div class="terms" fxLayout="column" fxLayoutAlign="start center" *ngFor="let sojourn of bookingDetailItem.sojourns">
-                                    <div class="term">da: {{sojourn.arrival}}  a: {{sojourn.departure}}</div>
-                                    <div class="term">Hotel: {{sojourn.room.hotel.name}}</div>
-                                    <div class="term">Situato in : {{sojourn.room.hotel.city.name}} - {{sojourn.room.hotel.city.region}}</div>
-                                    <div class="term">Prezzo per notte: {{sojourn.room.pricePerNight}}</div>
-                                    <div class="term">Prezzo totale: {{sojourn.totalPrice}}</div>
-                                    <div class="term">Posti letto: {{sojourn.room.numPlaces}}</div>
+                                <app-image-slider class="my-50 images"></app-image-slider>
+                                <div class="terms" fxLayout="column" fxLayoutAlign="start center"
+                                     *ngFor="let sojourn of bookingDetailItem.sojourns">
+                                    <div class="mt-32 fs">da: {{sojourn.arrival}}  a: {{sojourn.departure}}</div>
+                                    <div class="fs">Hotel: {{sojourn.room.hotel.name}}</div>
+                                    <div class="fs">Situato in : {{sojourn.room.hotel.city.name}}
+                                        - {{sojourn.room.hotel.city.region}}</div>
+                                    <div class="fs">Prezzo per notte: {{sojourn.room.pricePerNight}}</div>
+                                    <div class="fs">Prezzo totale: {{sojourn.totalPrice}}</div>
+                                    <div class=" fs">Posti letto: {{sojourn.room.numPlaces}}</div>
                                     <!--ci servirebbe un divisore ma mat-diviser non va-->
                                 </div>
 
+                                <!--<mat-chip-list #categoryList name="categories" formControlName="categories">
+                                si può usare per il tipo di turismo
+                                    <mat-chip *ngFor="let category of product.categories"
+                                              [removable]="true" (removed)="product.removeCategory(category)">
+                                        {{category}}
+                                        <mat-icon matChipRemove>cancel</mat-icon>
+                                    </mat-chip>
 
-                                    <!--<mat-chip-list #categoryList name="categories" formControlName="categories">
-                                    si può usare per il tipo di turismo
-                                        <mat-chip *ngFor="let category of product.categories"
-                                                  [removable]="true" (removed)="product.removeCategory(category)">
-                                            {{category}}
-                                            <mat-icon matChipRemove>cancel</mat-icon>
-                                        </mat-chip>
+                                    <input [matChipInputFor]="categoryList"
+                                           [matChipInputAddOnBlur]="true"
+                                           (matChipInputTokenEnd)="product.addCategory($event)"/>
 
-                                        <input [matChipInputFor]="categoryList"
-                                               [matChipInputAddOnBlur]="true"
-                                               (matChipInputTokenEnd)="product.addCategory($event)"/>
+                                </mat-chip-list>-->
 
-                                    </mat-chip-list>-->
-
-
-                            </div>
-
-                        </mat-tab>
-
-                        <mat-tab label="Immagini">
-
-                            <div class="tab-content p-24" fusePerfectScrollbar>
-                                <div fxLayout="row wrap" fxLayoutAlign="start start">
-
-                                   <div *ngFor="let image of [1,2,3,4,5]">
-                                        <div class="product-image" fxlayout="row" fxLayoutAlign="center center">
-                                            <img class="media" src="https://upload.wikimedia.org/wikipedia/commons/7/74/Maja_desnuda_%28museo_del_Prado%29.jpg">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                         </mat-tab>
@@ -97,8 +82,7 @@
                                 <div class="p-16 pt-0 line-height-1.75">
                                     Totale: {{bookingDetailItem.totalPrice}}
                                 </div>
-                                <button (click)="PayBooking()"> paga bello</button>
-
+                                <button (click)="PayBooking()"> Paga Ora</button>
                             </div>
                         </mat-tab>
 
