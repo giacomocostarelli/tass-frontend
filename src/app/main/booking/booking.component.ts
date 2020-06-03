@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../@fuse/animations';
 import {MenuColorChangerService} from '../../menuColorChanger.service';
-import {Guest} from "../interfaceDB/guest";
+import {Guest} from '../interfaceDB/guest';
 
 @Component({
     selector: 'app-booking',

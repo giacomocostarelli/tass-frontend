@@ -76,14 +76,69 @@
 
                         </mat-tab>
 
-                        <mat-tab *ngIf="!paid" label="Prezzo">
+                        <mat-tab *ngIf="!paid" label="Prenota un mezzo">
 
-                            <div class="tab-content p-24" fusePerfectScrollbar>
-                                <div class="p-16 pt-0 line-height-1.75">
-                                    Totale: {{bookingDetailItem.totalPrice}}
-                                </div>
-                                <button (click)="PayBooking()"> Paga Ora</button>
+                            <div class="mb-24 mt-24" fxLayout="row" fxLayoutAlign="center" fxLayout.gt-md="row">
+                                <form class="mat-card mat-elevation-z8 p-24 mr-24 ml-28" fxLayout="column"
+                                      fxLayoutAlign="start"
+                                      fxFlex="1 0 auto" name="form" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+
+                                    <div fxLayout="row" fxLayoutAlign="center center" fxFlex="0 0 auto">
+
+                                        <mat-form-field appearance="outline" fxFlex="34">
+                                            <mat-label>Noleggio</mat-label>
+                                            <input type="text"
+                                                   matInput
+                                                   formControlName="city"
+                                                   #i>
+<!--                                                   [matAutocomplete]="autoGroup">-->
+<!--                                            <mat-autocomplete #autoGroup="matAutocomplete">-->
+<!--                                                <mat-optgroup *ngFor="let group of stateGroupOptions | async"-->
+<!--                                                              [label]="group.letter">-->
+<!--                                                    <mat-option *ngFor="let name of group.names" [value]="name">-->
+<!--                                                        {{name}}-->
+<!--                                                    </mat-option>-->
+<!--                                                </mat-optgroup>-->
+<!--                                            </mat-autocomplete>-->
+                                            <mat-icon matSuffix class="deep-orange-800-fg secondary-text">
+                                                outlined_flag
+                                            </mat-icon>
+<!--                                            <mat-error *ngIf="form.get('city').hasError('required')">La destinazione è-->
+<!--                                                richiesta!-->
+<!--                                            </mat-error>-->
+
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" fxFlex="33">
+                                            <mat-label>Data di inizio noleggio</mat-label>
+                                            <input matInput formControlName="arr" [matDatepicker]="picker1" readonly>
+                                            <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix
+                                                                   [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                            <mat-error>La data di inizio noleggio è richiesta!</mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" fxFlex="33">
+                                            <mat-label>Data di fine noleggio</mat-label>
+                                            <input matInput formControlName="dep" [matDatepicker]="picker2" readonly>
+                                            <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix
+                                                                   [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2></mat-datepicker>
+                                            <mat-error>La data di fine noleggio è richiesta!</mat-error>
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="center center">
+
+                                        <button mat-raised-button type="submit"
+                                                [disabled]="form.invalid"
+                                                [ngClass]="{'deep-orange-800-bg fuse-white-fg': !form.invalid } ">
+                                            Finito
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
+
                         </mat-tab>
 
                     </mat-tab-group>

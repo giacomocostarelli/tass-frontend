@@ -10,6 +10,8 @@ import {FuseSharedModule} from '../../../../@fuse/shared.module';
 import {ImageSliderComponent} from './image-slider/image-slider.component';
 import {NgImageSliderModule} from 'ng-image-slider';
 import {MatButtonModule} from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MaterialModule} from '../../../angular-material/material.module';
 
 @NgModule({
     declarations: [
@@ -27,6 +29,8 @@ import {MatButtonModule} from '@angular/material';
         MatTabsModule,
         FuseSharedModule,
         NgImageSliderModule,
+        MatDatepickerModule,
+        MaterialModule,
 
     ],
     exports: [
