@@ -154,20 +154,24 @@ export class LoginComponent implements OnInit {
 
                 const g: Guest = {
                     email: profile.getEmail(),
-                    name: profile.getName(),
-                    imageUrl: profile.getImageUrl()
+                    name: profile.getName()
                 };
                 const tokenInfo = {
                     token: googleUser.getAuthResponse().id_token,
                     type: 1
                 };
                 // per logout =>   localStorage.clear();  scrivo qua poi creo servizio così non modifico toolbar
-                localStorage.setItem('user', JSON.stringify(g));
-                localStorage.setItem('token_info', JSON.stringify(tokenInfo));
-                this.router.navigate(['/homepage']);
 
-                this.springService.socialLogin();
-
+                this.springService.socialLogin(g)
+                    .subscribe( (id: number) => {
+                        if (id !== null){
+                            g.id = id;
+                            g.imageUrl = profile.getImageUrl()
+                            localStorage.setItem('user', JSON.stringify(g));
+                            localStorage.setItem('token_info', JSON.stringify(tokenInfo));
+                            this.router.navigate(['/homepage']);
+                        }
+                    });
 
 
             }, (error) => {
@@ -184,18 +188,23 @@ export class LoginComponent implements OnInit {
                         if (resp && !resp.error){
                             const g: Guest = {
                                 name: resp.name,
-                                email: resp.email,
-                                imageUrl: resp.picture.data.url,
+                                email: resp.email
                             };
                             const tokenInfo = {
-                                token: response.authResponse.token,
+                                token: response.authResponse.accessToken,
                                 type: 2
                             };
-                            localStorage.setItem('user', JSON.stringify(g));
-                            localStorage.setItem('token_info', JSON.stringify(tokenInfo));
+                            this.springService.socialLogin(g)
+                                .subscribe( (id: number) => {
+                                    if (id !== null){
+                                        g.id = id;
+                                        g.imageUrl = resp.picture.data.url;
+                                        localStorage.setItem('user', JSON.stringify(g));
+                                        localStorage.setItem('token_info', JSON.stringify(tokenInfo));
+                                        this.router.navigate(['/homepage']);
+                                    }
+                                });
                         }
-                        this.router.navigate(['/homepage']);
-                        this.springService.socialLogin();
                     });
                 }
                 else

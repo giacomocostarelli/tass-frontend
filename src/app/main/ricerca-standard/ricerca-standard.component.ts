@@ -43,6 +43,7 @@ export class RicercaStandardComponent implements OnInit {
     @ViewChild(MatSort, {static: true})
     sort: MatSort;
 
+    todayDate = new Date();
     /*@ViewChild('filter', {static: true})
     filter: ElementRef;*/
 
@@ -83,8 +84,7 @@ export class RicercaStandardComponent implements OnInit {
 
 
     onFormSubmit(): void {
-        /*this.roomList = [{id: 2, hotel: {name: 'lol', stars: 3, city: {name: 'nnnnn'}}, pricePerNight: 43, numPlaces: 3}, {id: 5, hotel: {name: 'yytty', stars: 1, city: {name: 'mmmmmm'}}, pricePerNight: 43, numPlaces: 3}];
-        this.onProductChanged.next(this.roomList);*/
+        console.log(this.form.value);
         this.springService.normalSearch(this.form.value)
             .subscribe(
                 rooms => {

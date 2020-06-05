@@ -13,7 +13,7 @@ import {Sojourn} from './interfaceDB/sojourn';
 export class SpringService {
 
     // private serverUrl = 'http://localhost:8080';
-     private serverUrl = 'http://82.54.103.107:8080';
+     private serverUrl = 'https://82.54.103.107:443';
 
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -63,9 +63,9 @@ export class SpringService {
             );
     }
 
-    socialLogin(): Observable<number> { // da modificare perchè non torna l'id
+    socialLogin(g: Guest): Observable<number> {
         const url = `${this.serverUrl}/guests/socialLogin`;
-        return this.http.post<number>(url, this.getUser())
+        return this.http.post<number>(url, g)
             .pipe(
                 catchError(this.handleError<number>('socialLogin', null))
             );

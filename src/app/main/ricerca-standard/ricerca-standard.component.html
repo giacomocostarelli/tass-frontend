@@ -60,7 +60,7 @@
 
                         <mat-form-field appearance="outline" fxFlex="25">
                             <mat-label>Data di partenza</mat-label>
-                            <input matInput formControlName="arr" [matDatepicker]="picker1" readonly>
+                            <input matInput formControlName="arr" [min]="todayDate"  [matDatepicker]="picker1" readonly>
                             <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix
                                                    [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
@@ -69,7 +69,7 @@
 
                         <mat-form-field appearance="outline" fxFlex="25">
                             <mat-label>Data di ritorno</mat-label>
-                            <input matInput formControlName="dep" [matDatepicker]="picker2" readonly>
+                            <input matInput formControlName="dep" [min]="todayDate"   [matDatepicker]="picker2" readonly>
                             <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix
                                                    [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>

@@ -33,6 +33,7 @@ import { BookingComponent } from './main/booking/booking.component';
 import {BookingModule} from './main/booking/booking.module';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ImageSliderComponent } from './main/booking/tab/image-slider/image-slider.component';
+import {UserInfoService} from './main/_user-info.service';
 
 export const MY_FORMATS = {
     parse: {
@@ -129,7 +130,7 @@ const appRoutes: Routes = [
         Error500Module,
         FooterModule,
 
-        //Image Slider
+        // Image Slider
         NgImageSliderModule,
     ],
     providers: [
@@ -142,7 +143,8 @@ const appRoutes: Routes = [
             useValue: MY_FORMATS
         },
         SpringService,
-        CityService
+        CityService,
+        UserInfoService
     ],
     bootstrap: [
         AppComponent

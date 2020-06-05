@@ -2,6 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../@fuse/animations';
 import {MenuColorChangerService} from '../../menuColorChanger.service';
 import {Guest} from '../interfaceDB/guest';
+import {SpringService} from "../spring.service";
+import {UserInfoService} from "../_user-info.service";
 
 @Component({
     selector: 'app-booking',
@@ -11,12 +13,12 @@ import {Guest} from '../interfaceDB/guest';
     animations: fuseAnimations
 })
 export class BookingComponent implements OnInit {
-    user: Guest;
 
     constructor(
-        private _menuColorChangerService: MenuColorChangerService
+        private _menuColorChangerService: MenuColorChangerService,
+        private _userDetail: UserInfoService
     ) {
-        this.user = JSON.parse(localStorage.getItem('user')) as Guest;
+
     }
 
     ngOnInit(): void {
