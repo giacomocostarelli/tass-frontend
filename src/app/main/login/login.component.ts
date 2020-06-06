@@ -149,7 +149,6 @@ export class LoginComponent implements OnInit {
             (googleUser) => {
 
                 const profile = googleUser.getBasicProfile();
-                console.log(googleUser);
                 // YOUR CODE HERE
 
                 const g: Guest = {
@@ -158,17 +157,17 @@ export class LoginComponent implements OnInit {
                 };
                 const tokenInfo = {
                     token: googleUser.getAuthResponse().id_token,
-                    type: 1
+                    type: 1,
+                    userId: profile.getId()
                 };
-                // per logout =>   localStorage.clear();  scrivo qua poi creo servizio così non modifico toolbar
 
-                this.springService.socialLogin(g)
+                this.springService.socialLogin(g, tokenInfo)
                     .subscribe( (id: number) => {
                         if (id !== null){
                             g.id = id;
                             g.imageUrl = profile.getImageUrl()
-                            localStorage.setItem('user', JSON.stringify(g));
                             localStorage.setItem('token_info', JSON.stringify(tokenInfo));
+                            localStorage.setItem('user', JSON.stringify(g));
                             this.router.navigate(['/homepage']);
                         }
                     });
@@ -192,15 +191,16 @@ export class LoginComponent implements OnInit {
                             };
                             const tokenInfo = {
                                 token: response.authResponse.accessToken,
-                                type: 2
+                                type: 2,
+                                userId: response.authResponse.userID
                             };
-                            this.springService.socialLogin(g)
+                            this.springService.socialLogin(g, tokenInfo)
                                 .subscribe( (id: number) => {
                                     if (id !== null){
                                         g.id = id;
                                         g.imageUrl = resp.picture.data.url;
-                                        localStorage.setItem('user', JSON.stringify(g));
                                         localStorage.setItem('token_info', JSON.stringify(tokenInfo));
+                                        localStorage.setItem('user', JSON.stringify(g));
                                         this.router.navigate(['/homepage']);
                                     }
                                 });

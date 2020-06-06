@@ -32,7 +32,7 @@ export class AlternativeComponent implements OnInit {
     createNewBooking(id: number): void {
         const newB: Booking = {sojourns: this.alternative[id].sojourns};
         this._springService.newBooking(newB).subscribe();
-        this.router.navigate(['']);
+        this.router.navigate(['/secret_places']);
     } // TODO => cosa farà dopo aver salvato booking?
 
 

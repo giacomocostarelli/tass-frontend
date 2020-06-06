@@ -13,4 +13,9 @@ export class UserInfoService {
         const user = JSON.parse(localStorage.getItem('user')) as Guest;
         return user.name;
     }
+
+    getEmail(): string{
+        const user = JSON.parse(localStorage.getItem('user')) as Guest;
+        return user.email;
+    }
 }

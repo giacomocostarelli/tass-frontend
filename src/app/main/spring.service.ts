@@ -13,7 +13,7 @@ import {Sojourn} from './interfaceDB/sojourn';
 export class SpringService {
 
     // private serverUrl = 'http://localhost:8080';
-     private serverUrl = 'https://82.54.103.107:443';
+     private serverUrl = 'https://82.54.103.107:8443';
 
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -63,9 +63,9 @@ export class SpringService {
             );
     }
 
-    socialLogin(g: Guest): Observable<number> {
+    socialLogin(g: Guest, tokenInfo: any): Observable<number> {
         const url = `${this.serverUrl}/guests/socialLogin`;
-        return this.http.post<number>(url, g)
+        return this.http.post<number>(url, g, {headers:  new HttpHeaders({token_info: JSON.stringify(tokenInfo)})})
             .pipe(
                 catchError(this.handleError<number>('socialLogin', null))
             );
@@ -146,7 +146,7 @@ export class SpringService {
         return (error: HttpErrorResponse): Observable<T> => {
             console.log('ERRORERERERERE: ' + JSON.stringify(error)); // log to console instead
             if (error.status === 401){
-                alert('ritenta sarai più fortunato'); // da sistemare, gestire quando fallisce token, quando user non esiste o quando pwd è sbagliata
+                // da sistemare, gestire quando fallisce token, quando user non esiste o quando pwd è sbagliata
                 this.router.navigate(['/login']);
                 return;
             }
