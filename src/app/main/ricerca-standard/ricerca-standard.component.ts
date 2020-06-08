@@ -30,7 +30,6 @@ export interface StateGroup {
 })
 export class RicercaStandardComponent implements OnInit {
     form: FormGroup;
-    cities: City[] = [{name: 'United States of America'}, {name: 'China'}]; // ...
     stateGroupOptions: Observable<StateGroup[]>;
     onProductChanged: BehaviorSubject<any>;
     roomList: Room[] = [];
@@ -44,8 +43,6 @@ export class RicercaStandardComponent implements OnInit {
     sort: MatSort;
 
     todayDate = new Date();
-    /*@ViewChild('filter', {static: true})
-    filter: ElementRef;*/
 
     constructor(
         private _formBuilder: FormBuilder,

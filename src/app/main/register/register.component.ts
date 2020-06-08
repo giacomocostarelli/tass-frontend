@@ -6,8 +6,8 @@ import {takeUntil} from 'rxjs/internal/operators';
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
-import {Md5} from 'ts-md5';
 import {Router} from '@angular/router';
+import { sha256 } from 'js-sha256';
 
 @Component({
     selector: 'register',
@@ -88,8 +88,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     onRegistersubmit(): void {
-        const md5 = new Md5();
-        const pwd = md5.appendStr(this.registerForm.get('password').value).end();
+        console.log(sha256(this.registerForm.get('password').value));
+        const pwd = sha256(this.registerForm.get('password').value);
         this.registerForm.removeControl('passwordConfirm');
         this.registerForm.removeControl('password');
         this.registerForm.get('pwd').setValue(pwd, {emitEvent: false});
