@@ -6,8 +6,6 @@ import {SpringService} from '../spring.service';
 import {Router} from '@angular/router';
 import {Guest} from '../interfaceDB/guest';
 import { sha256 } from 'js-sha256';
-import { AuthService } from 'angularx-social-login';
-import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 
 
 declare var FB: any;
