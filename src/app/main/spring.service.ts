@@ -65,6 +65,7 @@ export class SpringService {
 
     socialLogin(g: Guest, tokenInfo: any): Observable<number> {
         const url = `${this.serverUrl}/guests/socialLogin`;
+        console.log(tokenInfo);
         return this.http.post<number>(url, g, {headers:  new HttpHeaders({token_info: JSON.stringify(tokenInfo)})})
             .pipe(
                 catchError(this.handleError<number>('socialLogin', null))
@@ -144,7 +145,7 @@ export class SpringService {
      */
     private handleError<T>(operation = 'operation', result?: T): any {
         return (error: HttpErrorResponse): Observable<T> => {
-            console.log('ERRORERERERERE: ' + JSON.stringify(error)); // log to console instead
+            console.log('ERRORE: ' + JSON.stringify(error)); // log to console instead
             if (error.status === 401){
                 // da sistemare, gestire quando fallisce token, quando user non esiste o quando pwd è sbagliata
                 this.router.navigate(['/login']);

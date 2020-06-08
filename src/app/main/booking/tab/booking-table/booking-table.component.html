@@ -2,10 +2,10 @@
     <div class="cards">
         <div class="fuse-card" *ngFor="let b of booking;">
             <div class="position-relative">
-                <img src="assets/images/cards/card3.jpg">
+                <img src= "assets/images/profile/{{getRandImage()}}.jpg">
                 <div class="position-absolute font-size-20 fuse-white-fg p-16 align-left align-bottom">
                     <!-- mettere nome prenotazione -->
-                    Top 10 Holiday Locations
+                    {{getBookingName(b) | uppercase}}
                 </div>
             </div>
 
@@ -18,7 +18,7 @@
             </div>
 
             <div class="p-16 pt-0 line-height-1.75">
-                Cards are a convenient means of displaying content composed of different elements.
+                Immergiti in un'esperienza unica e conveniente con il nostro sistema di prenotazione.
             </div>
 
             <div class="p-8 pt-0" fxLayout="row" fxLayoutAlign="start center">

@@ -34,20 +34,25 @@ export class RicercaDialogComponent implements OnInit {
         this.soj.departure = this._data.returnDate;
     }
 
-    showBooking(): void{
-        const bookingSelected = this._bottomSheet.open(BookingSheetComponent);
-        bookingSelected.afterDismissed().subscribe(
-            (dataFromBottomSheet: number) => {
-                if (typeof dataFromBottomSheet === 'number'){
-                    this.saveBooking(dataFromBottomSheet);
+    showBooking(): void {
+        if (this.logged) {
+            const bookingSelected = this._bottomSheet.open(BookingSheetComponent);
+            bookingSelected.afterDismissed().subscribe(
+                (dataFromBottomSheet: number) => {
+                    if (typeof dataFromBottomSheet === 'number') {
+                        this.saveBooking(dataFromBottomSheet);
+                    }
                 }
-            }
-        );
+            );
+        } else {
+            window.alert("Per prenotare una stanza effettua prima il login.");
+        }
+
     }
 
     private saveBooking(id: number): void {
-        if (id < 0){    // nuovo booking
-            const newB: Booking = { sojourns: [this.soj] };
+        if (id < 0) {    // nuovo booking
+            const newB: Booking = {sojourns: [this.soj]};
             console.log('crea nuovo booking');
             this._springService.newBooking(newB).subscribe();
         } else { // booking esistente
