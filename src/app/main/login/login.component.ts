@@ -3,9 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
-import {Md5} from 'ts-md5/dist/md5';
 import {Router} from '@angular/router';
 import {Guest} from '../interfaceDB/guest';
+import { sha256 } from 'js-sha256';
+
 
 declare var FB: any;
 
@@ -14,8 +15,7 @@ declare var FB: any;
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations,
-    providers: [SpringService]
+    animations: fuseAnimations
 })
 export class LoginComponent implements OnInit {
     // TODO => nel login se user non ha img metterne una di default dall'assets
@@ -76,8 +76,8 @@ export class LoginComponent implements OnInit {
     }
 
     onLoginSubmit(): void {
-        const md5 = new Md5();
-        const pwd = md5.appendStr(this.password.nativeElement.value).end();
+        console.log(sha256((this.password.nativeElement.value)));
+        const pwd = sha256((this.password.nativeElement.value));
         this.springService.login(this.email.nativeElement.value, pwd)
             .subscribe((result: any) => {
                 console.log(JSON.stringify(result));
