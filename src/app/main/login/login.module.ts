@@ -8,12 +8,14 @@ import {MatInputModule} from '@angular/material/input';
 import {FuseSharedModule} from '@fuse/shared.module';
 import {LoginComponent} from 'app/main/login/login.component';
 
+
 const routes = [
     {
         path: 'login',
         component: LoginComponent
     }
 ];
+
 
 @NgModule({
     declarations: [
@@ -28,10 +30,9 @@ const routes = [
         MatIconModule,
         MatInputModule,
 
-        FuseSharedModule
+        FuseSharedModule,
+    ],
 
-
-    ]
 })
 export class LoginModule {
 }

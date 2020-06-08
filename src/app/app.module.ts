@@ -33,7 +33,10 @@ import { BookingComponent } from './main/booking/booking.component';
 import {BookingModule} from './main/booking/booking.module';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ImageSliderComponent } from './main/booking/tab/image-slider/image-slider.component';
+import {SocialLoginModule, AuthServiceConfig, LoginOpt} from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 import {UserInfoService} from './main/_user-info.service';
+
 
 export const MY_FORMATS = {
     parse: {
@@ -46,6 +49,21 @@ export const MY_FORMATS = {
         monthYearA11yLabel: 'MM YYYY',
     },
 };
+
+const googleLoginOptions: LoginOpt = {
+    scope: 'profile email'
+};
+
+const config = new AuthServiceConfig([
+    {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider('744778791116-5mm7c9an5oe38kh86qi36imgem919gq1', googleLoginOptions)
+    }
+]);
+
+export function provideConfig(): any {
+    return config;
+}
 
 const appRoutes: Routes = [
     {
@@ -130,10 +148,16 @@ const appRoutes: Routes = [
         Error500Module,
         FooterModule,
 
+
+        SocialLoginModule,
         // Image Slider
         NgImageSliderModule,
     ],
     providers: [
+        {
+            provide: AuthServiceConfig,
+            useFactory: provideConfig
+        },
         {
         provide: MAT_DATE_LOCALE,
         useValue: 'it'
