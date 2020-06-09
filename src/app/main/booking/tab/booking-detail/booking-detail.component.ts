@@ -5,6 +5,7 @@ import {SpringService} from '../../../spring.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateService} from '../../../date.service';
+import {Car} from "../../../interfaceDB/car";
 
 @Component({
     selector: 'booking-detail',
@@ -20,6 +21,8 @@ export class BookingDetailComponent implements OnInit {
     @Input() bookingDetailItem: Booking;
     @Output() bookingDetailItemChange = new EventEmitter<Booking>();
     @Input() paid: boolean;
+
+    carList: Car[];
 
 
     constructor(
@@ -55,7 +58,8 @@ export class BookingDetailComponent implements OnInit {
             this.form.get('string').value,
             this._dateService.getFinalDate(this.form.get('arr').value),
             this._dateService.getFinalDate(this.form.get('dep').value))
-                .subcribe(itemList => console.log(JSON.stringify(itemList));
+                .subscribe(itemList => this.carList = itemList);
+        console.log(JSON.stringify(this.carList));
     }
 
 }

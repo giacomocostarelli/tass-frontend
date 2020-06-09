@@ -8,6 +8,7 @@ import {Guest} from './interfaceDB/guest';
 import {Router} from '@angular/router';
 import {Booking} from './interfaceDB/booking';
 import {Sojourn} from './interfaceDB/sojourn';
+import {Car} from './interfaceDB/car';
 
 @Injectable({providedIn: 'root'})
 export class SpringService {
@@ -129,29 +130,29 @@ export class SpringService {
     }
 
     // PRENOTAZIONE VEICOLI
-    searchItem(stringToSearch: string, startRent: string, endRent: string): any{
+    searchItem(stringToSearch: string, startRent: string, endRent: string): Observable<Car[]>{
         const url = `${this.serverUrl}/bookings/items/searchItem`;
         const body = {
             stringToSearch: stringToSearch,
             startDate: startRent,
             endDate: endRent
         };
-        return this.http.post<any>(url, body, {headers: this.getHeaderWithToken()})
+        return this.http.post<Car[]>(url, body, {headers: this.getHeaderWithToken()})
             .pipe(
-                catchError(this.handleError<any>('searchItem', null))
+                catchError(this.handleError<Car[]>('searchItem', []))
             );
     }
 
-    rentItem(productId: number, startRent: string, endRent: string): any{
+    rentItem(productId: number, startRent: string, endRent: string): Observable<string>{
         const url = `${this.serverUrl}/bookings/items/rentItem`;
         const body = {
             productId: productId,
             startDate: startRent,
             endDate: endRent
         };
-        return this.http.post<any>(url, body, {headers: this.getHeaderWithToken()})
+        return this.http.post<string>(url, body, {headers: this.getHeaderWithToken()})
             .pipe(
-                catchError(this.handleError<any>('rentItem', null))
+                catchError(this.handleError<string>('rentItem', 'error'))
             );
     }
 
@@ -191,7 +192,7 @@ export class SpringService {
 
     payBooking(id: number, s: number): any {
         const url = `${this.serverUrl}/bookings/pay`;
-        return this.http.post<any>(url, {bookingId: id, totalPayment: s},{headers: this.getHeaderWithToken()})
+        return this.http.post<any>(url, {bookingId: id, totalPayment: s}, {headers: this.getHeaderWithToken()})
             .pipe(
                 catchError(this.handleError<string>('payBooking', 'failed'))
             );

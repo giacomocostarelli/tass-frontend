@@ -42,7 +42,7 @@ export class FormComponent implements OnInit {
     ngOnInit(): void {
         window.addEventListener('load', AOS.init());
         this.form = this._formBuilder.group({
-            cities: this._formBuilder.array([],),
+            cities: this._formBuilder.array([],  [CityValidator.checkCity(this._cityService)]),
             maxBudget: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})*'), Validators.min(300)]],
             people: ['', [Validators.required, Validators.pattern('^[0-9]'), Validators.min(1)]],
             onlyRegion: [''],
