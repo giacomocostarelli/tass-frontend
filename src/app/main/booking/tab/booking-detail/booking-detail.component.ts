@@ -31,7 +31,7 @@ export class BookingDetailComponent implements OnInit {
 
     ngOnInit() {
         this.form = this._formBuilder.group({
-            city: ['', {validators: [Validators.required], updateOn: 'blur'}],
+            car: ['', Validators.required],
             arr: ['', Validators.required],
             arrival: [''],
             dep: ['', Validators.required],
@@ -52,7 +52,7 @@ export class BookingDetailComponent implements OnInit {
     }
 
     onFormSubmit(): void {
-
+        console.log();
     }
 
 }
