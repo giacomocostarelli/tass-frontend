@@ -55,12 +55,12 @@ export class BookingDetailComponent implements OnInit {
     }
 
     onFormSubmit(): void {
+        console.log(this.form.value);
         this._springService.searchItem(
-            this.form.get('string').value,
+            this.form.get('car').value,
             this._dateService.getFinalDate(this.form.get('arr').value),
             this._dateService.getFinalDate(this.form.get('dep').value))
                 .subscribe(itemList => this.carList = itemList);
         console.log(JSON.stringify(this.carList));
     }
-
 }
