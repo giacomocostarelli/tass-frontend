@@ -24,6 +24,8 @@ export class BookingDetailComponent implements OnInit {
 
     carList: Car[];
     todayDate = new Date();
+    startRent: string;
+    endRent: string;
 
 
     constructor(
@@ -55,15 +57,17 @@ export class BookingDetailComponent implements OnInit {
     }
 
     onFormSubmit(): void {
-        console.log(this.form.value);
+        this.startRent = this._dateService.getFinalDate(this.form.get('arr').value);
+        this.endRent = this._dateService.getFinalDate(this.form.get('dep').value);
         this._springService.searchItem(
             this.form.get('car').value,
-            this._dateService.getFinalDate(this.form.get('arr').value),
-            this._dateService.getFinalDate(this.form.get('dep').value))
+            this.startRent,
+            this.endRent)
                 .subscribe(itemList => this.carList = itemList );
     }
 
-    rentCar(id: number) {
-
+    rentCar(id: number): void {
+        this._springService.rentItem(id, this.startRent, this.endRent)
+            .subscribe( message => alert(message));
     }
 }

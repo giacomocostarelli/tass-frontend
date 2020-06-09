@@ -150,7 +150,7 @@ export class SpringService {
             startDate: startRent,
             endDate: endRent
         };
-        return this.http.post<string>(url, body, {headers: this.getHeaderWithToken()})
+        return this.http.post(url, body, {headers: this.getHeaderWithToken(), responseType: 'text'})
             .pipe(
                 catchError(this.handleError<string>('rentItem', 'error'))
             );
