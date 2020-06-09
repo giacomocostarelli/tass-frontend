@@ -1,12 +1,15 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { Platform } from '@angular/cdk/platform';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, filter, takeUntil } from 'rxjs/operators';
+import {AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {Platform} from '@angular/cdk/platform';
+import {fromEvent, Subject} from 'rxjs';
+import {debounceTime, filter, takeUntil} from 'rxjs/operators';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as _ from 'lodash';
-import { FusePerfectScrollbarGeometry, FusePerfectScrollbarPosition } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.interfaces';
-import { FuseConfigService } from '@fuse/services/config.service';
+import {
+    FusePerfectScrollbarGeometry,
+    FusePerfectScrollbarPosition
+} from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.interfaces';
+import {FuseConfigService} from '@fuse/services/config.service';
 
 @Directive({
     selector: '[fusePerfectScrollbar]'

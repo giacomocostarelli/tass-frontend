@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {trigger, transition, useAnimation} from '@angular/animations';
+import {transition, trigger, useAnimation} from '@angular/animations';
 import {fadeInLeft} from 'ng-animate';
 import {MenuColorChangerService} from '../../../menuColorChanger.service';
 

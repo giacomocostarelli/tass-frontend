@@ -10,8 +10,8 @@ import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 import {navigation} from 'app/navigation/navigation';
 import {Guest} from '../../../main/interfaceDB/guest';
-import {Router} from "@angular/router";
-import {UserInfoService} from "../../../main/_user-info.service";
+import {Router} from '@angular/router';
+import {UserInfoService} from '../../../main/_user-info.service';
 
 
 @Component({

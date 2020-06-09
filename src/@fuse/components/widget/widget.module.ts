@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { FuseWidgetComponent } from './widget.component';
-import { FuseWidgetToggleDirective } from './widget-toggle.directive';
+import {FuseWidgetComponent} from './widget.component';
+import {FuseWidgetToggleDirective} from './widget-toggle.directive';
 
 @NgModule({
     declarations: [

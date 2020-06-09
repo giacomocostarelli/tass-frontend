@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { MediaObserver } from '@angular/flex-layout';
-import { CookieService } from 'ngx-cookie-service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {MediaObserver} from '@angular/flex-layout';
+import {CookieService} from 'ngx-cookie-service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
-import { FuseMatchMediaService } from '@fuse/services/match-media.service';
-import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import {FuseMatchMediaService} from '@fuse/services/match-media.service';
+import {FuseNavigationService} from '@fuse/components/navigation/navigation.service';
 
 @Component({
     selector   : 'fuse-shortcuts',

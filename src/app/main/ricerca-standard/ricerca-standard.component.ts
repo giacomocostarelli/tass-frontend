@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {City} from '../interfaceDB/city';
 import {BehaviorSubject, merge, Observable} from 'rxjs';
 import {SpringService} from '../spring.service';
 import {Room} from '../interfaceDB/room';

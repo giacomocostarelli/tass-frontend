@@ -19,6 +19,7 @@ export class BookingTableComponent implements OnInit {
     @Output() bookingDetailItemChange = new EventEmitter<Booking>();
     @Input() paid: boolean;
 
+    imageNumberArray =  new Array();
     randImageArray: string[] = [
         'a-walk-amongst-friends-small',
         'braies-lake-small',
@@ -42,9 +43,14 @@ export class BookingTableComponent implements OnInit {
                 .subscribe(b => {
                     this.booking = b;
                     console.log(this.paid + ':    ' + JSON.stringify(this.booking));
+                    this.genImageNumberArray();
+                    console.log(this.imageNumberArray.length);
+                    console.log('NUMERI');
+                    for(let i=0; i<this.imageNumberArray.length; i++){
+                        console.log(this.imageNumberArray[i]);
+                    }
                 });
         }
-
     }
 
     showBookingDetail(b: Booking): void {
@@ -55,11 +61,10 @@ export class BookingTableComponent implements OnInit {
     }
 
     delete(id: number): void { // TODO chiamare server e cancellare prenotazione
-        if (confirm('Are you sure to delete this booking?')) {
+        if (confirm('Delete this booking?')) {
             this._springService.deleteBooking(id).subscribe(x =>
                 this.booking.splice(this.booking.findIndex(b => b.id === id), 1)
             );
-
         }
     }
 
@@ -77,8 +82,15 @@ export class BookingTableComponent implements OnInit {
         return bookingName;
     }
 
-    getRandImage(): string {
-        let imageNumber: number = Math.floor(Math.random() * 5) + 0;
+    genImageNumberArray(): void {
+        let imageNumber: number;
+        for (let i = 0; i < this.booking.length; i++) {
+            imageNumber = Math.floor(Math.random() * 5) + 0;
+            this.imageNumberArray.push(imageNumber);
+        }
+    }
+
+    mapRandImage(imageNumber: number): string {
         return this.randImageArray[imageNumber];
     }
 

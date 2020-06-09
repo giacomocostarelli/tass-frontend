@@ -1,16 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {
-    FormArray,
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators
-} from '@angular/forms';
-import {Observable, of} from 'rxjs';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Observable} from 'rxjs';
 import {SpringService} from '../../spring.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {CityService, CityValidator, REGIONS, StateGroup} from '../../city.service';
-import {Alternative} from '../../interfaceDB/alternative';
 import {SecretPlacesService} from '../secret-places.service';
 import {Router} from '@angular/router';
 import AOS from 'aos';

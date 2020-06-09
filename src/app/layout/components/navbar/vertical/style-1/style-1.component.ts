@@ -7,7 +7,7 @@ import {FuseConfigService} from '@fuse/services/config.service';
 import {FuseNavigationService} from '@fuse/components/navigation/navigation.service';
 import {FusePerfectScrollbarDirective} from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import {FuseSidebarService} from '@fuse/components/sidebar/sidebar.service';
-import {UserInfoService} from "../../../../../main/_user-info.service";
+import {UserInfoService} from '../../../../../main/_user-info.service';
 
 @Component({
     selector: 'navbar-vertical-style-1',

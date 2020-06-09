@@ -7,7 +7,8 @@ import {MenuColorChangerService} from '../../../menuColorChanger.service';
     styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-
-    constructor(private menuColorChangerService: MenuColorChangerService) { }
-
+    constructor(
+        private menuColorChangerService: MenuColorChangerService
+    ) {
+    }
 }

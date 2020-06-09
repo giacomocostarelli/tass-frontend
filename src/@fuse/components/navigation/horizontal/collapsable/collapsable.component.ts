@@ -1,9 +1,9 @@
-import { Component, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, HostBinding, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
-import { fuseAnimations } from '@fuse/animations';
-import { FuseConfigService } from '@fuse/services/config.service';
+import {fuseAnimations} from '@fuse/animations';
+import {FuseConfigService} from '@fuse/services/config.service';
 
 @Component({
     selector   : 'fuse-nav-horizontal-collapsable',
