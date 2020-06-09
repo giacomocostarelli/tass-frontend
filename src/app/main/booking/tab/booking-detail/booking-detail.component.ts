@@ -4,6 +4,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 import {SpringService} from '../../../spring.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Car} from '../../../interfaceDB/car';
 
 @Component({
     selector: 'booking-detail',

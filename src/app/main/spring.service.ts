@@ -135,7 +135,7 @@ export class SpringService {
             stringToSearch: stringToSearch,
             startDate: startRent,
             endDate: endRent
-        }
+        };
         return this.http.post<any>(url, body, {headers: this.getHeaderWithToken()})
             .pipe(
                 catchError(this.handleError<any>('searchItem', null))
@@ -148,7 +148,7 @@ export class SpringService {
             productId: productId,
             startDate: startRent,
             endDate: endRent
-        }
+        };
         return this.http.post<any>(url, body, {headers: this.getHeaderWithToken()})
             .pipe(
                 catchError(this.handleError<any>('rentItem', null))
