@@ -5,7 +5,7 @@ import {SpringService} from '../../../spring.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateService} from '../../../date.service';
-import {Car} from "../../../interfaceDB/car";
+import {Car} from '../../../interfaceDB/car';
 
 @Component({
     selector: 'booking-detail',
