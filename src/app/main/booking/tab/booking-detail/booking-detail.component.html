@@ -156,15 +156,20 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
 
-                            <!-- CONTENT CARD -->
-                            <div class="mat-card mat-elevation-z4 p-24 mr-24 ml-28">
-                                <mat-list role="list">
-                                    <mat-list-item role="listitem"> {{carList.}}</mat-list-item>
-                                    <mat-list-item role="listitem">Item 2</mat-list-item>
-                                    <mat-list-item role="listitem">Item 3</mat-list-item>
-                                </mat-list>
+
+                                <!-- CONTENT CARD -->
+                                <div class="mat-card mat-elevation-z4 mb-24 mt-24" fxLayout="row" fxLayoutAlign="center" fxLayout.gt-md="row">
+                                    <mat-list>
+                                        <mat-list-item *ngFor="let car of carList">
+                                            <div matLine>{{car.name}}</div>
+                                            <button mat-icon-button (click)="rentCar(car.id)">
+                                                <mat-icon>add_shopping_cart</mat-icon>
+                                            </button>
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                    </mat-list>
+                                </div>
                             </div>
                             <!-- / CONTENT CARD -->
                         </mat-tab>

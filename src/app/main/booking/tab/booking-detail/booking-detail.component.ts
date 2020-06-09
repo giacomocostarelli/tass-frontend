@@ -62,4 +62,8 @@ export class BookingDetailComponent implements OnInit {
             this._dateService.getFinalDate(this.form.get('dep').value))
                 .subscribe(itemList => this.carList = itemList );
     }
+
+    rentCar(id: number) {
+
+    }
 }
