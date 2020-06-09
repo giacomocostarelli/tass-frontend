@@ -128,6 +128,34 @@ export class SpringService {
             );
     }
 
+    // PRENOTAZIONE VEICOLI
+    searchItem(stringToSearch: string, startRent: string, endRent: string): any{
+        const url = `${this.serverUrl}/bookings/items/searchItem`;
+        const body = {
+            stringToSearch: stringToSearch,
+            startDate: startRent,
+            endDate: endRent
+        }
+        return this.http.post<any>(url, body, {headers: this.getHeaderWithToken()})
+            .pipe(
+                catchError(this.handleError<any>('searchItem', null))
+            );
+    }
+
+    rentItem(productId: number, startRent: string, endRent: string): any{
+        const url = `${this.serverUrl}/bookings/items/rentItem`;
+        const body = {
+            productId: productId,
+            startDate: startRent,
+            endDate: endRent
+        }
+        return this.http.post<any>(url, body, {headers: this.getHeaderWithToken()})
+            .pipe(
+                catchError(this.handleError<any>('rentItem', null))
+            );
+    }
+
+
     private getUser(): Guest{
         return JSON.parse(localStorage.getItem('user')) as Guest;
     }
