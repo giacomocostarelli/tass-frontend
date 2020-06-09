@@ -23,6 +23,7 @@ export class BookingDetailComponent implements OnInit {
     @Input() paid: boolean;
 
     carList: Car[];
+    todayDate = new Date();
 
 
     constructor(
