@@ -60,7 +60,6 @@ export class BookingDetailComponent implements OnInit {
             this.form.get('car').value,
             this._dateService.getFinalDate(this.form.get('arr').value),
             this._dateService.getFinalDate(this.form.get('dep').value))
-                .subscribe(itemList => this.carList = itemList);
-        console.log(JSON.stringify(this.carList));
+                .subscribe(itemList => this.carList = itemList );
     }
 }
