@@ -4,6 +4,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 import {SpringService} from '../../../spring.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {DateService} from '../../../date.service';
 
 @Component({
     selector: 'booking-detail',
@@ -24,17 +25,16 @@ export class BookingDetailComponent implements OnInit {
     constructor(
         private _springService: SpringService,
         private router: Router,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _dateService: DateService
     ) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.form = this._formBuilder.group({
-            city: ['', {validators: [Validators.required], updateOn: 'blur'}],
+            string: ['', Validators.required],
             arr: ['', Validators.required],
-            arrival: [''],
-            dep: ['', Validators.required],
-            departure: ['']
+            dep: ['', Validators.required]
         });
     }
 
@@ -51,7 +51,11 @@ export class BookingDetailComponent implements OnInit {
     }
 
     onFormSubmit(): void {
-
+        this._springService.searchItem(
+            this.form.get('string').value,
+            this._dateService.getFinalDate(this.form.get('arr').value),
+            this._dateService.getFinalDate(this.form.get('dep').value))
+                .subcribe(itemList => console.log(JSON.stringify(itemList));
     }
 
 }

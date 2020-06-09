@@ -36,6 +36,7 @@ import { ImageSliderComponent } from './main/booking/tab/image-slider/image-slid
 import {SocialLoginModule, AuthServiceConfig, LoginOpt} from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import {UserInfoService} from './main/_user-info.service';
+import {DateService} from "./main/date.service";
 
 
 export const MY_FORMATS = {
@@ -168,7 +169,8 @@ const appRoutes: Routes = [
         },
         SpringService,
         CityService,
-        UserInfoService
+        UserInfoService,
+        DateService
     ],
     bootstrap: [
         AppComponent

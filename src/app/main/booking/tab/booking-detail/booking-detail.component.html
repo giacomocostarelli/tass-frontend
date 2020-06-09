@@ -114,29 +114,18 @@
                                                 <mat-label>Noleggio</mat-label>
                                                 <input type="text"
                                                        matInput
-                                                       formControlName="city"
-                                                       #i>
-                                                <!--                                                   [matAutocomplete]="autoGroup">-->
-                                                <!--                                            <mat-autocomplete #autoGroup="matAutocomplete">-->
-                                                <!--                                                <mat-optgroup *ngFor="let group of stateGroupOptions | async"-->
-                                                <!--                                                              [label]="group.letter">-->
-                                                <!--                                                    <mat-option *ngFor="let name of group.names" [value]="name">-->
-                                                <!--                                                        {{name}}-->
-                                                <!--                                                    </mat-option>-->
-                                                <!--                                                </mat-optgroup>-->
-                                                <!--                                            </mat-autocomplete>-->
+                                                       formControlName="city">
                                                 <mat-icon matSuffix class="deep-orange-800-fg secondary-text">
                                                     outlined_flag
                                                 </mat-icon>
-                                                <!--                                            <mat-error *ngIf="form.get('city').hasError('required')">La destinazione è-->
-                                                <!--                                                richiesta!-->
-                                                <!--                                            </mat-error>-->
-
+                                                <mat-error>Inserire una termine da cercare</mat-error>
                                             </mat-form-field>
 
                                             <mat-form-field appearance="outline" fxFlex="33">
                                                 <mat-label>Data di inizio noleggio</mat-label>
-                                                <input matInput formControlName="arr" [matDatepicker]="picker1"
+                                                <input matInput formControlName="arr"
+                                                       [min]="todayDate"
+                                                       [matDatepicker]="picker1"
                                                        readonly>
                                                 <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix
                                                                        [for]="picker1"></mat-datepicker-toggle>
@@ -146,7 +135,9 @@
 
                                             <mat-form-field appearance="outline" fxFlex="33">
                                                 <mat-label>Data di fine noleggio</mat-label>
-                                                <input matInput formControlName="dep" [matDatepicker]="picker2"
+                                                <input matInput formControlName="dep"
+                                                       [min]="todayDate"
+                                                       [matDatepicker]="picker2"
                                                        readonly>
                                                 <mat-datepicker-toggle class="deep-orange-800-fg" matSuffix
                                                                        [for]="picker2"></mat-datepicker-toggle>

@@ -12,6 +12,7 @@ import {map} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
 import {CityService, CityValidator} from '../city.service';
+import {DateService} from "../date.service";
 
 
 export interface StateGroup {
@@ -49,6 +50,7 @@ export class RicercaStandardComponent implements OnInit {
         private springService: SpringService,
         public dialog: MatDialog,
         private _cityService: CityService,
+        private _dateService: DateService
     ) {
         this.onProductChanged = new BehaviorSubject({});
     }
