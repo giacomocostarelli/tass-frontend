@@ -42,7 +42,7 @@ export class FormComponent implements OnInit {
     ngOnInit(): void {
         window.addEventListener('load', AOS.init());
         this.form = this._formBuilder.group({
-            cities: this._formBuilder.array([],  [CityValidator.checkCity(this._cityService)]),
+            cities: this._formBuilder.array([]),
             maxBudget: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})*'), Validators.min(300)]],
             people: ['', [Validators.required, Validators.pattern('^[0-9]'), Validators.min(1)]],
             onlyRegion: [''],
@@ -124,7 +124,7 @@ export class FormComponent implements OnInit {
             return;
         }
         const newCity = this._formBuilder.group({
-            name: [value, {validators: [CityValidator.checkCity(this._cityService)], updateOn: 'blur'}],
+            name: [value, {validators: [CityValidator.checkCity(this._cityService.getSortedCity(false))], updateOn: 'blur'}],
             region: [this._cityService.getRegion(value)],
         });
         this.cities.push(newCity);

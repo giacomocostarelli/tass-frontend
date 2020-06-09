@@ -106,10 +106,10 @@ export class CityService {
 
 export class CityValidator {
 
-    static checkCity(_cityService: CityService): ValidatorFn | null {
+    static checkCity(obs: Observable<StateGroup[]>): ValidatorFn | null {
         return (control: AbstractControl): ValidationErrors | null => {
             let listCityGroup: StateGroup[] = [];
-            _cityService.getSortedCity(false).subscribe(
+            obs.subscribe(
                 (value: StateGroup[]) => listCityGroup = value);
             let exist = false;
             if (control.value === '') {
