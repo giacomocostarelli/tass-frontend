@@ -35,7 +35,7 @@ export class BookingDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = this._formBuilder.group({
-            string: ['', Validators.required],
+            car: ['', Validators.required],
             arr: ['', Validators.required],
             dep: ['', Validators.required]
         });
