@@ -1,8 +1,8 @@
-import { Directive, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Directive, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
-import { FuseMatchMediaService } from '@fuse/services/match-media.service';
+import {FuseMatchMediaService} from '@fuse/services/match-media.service';
 
 @Directive({
     selector: '.inner-scroll'

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import * as _ from 'lodash';
 
-import { FuseNavigationItem } from '@fuse/types';
+import {FuseNavigationItem} from '@fuse/types';
 
 @Injectable({
     providedIn: 'root'

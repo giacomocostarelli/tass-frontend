@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { merge, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {merge, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
-import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import {FuseNavigationService} from '@fuse/components/navigation/navigation.service';
 
 @Component({
     selector       : 'fuse-navigation',

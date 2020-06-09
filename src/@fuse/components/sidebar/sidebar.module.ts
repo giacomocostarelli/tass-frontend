@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { FuseSidebarComponent } from './sidebar.component';
+import {FuseSidebarComponent} from './sidebar.component';
 
 @NgModule({
     declarations: [

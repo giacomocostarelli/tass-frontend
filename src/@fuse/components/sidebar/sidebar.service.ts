@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { FuseSidebarComponent } from './sidebar.component';
+import {FuseSidebarComponent} from './sidebar.component';
 
 @Injectable({
     providedIn: 'root'

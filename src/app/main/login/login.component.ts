@@ -5,9 +5,8 @@ import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
 import {Router} from '@angular/router';
 import {Guest} from '../interfaceDB/guest';
-import { sha256 } from 'js-sha256';
-import { AuthService } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
+import {sha256} from 'js-sha256';
+import {AuthService, GoogleLoginProvider} from 'angularx-social-login';
 
 
 declare var FB: any;
@@ -161,8 +160,6 @@ export class LoginComponent implements OnInit {
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     }
-
-
 
     private saveLocalDataAndNavigate(tokenInfo, g): void {
         localStorage.setItem('token_info', JSON.stringify(tokenInfo));

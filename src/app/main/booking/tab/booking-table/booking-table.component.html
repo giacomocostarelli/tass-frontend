@@ -2,9 +2,8 @@
     <div class="cards">
         <div class="fuse-card" *ngFor="let b of booking;">
             <div class="position-relative">
-                <img src= "assets/images/profile/{{getRandImage()}}.jpg">
+                <img src= "assets/images/profile/{{mapRandImage(0)}}.jpg">
                 <div class="position-absolute font-size-20 fuse-white-fg p-16 align-left align-bottom">
-                    <!-- mettere nome prenotazione -->
                     {{getBookingName(b) | uppercase}}
                 </div>
             </div>

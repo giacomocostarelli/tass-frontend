@@ -7,7 +7,7 @@ import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {SpringService} from '../spring.service';
 import {Router} from '@angular/router';
-import { sha256 } from 'js-sha256';
+import {sha256} from 'js-sha256';
 
 @Component({
     selector: 'register',

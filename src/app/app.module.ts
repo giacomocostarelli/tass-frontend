@@ -29,12 +29,9 @@ import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {SpringService} from './main/spring.service';
 import {CityService} from './main/city.service';
 import {FooterModule} from './layout/components/footer/footer.module';
-import { BookingComponent } from './main/booking/booking.component';
 import {BookingModule} from './main/booking/booking.module';
-import { NgImageSliderModule } from 'ng-image-slider';
-import { ImageSliderComponent } from './main/booking/tab/image-slider/image-slider.component';
-import {SocialLoginModule, AuthServiceConfig, LoginOpt} from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
+import {NgImageSliderModule} from 'ng-image-slider';
+import {AuthServiceConfig, GoogleLoginProvider, LoginOpt, SocialLoginModule} from 'angularx-social-login';
 import {UserInfoService} from './main/_user-info.service';
 
 
