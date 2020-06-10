@@ -28,6 +28,7 @@ export class BookingDetailComponent implements OnInit {
     endRent: string;
     sojournId: number;
     sojournIdList: number[];
+        soggiorni: ['1', '2'];
 
 
     constructor(
