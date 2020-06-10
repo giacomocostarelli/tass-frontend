@@ -26,6 +26,7 @@ export class BookingDetailComponent implements OnInit {
     todayDate = new Date();
     startRent: string;
     endRent: string;
+    soggiorni: ['1', '2'];
 
 
     constructor(

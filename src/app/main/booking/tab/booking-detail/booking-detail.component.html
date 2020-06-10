@@ -110,7 +110,7 @@
 
                                         <div fxLayout="row" fxLayoutAlign="center center" fxFlex="0 0 auto">
 
-                                            <mat-form-field appearance="outline" fxFlex="34">
+                                            <mat-form-field appearance="outline" fxFlex="25">
                                                 <mat-label>Noleggio</mat-label>
                                                 <input type="text"
                                                        matInput
@@ -121,7 +121,7 @@
                                                 <mat-error>Inserire una termine da cercare</mat-error>
                                             </mat-form-field>
 
-                                            <mat-form-field appearance="outline" fxFlex="33">
+                                            <mat-form-field appearance="outline" fxFlex="25">
                                                 <mat-label>Data di inizio noleggio</mat-label>
                                                 <input matInput formControlName="arr"
                                                        [min]="todayDate"
@@ -133,7 +133,7 @@
                                                 <mat-error>La data di inizio noleggio è richiesta!</mat-error>
                                             </mat-form-field>
 
-                                            <mat-form-field appearance="outline" fxFlex="33">
+                                            <mat-form-field appearance="outline" fxFlex="25">
                                                 <mat-label>Data di fine noleggio</mat-label>
                                                 <input matInput formControlName="dep"
                                                        [min]="todayDate"
@@ -143,6 +143,17 @@
                                                                        [for]="picker2"></mat-datepicker-toggle>
                                                 <mat-datepicker #picker2></mat-datepicker>
                                                 <mat-error>La data di fine noleggio è richiesta!</mat-error>
+                                            </mat-form-field>
+
+                                            <mat-form-field appearance="outline" fxFlex="25">
+                                                <mat-label>Soggiorno</mat-label>
+                                                <mat-select formControlName="onlyRegion">
+                                                    <div *ngFor="let soggiorno of soggiorni">
+                                                        <mat-option [value]="soggiorno">
+                                                            {{soggiorno}}
+                                                        </mat-option>
+                                                    </div>
+                                                </mat-select>
                                             </mat-form-field>
 
                                         </div>
