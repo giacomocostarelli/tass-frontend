@@ -94,6 +94,7 @@ export class RicercaStandardComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if (result !== null && typeof result === 'number'){
                 this.roomList.splice(this.roomList.findIndex(b => b.id === result));
+                this.onProductChanged.next(this.roomList);
             }
         });
     }
