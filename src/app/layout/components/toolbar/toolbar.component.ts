@@ -10,6 +10,7 @@ import {navigation} from 'app/navigation/navigation';
 import {Guest} from '../../../main/interfaceDB/guest';
 import {Router} from '@angular/router';
 import {UserInfoService} from '../../../main/_user-info.service';
+import {AuthService} from "angularx-social-login";
 
 
 @Component({
@@ -46,7 +47,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
         private router: Router,
-        private _userDetail: UserInfoService
+        private _userDetail: UserInfoService,
+        private authService: AuthService
     ) {
         this.userStatusOptions = [
             {
@@ -136,6 +138,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         localStorage.clear();
         this.logged = false;
         this.router.navigate(['']);
+
 
     }
 
