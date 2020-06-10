@@ -75,7 +75,8 @@
                                     </div>
                                     <button mat-raised-button *ngIf="!paid"
                                             class="horizontal-centered mt-32 deep-orange-800-bg fuse-white-fg"
-                                            (click)="PayBooking()">
+                                            (click)="PayBooking()"
+                                            *ngIf="!paid">
                                         Paga Ora
                                     </button>
                                 </div>
@@ -131,10 +132,10 @@
 
                                             <mat-form-field appearance="outline" fxFlex="25">
                                                 <mat-label>Soggiorno</mat-label>
-                                                <mat-select formControlName="onlyRegion">
-                                                    <div *ngFor="let soggiorno of soggiorni">
-                                                        <mat-option [value]="soggiorno">
-                                                            {{soggiorno}}
+                                                <mat-select formControlName="sojournId">
+                                                    <div *ngFor="let soj of sojournIdList">
+                                                        <mat-option [value]="soj.id">
+                                                            {{'da ' + soj.arrival + ' a ' + soj.departure}}
                                                         </mat-option>
                                                     </div>
                                                 </mat-select>

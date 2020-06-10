@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateService} from '../../../date.service';
 import {Car} from '../../../interfaceDB/car';
+import {Sojourn} from "../../../interfaceDB/sojourn";
 
 @Component({
     selector: 'booking-detail',
@@ -26,8 +27,8 @@ export class BookingDetailComponent implements OnInit {
     todayDate = new Date();
     startRent: string;
     endRent: string;
-    soggiorni: ['1', '2'];
-
+    sojournId: number;
+    sojournIdList: Sojourn[];
 
     constructor(
         private _springService: SpringService,
@@ -41,8 +42,10 @@ export class BookingDetailComponent implements OnInit {
         this.form = this._formBuilder.group({
             car: ['', Validators.required],
             arr: ['', Validators.required],
-            dep: ['', Validators.required]
+            dep: ['', Validators.required],
+            sojournId: ['', Validators.required]
         });
+        this.sojournIdList = this.bookingDetailItem.sojourns;
     }
 
     backToList(): void {
@@ -60,6 +63,7 @@ export class BookingDetailComponent implements OnInit {
     onFormSubmit(): void {
         this.startRent = this._dateService.getFinalDate(this.form.get('arr').value);
         this.endRent = this._dateService.getFinalDate(this.form.get('dep').value);
+        this.sojournId = this.form.get('sojournId').value;
         this._springService.searchItem(
             this.form.get('car').value,
             this.startRent,
@@ -68,7 +72,7 @@ export class BookingDetailComponent implements OnInit {
     }
 
     rentCar(id: number): void {
-        this._springService.rentItem(id, this.startRent, this.endRent)
+        this._springService.rentItem(this.sojournId, id, this.startRent, this.endRent)
             .subscribe( message => alert(message));
     }
 }
