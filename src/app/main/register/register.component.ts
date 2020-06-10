@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/internal/operators';
@@ -19,9 +19,6 @@ import {sha256} from 'js-sha256';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
     registerForm: FormGroup;
-    @ViewChild('IdName', {static: true}) idNamets: ElementRef;
-
-    // Private
     private _unsubscribeAll: Subject<any>;
 
     constructor(
@@ -63,14 +60,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.registerForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
             name: ['', Validators.required],
-            pwd: ['',], // per hash
             password: ['', Validators.required],
             username: ['', Validators.required],
             passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
         });
 
-        // Update the validity of the 'passwordConfirm' field
-        // when the 'password' field changes
         this.registerForm.get('password').valueChanges
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
@@ -82,7 +76,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
      * On destroy
      */
     ngOnDestroy(): void {
-        // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
@@ -90,12 +83,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
     onRegistersubmit(): void {
         console.log(sha256(this.registerForm.get('password').value));
         const pwd = sha256(this.registerForm.get('password').value);
-        this.registerForm.removeControl('passwordConfirm');
-        this.registerForm.removeControl('password');
-        this.registerForm.get('pwd').setValue(pwd, {emitEvent: false});
-        this.springService.register(this.registerForm.value).subscribe(
+        const register = {
+            email: this.registerForm.get('email').value,
+            username: this.registerForm.get('username').value,
+            name: this.registerForm.get('name').value,
+            pwd: pwd
+        };
+        this.springService.register(register).subscribe(
             g => this.router.navigate(['/login']));
-        // da controllare se ritorna errori
     }
 }
 
