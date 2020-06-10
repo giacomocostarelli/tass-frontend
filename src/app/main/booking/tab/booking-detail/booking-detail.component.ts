@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateService} from '../../../date.service';
 import {Car} from '../../../interfaceDB/car';
+import {Sojourn} from "../../../interfaceDB/sojourn";
 
 @Component({
     selector: 'booking-detail',
@@ -27,9 +28,7 @@ export class BookingDetailComponent implements OnInit {
     startRent: string;
     endRent: string;
     sojournId: number;
-    sojournIdList: number[];
-        soggiorni: ['1', '2'];
-
+    sojournIdList: Sojourn[];
 
     constructor(
         private _springService: SpringService,
@@ -43,9 +42,10 @@ export class BookingDetailComponent implements OnInit {
         this.form = this._formBuilder.group({
             car: ['', Validators.required],
             arr: ['', Validators.required],
-            dep: ['', Validators.required]
+            dep: ['', Validators.required],
+            sojournId: ['', Validators.required]
         });
-        this.sojournIdList = this.bookingDetailItem.sojourns.map(soj => soj.id);
+        this.sojournIdList = this.bookingDetailItem.sojourns;
     }
 
     backToList(): void {

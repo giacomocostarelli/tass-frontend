@@ -146,6 +146,7 @@ export class SpringService {
     rentItem(sojournId: number, productId: number, startRent: string, endRent: string): Observable<string>{
         const url = `${this.serverUrl}/bookings/items/rentItem`;
         const body = {
+            sojournId: sojournId,
             productId: productId,
             startDate: startRent,
             endDate: endRent
