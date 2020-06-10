@@ -22,7 +22,7 @@ export interface StateGroup {
 export class CityService {
 
     // private serverUrl = 'http://localhost:8080';
-    private serverUrl = 'https://82.54.103.107:8443';
+    private serverUrl = 'https://82.54.103.107:443';
     sortedCity: StateGroup[] = [];
     cityRegion: Map<string, string> = new Map();
     httpOptions = {

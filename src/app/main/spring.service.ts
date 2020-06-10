@@ -14,7 +14,7 @@ import {Car} from './interfaceDB/car';
 export class SpringService {
 
     // private serverUrl = 'http://localhost:8080';
-     private serverUrl = 'https://82.54.103.107:8443';
+     private serverUrl = 'https://82.54.103.107:443';
 
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
