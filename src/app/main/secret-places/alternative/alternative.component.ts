@@ -26,14 +26,13 @@ export class AlternativeComponent implements OnInit {
     ngOnInit(): void {
         this.alternative = this._alternativeService.getAlternative();
         this.startingDate = this._alternativeService.getStartingDate();
-        // if (this.alternative.length === 0){ this.router.navigate(['/secret_places'])}
     }
 
     createNewBooking(id: number): void {
         const newB: Booking = {sojourns: this.alternative[id].sojourns};
         this._springService.newBooking(newB).subscribe();
         this.router.navigate(['/secret_places']);
-    } // TODO => cosa farà dopo aver salvato booking?
+    }
 
 
 }

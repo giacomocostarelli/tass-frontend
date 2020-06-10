@@ -10,7 +10,7 @@ import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {RicercaDialogComponent} from './ricerca-dialog/ricerca-dialog.component';
-import {CityService, CityValidator} from '../city.service';
+import {CityService} from '../city.service';
 import {DateService} from '../date.service';
 
 
@@ -57,33 +57,22 @@ export class RicercaStandardComponent implements OnInit {
     ngOnInit(): void {
         this.dataSource = new FilesDataSource(this, this.paginator, this.sort);
         this.form = this._formBuilder.group({
-            city: ['', {validators: [Validators.required, CityValidator.checkCity(this._cityService.getSortedCity(false))], updateOn: 'blur'}],
+            city: ['', {validators: [Validators.required, ], updateOn: 'blur'}],
             personNumber: ['', [Validators.required, Validators.pattern('^[0-9]')]],
             arr: ['', Validators.required],
-            arrival: [''],
-            dep: ['', Validators.required],
-            departure: ['']
-        });
-        // aggiungere validators su città, non deve prendere città diverse dalle nostre
-        this.form.controls['arr'].valueChanges.subscribe(arr => {
-            this.setFinalDate('arrival', arr);
-        });
-        this.form.controls['dep'].valueChanges.subscribe(dep => {
-            this.setFinalDate('departure', dep);
+            dep: ['', Validators.required]
         });
         this.stateGroupOptions = this._cityService.getSortedCity();
     }
 
-    private setFinalDate(param: string, value: any): void {
-        const date = this.parse(value);
-        const finalDate = date.getDate() + '/' + (1 + date.getMonth()) + '/' + date.getFullYear();
-        this.form.controls[param].setValue(finalDate);
-    }
-
-
     onFormSubmit(): void {
-        console.log(this.form.value);
-        this.springService.normalSearch(this.form.value)
+        const val = {
+            city: this.form.get('city').value,
+            personNumber: this.form.get('personNumber').value,
+            arrival: this._dateService.getFinalDate(this.form.get('arr').value),
+            departure: this._dateService.getFinalDate(this.form.get('dep').value)
+        };
+        this.springService.normalSearch(val)
             .subscribe(
                 rooms => {
                     this.roomList = rooms;
@@ -92,36 +81,25 @@ export class RicercaStandardComponent implements OnInit {
             );
     }
 
-    parse(value: any): Date | null {
-        if ((typeof value === 'string') && (value.indexOf('/') > -1)) {
-            const str = value.split('/');
-            const year = Number(str[2]);
-            const month = Number(str[1]) - 1;
-            const date = Number(str[0]);
-            return new Date(year, month, date);
-        }
-        const timestamp = typeof value === 'number' ? value : Date.parse(value);
-        return isNaN(timestamp) ? null : new Date(timestamp);
-    }
-
     openDialog(roomRow: Room): void {
         const dialogRef = this.dialog.open(RicercaDialogComponent, {
             panelClass: 'form-dialog',
             data: {
                 room: roomRow,
-                startingDate: this.form.get('arrival').value,
-                returnDate: this.form.get('departure').value
+                startingDate: this._dateService.getFinalDate(this.form.get('arr').value),
+                returnDate: this._dateService.getFinalDate(this.form.get('dep').value)
             }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog result: ${result}`);
+            if (result !== null && typeof result === 'number'){
+                this.roomList.splice(this.roomList.findIndex(b => b.id === result));
+            }
         });
     }
 }
 
 export class FilesDataSource extends DataSource<any> {
-    // private _filterChange = new BehaviorSubject('');  // tutto ciò relativo a filter può servire, non cancellare
     private _filteredDataChange = new BehaviorSubject('');
 
     /**

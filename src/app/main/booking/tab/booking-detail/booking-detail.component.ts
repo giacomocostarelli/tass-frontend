@@ -73,6 +73,11 @@ export class BookingDetailComponent implements OnInit {
 
     rentCar(id: number): void {
         this._springService.rentItem(this.sojournId, id, this.startRent, this.endRent)
-            .subscribe( message => alert(message));
+            .subscribe( message => {
+                if (message !== 'error') {
+                    this.carList.splice(this.carList.findIndex(c => c.id === id), 1);
+                }
+                alert(message);
+            });
     }
 }

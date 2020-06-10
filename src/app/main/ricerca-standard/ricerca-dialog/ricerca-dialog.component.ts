@@ -28,7 +28,6 @@ export class RicercaDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this._data.room.hotel.name);
         this.soj.room = this._data.room;
         this.soj.arrival = this._data.startingDate;
         this.soj.departure = this._data.returnDate;
@@ -59,7 +58,7 @@ export class RicercaDialogComponent implements OnInit {
             console.log('aggiung soggiorno a booking: ' + id);
             this._springService.addToExistingBooking(id, this.soj).subscribe();
         }
-        // TODO => cosa farà dopo aver salvato booking?
+        this.matDialogRef.close(this.soj.room.id);
     }
 
 }

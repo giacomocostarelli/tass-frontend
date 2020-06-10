@@ -13,13 +13,7 @@ import {Car} from './interfaceDB/car';
 @Injectable({providedIn: 'root'})
 export class SpringService {
 
-    // private serverUrl = 'http://localhost:8080';
      private serverUrl = 'https://82.54.103.107:443';
-
-    httpOptions = {
-        headers: new HttpHeaders({'Content-Type': 'application/json'}),
-        params: new HttpParams()
-    };
 
     constructor(
         private http: HttpClient,
@@ -177,7 +171,7 @@ export class SpringService {
         return (error: HttpErrorResponse): Observable<T> => {
             console.log('ERRORE: ' + JSON.stringify(error)); // log to console instead
             if (error.status === 401){
-                // da sistemare, gestire quando fallisce token, quando user non esiste o quando pwd è sbagliata
+
                 this.router.navigate(['/login']);
                 return;
             }
@@ -186,7 +180,6 @@ export class SpringService {
                 return;
             }
 
-            // Let the app keep running by returning an empty result.
             return of(result as T);
         };
     }

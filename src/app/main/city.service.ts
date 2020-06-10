@@ -21,13 +21,10 @@ export interface StateGroup {
 @Injectable({providedIn: 'root'})
 export class CityService {
 
-    // private serverUrl = 'http://localhost:8080';
+
     private serverUrl = 'https://82.54.103.107:443';
     sortedCity: StateGroup[] = [];
     cityRegion: Map<string, string> = new Map();
-    httpOptions = {
-        headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
 
 
     constructor(
@@ -45,8 +42,6 @@ export class CityService {
     }
 
     getSortedCity(updatelist: boolean = true): Observable<StateGroup[]> {
-        /*this.sortCity([{name: 'Cagliari'}, {name: 'China'}]);
-        return of(this.sortedCity);*/
         if (updatelist === false) {
             return of(this.sortedCity);
         }
@@ -77,13 +72,6 @@ export class CityService {
         return this.cityRegion.get(city);
     }
 
-    /*getAllHotels(): Observable<Hotel[]> {
-        const url = `${this.serverUrl}/hotels`;
-        return this.http.get<Hotel[]>(url)
-            .pipe(
-                catchError(this.handleError<Hotel[]>('getAllHotels', []))
-            );
-    }*/
 
 
     /**

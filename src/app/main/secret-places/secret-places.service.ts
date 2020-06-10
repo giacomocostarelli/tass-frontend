@@ -11,7 +11,6 @@ export class SecretPlacesService {
     constructor() { }
 
     getAlternative(): Alternative[]{
-        // console.log('SERVICE: ' + JSON.stringify(this.alternative));
         return this.alternative;
     }
 
