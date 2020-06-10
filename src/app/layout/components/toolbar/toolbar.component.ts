@@ -6,8 +6,6 @@ import * as _ from 'lodash';
 
 import {FuseConfigService} from '@fuse/services/config.service';
 import {FuseSidebarService} from '@fuse/components/sidebar/sidebar.service';
-import {MenuColorChangerService} from '../../../menuColorChanger.service';
-
 import {navigation} from 'app/navigation/navigation';
 import {Guest} from '../../../main/interfaceDB/guest';
 import {Router} from '@angular/router';
@@ -47,7 +45,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
-        private menuColorChangerService: MenuColorChangerService,
         private router: Router,
         private _userDetail: UserInfoService
     ) {
@@ -154,9 +151,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         return this.hover[ind] === true ? '#d84315' : 'black';
     }
 
-    onSelect(page: string) {
-        this.menuColorChangerService.changePageSelected(page);
-    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks

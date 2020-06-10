@@ -43,7 +43,6 @@
                     <button mat-raised-button
                             class="cta-button deep-orange-800-bg"
                             color="accent"
-                            (click)="menuColorChangerService.changePageSelected('Secret Places')"
                             [routerLink]="'/secret_places'">
                         Scopri di più
                     </button>
@@ -68,7 +67,6 @@
                     <button mat-raised-button
                             class="cta-button deep-orange-800-bg"
                             color="accent"
-                            (click)="menuColorChangerService.changePageSelected('Ricerca Standard')"
                             [routerLink]="'/ricerca_standard'">
                         Esplora Viaggi
                     </button>
@@ -94,7 +92,6 @@
                             class="cta-button deep-orange-800-bg"
                             *ngIf="logged"
                             color="accent"
-                            (click)="menuColorChangerService.changePageSelected('Profilo')"
                             [routerLink]="'/profile'">
                         Vai al Profilo
                     </button>

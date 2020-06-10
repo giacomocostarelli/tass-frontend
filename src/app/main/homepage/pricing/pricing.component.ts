@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {transition, trigger, useAnimation} from '@angular/animations';
 import {fadeInLeft} from 'ng-animate';
-import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 @Component({
     selector: 'pricing',
@@ -31,7 +30,7 @@ export class PricingComponent implements OnInit{
 
     logged: boolean
 
-    constructor(private menuColorChangerService: MenuColorChangerService) {
+    constructor() {
         setTimeout(() => {
             this.visible1 = true;
         }, 1100);

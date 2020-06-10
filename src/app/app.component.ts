@@ -14,13 +14,11 @@ import {FuseTranslationLoaderService} from '@fuse/services/translation-loader.se
 import {navigation} from 'app/navigation/navigation';
 import {locale as navigationEnglish} from 'app/navigation/i18n/en';
 import {locale as navigationTurkish} from 'app/navigation/i18n/tr';
-import {MenuColorChangerService} from './menuColorChanger.service';
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    providers: [MenuColorChangerService]
 })
 export class AppComponent implements OnInit, OnDestroy {
     fuseConfig: any;

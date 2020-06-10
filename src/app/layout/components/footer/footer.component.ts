@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {MenuColorChangerService} from '../../../menuColorChanger.service';
 
 @Component({
     selector: 'footer',
@@ -8,7 +7,6 @@ import {MenuColorChangerService} from '../../../menuColorChanger.service';
 })
 export class FooterComponent {
     constructor(
-        private menuColorChangerService: MenuColorChangerService
     ) {
     }
 }

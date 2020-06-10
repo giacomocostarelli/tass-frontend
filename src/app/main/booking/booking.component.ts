@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../@fuse/animations';
-import {MenuColorChangerService} from '../../menuColorChanger.service';
 import {UserInfoService} from '../_user-info.service';
 import {Router} from '@angular/router';
 
@@ -14,7 +13,6 @@ import {Router} from '@angular/router';
 export class BookingComponent implements OnInit {
 
     constructor(
-        private _menuColorChangerService: MenuColorChangerService,
         private _userDetail: UserInfoService,
         private router: Router
     ) {
@@ -22,7 +20,7 @@ export class BookingComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._menuColorChangerService.changePageSelected('profile');
+
         if (localStorage.getItem('user') === null){
             this.router.navigate(['']);
         }
