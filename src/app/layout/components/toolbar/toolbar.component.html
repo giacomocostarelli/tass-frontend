@@ -13,24 +13,18 @@
         <div class="navbar-elements">
             <a mat-button disableRipple class="navbar-element no-hover-effect" [routerLink]="'/homepage'"
                (mouseenter)="onMouseEnter(0)" (mouseleave)="onMouseLeave(0)"
-               (click)="menuColorChangerService.changePageSelected('Homepage')"
-               [ngStyle]="{'color': getColor(0)}"
-               [ngClass]="{selected: menuColorChangerService.pageSelected === 'Homepage'}">
+               [ngStyle]="{'color': getColor(0)}">
                 Homepage
             </a>
             <a mat-button disableRipple class="navbar-element no-hover-effect" [routerLink]="'/secret_places'"
                (mouseenter)="onMouseEnter(1)" (mouseleave)="onMouseLeave(1)"
-               (click)="menuColorChangerService.changePageSelected('Secret Places')"
-               [ngStyle]="{'color': getColor(1)}"
-               [ngClass]="{selected: menuColorChangerService.pageSelected === 'Secret Places'}">
+               [ngStyle]="{'color': getColor(1)}">
                 Secret places
             </a>
             <a mat-button disableRipple class="navbar-element last-element no-hover-effect"
                [routerLink]="'/ricerca_standard'"
                (mouseenter)="onMouseEnter(2)" (mouseleave)="onMouseLeave(2)"
-               (click)="menuColorChangerService.changePageSelected('Ricerca Standard')"
-               [ngStyle]="{'color': getColor(2)}"
-               [ngClass]="{selected: menuColorChangerService.pageSelected === 'Ricerca Standard'}">
+               [ngStyle]="{'color': getColor(2)}">
                 Ricerca Standard
             </a>
         </div>
@@ -50,7 +44,8 @@
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
             </button>
-            <button mat-button *ngIf="!logged" routerLink="/login">
+            <button mat-button *ngIf="!logged"
+                    class ="mr-24" routerLink="/login">
                Effettua il login
             </button>
 

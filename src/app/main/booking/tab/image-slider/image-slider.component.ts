@@ -58,9 +58,23 @@ export class ImageSliderComponent implements OnInit {
     }, {
         image: '../../../../../../assets/images/cars/car5.jpg',
         thumbImage: '../../../../../../assets/images/cars/car5.jpg',
+    },{
+        image: '../../../../../../assets/images/cars/car1.jpg',
+        thumbImage: '../../../../../../assets/images/cars/car1.jpg',
+    }, {
+        image: '../../../../../../assets/images/cars/car2.jpg',
+        thumbImage: '../../../../../../assets/images/cars/car2.jpg',
+    }, {
+        image: '../../../../../../assets/images/cars/car3.jpg',
+        thumbImage: '../../../../../../assets/images/cars/car3.jpg',
+    }, {
+        image: '../../../../../../assets/images/cars/car4.jpg',
+        thumbImage: '../../../../../../assets/images/cars/car4.jpg',
+    }, {
+        image: '../../../../../../assets/images/cars/car5.jpg',
+        thumbImage: '../../../../../../assets/images/cars/car5.jpg',
     },
     ];
-
 
     constructor() {
     }

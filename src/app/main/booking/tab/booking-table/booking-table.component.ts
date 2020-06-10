@@ -37,18 +37,16 @@ export class BookingTableComponent implements OnInit {
     ngOnInit(): void {
         if (this.paid) {
             this._springService.getPaidBooking()
-                .subscribe(b => this.booking = b);
+                .subscribe(b => {
+                    this.booking = b
+                    this.genImageNumberArray();
+                });
         } else {
             this._springService.getSavedBooking()
                 .subscribe(b => {
                     this.booking = b;
                     console.log(this.paid + ':    ' + JSON.stringify(this.booking));
                     this.genImageNumberArray();
-                    console.log(this.imageNumberArray.length);
-                    console.log('NUMERI');
-                    for(let i=0; i<this.imageNumberArray.length; i++){
-                        console.log(this.imageNumberArray[i]);
-                    }
                 });
         }
     }
@@ -84,14 +82,14 @@ export class BookingTableComponent implements OnInit {
 
     genImageNumberArray(): void {
         let imageNumber: number;
-        for (let i = 0; i < this.booking.length; i++) {
+        for (let i = 0; i < 100; i++) {
             imageNumber = Math.floor(Math.random() * 5) + 0;
             this.imageNumberArray.push(imageNumber);
         }
     }
 
     mapRandImage(imageNumber: number): string {
-        return this.randImageArray[imageNumber];
+        return this.randImageArray[this.imageNumberArray[imageNumber]];
     }
 
 }
